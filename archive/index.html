@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VYRION Index Archive — Daily planetary health benchmark. Every score, every day, timestamped and permanent.">
+<meta property="og:title" content="VYRION Archive — Daily Planetary Health Record">
+<meta property="og:description" content="The world's first daily investable planetary health benchmark. Every entry timestamped before any event occurs.">
+<title>VYRION Archive — dablerfrost.github.io/conscience/archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:   #030a05;
+  --s1:   #071209;
+  --s2:   #0c1a0e;
+  --b1:   #122016;
+  --b2:   #1a3020;
+  --b3:   #243828;
+  --glow: #00ff9d;
+  --gold: #ffb84d;
+  --red:  #f03030;
+  --warn: #f09000;
+  --t1:   #e8f5ec;
+  --t2:   #6b9a72;
+  --t3:   #2a4a30;
+  --mono: 'Courier Prime', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --bb:   'Bebas Neue', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--b2); border-radius:2px; }
+
+/* ── HEADER ── */
+header {
+  position: sticky; top:0; z-index:200;
+  background: rgba(3,10,5,0.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--b1);
+  height: 52px;
+  display: flex; align-items: center;
+  padding: 0 40px;
+  justify-content: space-between;
+}
+
+.hdr-left {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.hdr-back {
+  font-family: var(--mono);
+  font-size: .48rem;
+  letter-spacing: .12em;
+  color: var(--t3);
+  text-decoration: none;
+  border: 1px solid var(--b2);
+  padding: 4px 10px;
+  transition: all .2s;
+}
+.hdr-back:hover { color: var(--glow); border-color: rgba(0,255,157,.3); }
+
+.hdr-brand {
+  font-family: var(--bb);
+  font-size: .95rem;
+  letter-spacing: .3em;
+  color: var(--glow);
+  text-shadow: 0 0 16px rgba(0,255,157,.3);
+}
+
+.hdr-sep {
+  width: 1px; height: 16px;
+  background: var(--b2);
+}
+
+.hdr-section {
+  font-family: var(--mono);
+  font-size: .48rem;
+  letter-spacing: .16em;
+  color: var(--t3);
+  text-transform: uppercase;
+}
+
+.hdr-right {
+  font-family: var(--mono);
+  font-size: .46rem;
+  letter-spacing: .1em;
+  color: var(--t3);
+}
+
+/* ── TICKER ── */
+.ticker {
+  background: rgba(0,255,157,.04);
+  border-bottom: 1px solid rgba(0,255,157,.08);
+  height: 32px;
+  overflow: hidden;
+  display: flex; align-items: center;
+}
+
+.ticker-track {
+  display: flex;
+  animation: ticker-scroll 50s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-family: var(--mono);
+  font-size: .5rem;
+  letter-spacing: .1em;
+  color: rgba(0,255,157,.5);
+  padding: 0 40px;
+  flex-shrink: 0;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 52px 40px 40px;
+  border-bottom: 1px solid var(--b1);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: .52rem;
+  letter-spacing: .28em;
+  color: rgba(0,255,157,.5);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap:10px;
+}
+.hero-eyebrow::before {
+  content:''; width:20px; height:1px;
+  background: var(--glow); display:inline-block;
+}
+
+h1 {
+  font-family: var(--bb);
+  font-size: clamp(2rem,5vw,3.4rem);
+  letter-spacing: .06em;
+  color: var(--t1);
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+h1 .g { color: var(--glow); }
+
+.hero-sub {
+  font-size: .95rem;
+  color: var(--t2);
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+/* ── STATS ROW ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--b1);
+  border: 1px solid var(--b1);
+}
+
+.stat {
+  background: var(--s1);
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.stat-n {
+  font-family: var(--bb);
+  font-size: 1.9rem;
+  color: var(--glow);
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(0,255,157,.3);
+  margin-bottom: 3px;
+}
+
+.stat-l {
+  font-family: var(--mono);
+  font-size: .42rem;
+  letter-spacing: .12em;
+  color: var(--t3);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ── MAIN LAYOUT ── */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1px;
+}
+
+@media(max-width:860px) {
+  .main { grid-template-columns: 1fr; }
+}
+
+/* ── INDEX LOG (left) ── */
+.index-log {
+  border-right: 1px solid var(--b1);
+  padding-right: 32px;
+  padding-top: 32px;
+}
+
+.log-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--b1);
+}
+
+.log-title {
+  font-family: var(--bb);
+  font-size: 1rem;
+  letter-spacing: .2em;
+  color: var(--t1);
+}
+
+.log-count {
+  font-family: var(--mono);
+  font-size: .46rem;
+  color: var(--t3);
+  letter-spacing: .1em;
+}
+
+/* ── ENTRY CARD ── */
+.entry {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  align-items: start;
+  transition: background .15s;
+}
+
+.entry:hover {
+  background: rgba(0,255,157,.02);
+  margin: 0 -12px;
+  padding: 16px 12px;
+  border-radius: 2px;
+}
+
+/* Score block */
+.entry-score {
+  text-align: center;
+  padding: 10px 8px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  flex-shrink: 0;
+}
+
+.es-num {
+  font-family: var(--bb);
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 2px;
+  letter-spacing: .02em;
+}
+
+.es-denom {
+  font-family: var(--mono);
+  font-size: .4rem;
+  color: var(--t3);
+  letter-spacing: .1em;
+}
+
+.es-delta {
+  font-family: var(--mono);
+  font-size: .44rem;
+  margin-top: 4px;
+  letter-spacing: .06em;
+}
+
+.delta-neg  { color: var(--red); }
+.delta-pos  { color: var(--glow); }
+.delta-zero { color: var(--t3); }
+
+/* Entry body */
+.entry-body {}
+
+.entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.entry-day {
+  font-family: var(--bb);
+  font-size: .85rem;
+  letter-spacing: .15em;
+  color: var(--t2);
+}
+
+.entry-date {
+  font-family: var(--mono);
+  font-size: .46rem;
+  color: var(--t3);
+  letter-spacing: .08em;
+}
+
+.entry-status {
+  font-family: var(--mono);
+  font-size: .42rem;
+  letter-spacing: .1em;
+  padding: 2px 8px;
+  border-radius: 1px;
+  text-transform: uppercase;
+}
+
+.st-critical { background:rgba(255,184,77,.08); color:rgba(255,184,77,.8); border:1px solid rgba(255,184,77,.2); }
+.st-emergency{ background:rgba(240,48,48,.08);  color:rgba(240,48,48,.8);  border:1px solid rgba(240,48,48,.2); }
+.st-caution  { background:rgba(232,192,0,.08);  color:rgba(232,192,0,.8);  border:1px solid rgba(232,192,0,.2); }
+.st-healthy  { background:rgba(0,255,157,.06);  color:rgba(0,255,157,.7);  border:1px solid rgba(0,255,157,.2); }
+
+.entry-moved {
+  font-size: .88rem;
+  color: var(--t1);
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+.entry-detail {
+  font-family: var(--mono);
+  font-size: .48rem;
+  color: var(--t3);
+  line-height: 1.7;
+  letter-spacing: .02em;
+}
+
+/* Entry links */
+.entry-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.entry-link {
+  font-family: var(--mono);
+  font-size: .42rem;
+  letter-spacing: .1em;
+  padding: 3px 8px;
+  border: 1px solid var(--b2);
+  color: var(--t3);
+  text-decoration: none;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.entry-link:hover {
+  border-color: rgba(0,255,157,.3);
+  color: rgba(0,255,157,.7);
+}
+
+/* ── RECORD SECTION ── */
+.record-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--b1);
+}
+
+.record-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--b1);
+}
+
+.record-title {
+  font-family: var(--bb);
+  font-size: 1rem;
+  letter-spacing: .2em;
+  color: var(--t1);
+}
+
+.record-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  align-items: start;
+}
+
+.rc-issue {
+  font-family: var(--bb);
+  font-size: .8rem;
+  letter-spacing: .1em;
+  color: var(--t3);
+  padding: 8px 10px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  text-align: center;
+  flex-shrink: 0;
+  min-width: 44px;
+}
+
+.rc-body {}
+
+.rc-company {
+  font-family: var(--bb);
+  font-size: .9rem;
+  letter-spacing: .15em;
+  color: var(--t1);
+  margin-bottom: 2px;
+}
+
+.rc-sector {
+  font-family: var(--mono);
+  font-size: .42rem;
+  color: var(--t3);
+  letter-spacing: .1em;
+  margin-bottom: 5px;
+}
+
+.rc-headline {
+  font-size: .82rem;
+  color: var(--t2);
+  line-height: 1.5;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+.rc-score {
+  font-family: var(--mono);
+  font-size: .46rem;
+  letter-spacing: .1em;
+}
+
+.score-breach  { color: var(--red); }
+.score-warn    { color: var(--warn); }
+.score-drift   { color: rgba(232,192,0,.8); }
+.score-track   { color: var(--glow); }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  padding: 32px 0 32px 28px;
+}
+
+.sb-block {
+  margin-bottom: 28px;
+}
+
+.sb-label {
+  font-family: var(--mono);
+  font-size: .46rem;
+  letter-spacing: .2em;
+  color: rgba(0,255,157,.4);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--b1);
+}
+
+/* Sparkline placeholder */
+.sparkline {
+  height: 60px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-top: 2px solid rgba(0,255,157,.3);
+  display: flex;
+  align-items: flex-end;
+  padding: 6px;
+  gap: 3px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.spark-bar {
+  flex: 1;
+  background: rgba(0,255,157,.2);
+  border-radius: 1px 1px 0 0;
+  min-height: 4px;
+  transition: background .2s;
+  position: relative;
+}
+
+.spark-bar:hover { background: rgba(0,255,157,.5); }
+.spark-bar.today { background: rgba(0,255,157,.7); }
+
+.spark-note {
+  font-family: var(--mono);
+  font-size: .42rem;
+  color: var(--t3);
+  letter-spacing: .06em;
+  line-height: 1.7;
+}
+
+/* Portfolio mini */
+.portfolio-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+}
+
+.pr-name {
+  font-family: var(--mono);
+  font-size: .46rem;
+  color: var(--t2);
+  letter-spacing: .04em;
+}
+
+.pr-score {
+  font-family: var(--bb);
+  font-size: .85rem;
+  letter-spacing: .05em;
+}
+
+/* Methodology box */
+.method-box {
+  padding: 12px 14px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-left: 3px solid rgba(0,255,157,.3);
+}
+
+.mb-text {
+  font-family: var(--mono);
+  font-size: .46rem;
+  color: var(--t3);
+  line-height: 1.75;
+  letter-spacing: .03em;
+}
+
+.mb-link {
+  color: rgba(0,255,157,.4);
+  text-decoration: none;
+}
+.mb-link:hover { color: var(--glow); }
+
+/* Challenge box */
+.challenge-box {
+  padding: 12px 14px;
+  background: rgba(240,48,48,.04);
+  border: 1px solid rgba(240,48,48,.12);
+  margin-top: 12px;
+}
+
+.cb-head {
+  font-family: var(--mono);
+  font-size: .46rem;
+  letter-spacing: .14em;
+  color: rgba(240,48,48,.6);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.cb-text {
+  font-family: var(--mono);
+  font-size: .44rem;
+  color: var(--t3);
+  line-height: 1.7;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--b1);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--s1);
+}
+
+.ft-brand {
+  font-family: var(--bb);
+  font-size: .85rem;
+  letter-spacing: .3em;
+  color: rgba(0,255,157,.2);
+}
+
+.ft-note {
+  font-family: var(--mono);
+  font-size: .42rem;
+  color: var(--t3);
+  letter-spacing: .08em;
+  line-height: 1.7;
+  text-align: right;
+}
+
+@media(max-width:700px) {
+  header, .hero, .main, footer { padding-left:20px; padding-right:20px; }
+  .stats { grid-template-columns: repeat(3,1fr); }
+  .entry { grid-template-columns: 64px 1fr; }
+  .entry-links { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr-left">
+    <a class="hdr-back" href="../">← CONSCIENCE</a>
+    <div class="hdr-brand">VYRION</div>
+    <div class="hdr-sep"></div>
+    <div class="hdr-section">Public Archive · Index + Record</div>
+  </div>
+  <div class="hdr-right">Every entry timestamped · All data public · All methodology open</div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">VYRION INDEX — the world's first daily investable planetary health benchmark · published since March 18, 2026</span>
+    <span class="ticker-item">All data from NOAA · NASA · ESA · NSIDC · IUCN · FAO · CDP · SEC public filings</span>
+    <span class="ticker-item">Every entry timestamped before any event occurs · Methodology open source · Find the error → we publish your correction</span>
+    <span class="ticker-item">VYRION INDEX — the world's first daily investable planetary health benchmark · published since March 18, 2026</span>
+    <span class="ticker-item">All data from NOAA · NASA · ESA · NSIDC · IUCN · FAO · CDP · SEC public filings</span>
+    <span class="ticker-item">Every entry timestamped before any event occurs · Methodology open source · Find the error → we publish your correction</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Public Archive · dablerfrost.github.io/conscience/archive</div>
+  <h1>The Permanent <span class="g">Record.</span></h1>
+  <p class="hero-sub">
+    Every VYRION Index score ever published. Every Record investigation. All timestamped.
+    All sourced. All permanent. This archive exists to prove that every entry was made
+    before any future event — not after.
+  </p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-n">2</div>
+      <div class="stat-l">Days<br>Published</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">41.2</div>
+      <div class="stat-l">Latest<br>Index Score</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">−0.1</div>
+      <div class="stat-l">24hr<br>Delta</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" style="color:var(--red)">1</div>
+      <div class="stat-l">Record<br>Issues</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">11</div>
+      <div class="stat-l">Companies<br>Monitored</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT — INDEX LOG + RECORD -->
+  <div>
+    <!-- INDEX LOG -->
+    <div class="index-log">
+      <div class="log-header">
+        <div class="log-title">VYRION INDEX — DAILY LOG</div>
+        <div class="log-count" id="entryCount">2 entries · Updated daily at 00:00 UTC</div>
+      </div>
+
+      <!-- DAY 002 -->
+      <div class="entry">
+        <div class="entry-score">
+          <div class="es-num" style="color:var(--gold)">41.2</div>
+          <div class="es-denom">/100</div>
+          <div class="es-delta delta-neg">▼ 0.1</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-meta">
+            <span class="entry-day">DAY 002</span>
+            <span class="entry-date">March 19, 2026</span>
+            <span class="entry-status st-critical">Critical</span>
+          </div>
+          <div class="entry-moved">Arctic sea ice hit a new daily low for March — 14% below the 1981–2010 baseline.</div>
+          <div class="entry-detail">
+            Ocean heat content: record high · 14th consecutive month · NOAA/Argo<br>
+            CO₂: 424.9 ppm · NOAA Mauna Loa · Temp anomaly: +1.48°C · NASA GISS<br>
+            CONSCIENCE: 3 of 11 companies on track · Starbucks added as Company 11
+          </div>
+        </div>
+        <div class="entry-links">
+          <a class="entry-link" href="https://github.com/dablerfrost/conscience/blob/main/archive/2026-03-19.md" target="_blank">Full Entry ↗</a>
+          <a class="entry-link" href="https://github.com/dablerfrost/conscience" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- DAY 001 -->
+      <div class="entry">
+        <div class="entry-score">
+          <div class="es-num" style="color:var(--gold)">41.3</div>
+          <div class="es-denom">/100</div>
+          <div class="es-delta delta-zero">— Baseline</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-meta">
+            <span class="entry-day">DAY 001</span>
+            <span class="entry-date">March 18, 2026</span>
+            <span class="entry-status st-critical">Critical</span>
+          </div>
+          <div class="entry-moved">Baseline established. The VYRION Index publishes its first score.</div>
+          <div class="entry-detail">
+            CO₂: 424.9 ppm · NOAA · Temp anomaly: +1.48°C · NASA GISS<br>
+            Arctic ice: −18% vs baseline · NSIDC · Ocean heat: record high · NOAA/Argo<br>
+            Planetary boundaries breached: 7 of 9 · Potsdam Institute 2025<br>
+            Prior art: GitHub commit · X @DablerFrost 10:22 PM HST · Instagram @dablerfrost
+          </div>
+        </div>
+        <div class="entry-links">
+          <a class="entry-link" href="https://github.com/dablerfrost/conscience/blob/main/archive/2026-03-18.md" target="_blank">Full Entry ↗</a>
+          <a class="entry-link" href="https://github.com/dablerfrost/conscience" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- FUTURE ENTRIES NOTE -->
+      <div style="padding:20px 0;border-bottom:1px solid rgba(255,255,255,.03);">
+        <div style="font-family:var(--mono);font-size:.48rem;color:var(--t3);line-height:1.8;letter-spacing:.04em;">
+          New entries added daily · Each entry links to its GitHub commit for independent timestamp verification ·
+          Score history visible in /archive/README.md · Full methodology at
+          <a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-INDEX.md"
+             style="color:rgba(0,255,157,.4);text-decoration:none;"
+             target="_blank">VYRION-INDEX.md</a>
+        </div>
+      </div>
+
+      <!-- THE RECORD SECTION -->
+      <div class="record-section">
+        <div class="record-header">
+          <div class="record-title">THE RECORD — WEEKLY INVESTIGATIONS</div>
+          <div class="log-count">Published every Wednesday</div>
+        </div>
+
+        <!-- RECORD 001 -->
+        <div class="record-card">
+          <div class="rc-issue">001</div>
+          <div class="rc-body">
+            <div class="rc-company">BP PLC</div>
+            <div class="rc-sector">OIL & GAS · LONDON STOCK EXCHANGE: BP.L</div>
+            <div class="rc-headline">"They promised −40%. They delivered −2%."</div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <div class="rc-score score-breach">CONSCIENCE SCORE: 11/100 · BREACH</div>
+              <div style="font-family:var(--mono);font-size:.42rem;color:var(--t3);">Published March 18, 2026</div>
+            </div>
+            <div style="margin-top:6px;">
+              <a class="entry-link" href="https://github.com/dablerfrost/conscience/blob/main/archive/RECORD-001-BP.md" target="_blank" style="display:inline-block;">Full Report ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECORD 002 COMING -->
+        <div class="record-card" style="opacity:.5;">
+          <div class="rc-issue" style="color:var(--t3);">002</div>
+          <div class="rc-body">
+            <div class="rc-company">EXXONMOBIL CORPORATION</div>
+            <div class="rc-sector">OIL & GAS · NYSE: XOM</div>
+            <div class="rc-headline">"The satellite sees what the filing doesn't say."</div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <div class="rc-score score-breach">CONSCIENCE SCORE: 8/100 · BREACH</div>
+              <div style="font-family:var(--mono);font-size:.42rem;color:var(--t3);">Publishing Wednesday March 25, 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECORD 003 COMING -->
+        <div class="record-card" style="opacity:.3;">
+          <div class="rc-issue" style="color:var(--t3);">003</div>
+          <div class="rc-body">
+            <div class="rc-company">SHELL PLC</div>
+            <div class="rc-sector">OIL & GAS · LSE: SHEL</div>
+            <div class="rc-headline">A Dutch court ordered them to cut 45%. They're appealing.</div>
+            <div style="font-family:var(--mono);font-size:.42rem;color:var(--t3);margin-top:4px;">Publishing Wednesday April 1, 2026</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-block">
+      <div class="sb-label">Index Trend — Days 1–2</div>
+      <div class="sparkline">
+        <!-- These bars represent days 1-2, will grow as entries added -->
+        <div class="spark-bar" style="height:52%;" title="Day 1: 41.3"></div>
+        <div class="spark-bar today" style="height:50%;" title="Day 2: 41.2"></div>
+        <div class="spark-bar" style="height:4%;background:rgba(255,255,255,.06);"></div>
+        <div class="spark-bar" style="height:4%;background:rgba(255,255,255,.06);"></div>
+        <div class="spark-bar" style="height:4%;background:rgba(255,255,255,.06);"></div>
+        <div class="spark-bar" style="height:4%;background:rgba(255,255,255,.06);"></div>
+        <div class="spark-bar" style="height:4%;background:rgba(255,255,255,.06);"></div>
+      </div>
+      <div class="spark-note">
+        Day 1: 41.3 · Day 2: 41.2 · Δ −0.1<br>
+        Chart updates as new entries are added.<br>
+        Downward = planetary health declining.
+      </div>
+    </div>
+
+    <div class="sb-block">
+      <div class="sb-label">CONSCIENCE Portfolio</div>
+      <div class="portfolio-row"><span class="pr-name">ExxonMobil</span><span class="pr-score" style="color:var(--red)">8</span></div>
+      <div class="portfolio-row"><span class="pr-name">BP</span><span class="pr-score" style="color:var(--red)">11</span></div>
+      <div class="portfolio-row"><span class="pr-name">Delta</span><span class="pr-score" style="color:var(--red)">14</span></div>
+      <div class="portfolio-row"><span class="pr-name">Shell</span><span class="pr-score" style="color:var(--red)">19</span></div>
+      <div class="portfolio-row"><span class="pr-name">Starbucks</span><span class="pr-score" style="color:var(--warn)">29</span></div>
+      <div class="portfolio-row"><span class="pr-name">Walmart</span><span class="pr-score" style="color:var(--warn)">38</span></div>
+      <div class="portfolio-row"><span class="pr-name">Meta</span><span class="pr-score" style="color:var(--warn)">43</span></div>
+      <div class="portfolio-row"><span class="pr-name">Amazon</span><span class="pr-score" style="color:var(--warn)">47</span></div>
+      <div class="portfolio-row"><span class="pr-name">Microsoft</span><span class="pr-score" style="color:rgba(232,192,0,.8)">61</span></div>
+      <div class="portfolio-row"><span class="pr-name">Unilever</span><span class="pr-score" style="color:var(--glow)">72</span></div>
+      <div class="portfolio-row"><span class="pr-name">Apple</span><span class="pr-score" style="color:var(--glow)">84</span></div>
+      <div style="margin-top:8px;font-family:var(--mono);font-size:.42rem;color:var(--t3);line-height:1.7;">
+        7 of 11 in breach or warning<br>
+        Based on companies' own public filings<br>
+        <a href="../" style="color:rgba(0,255,157,.4);text-decoration:none;">Full platform →</a>
+      </div>
+    </div>
+
+    <div class="sb-block">
+      <div class="sb-label">Methodology</div>
+      <div class="method-box">
+        <div class="mb-text">
+          48 verified indicators · 8 Earth systems<br>
+          All sources free and publicly auditable<br>
+          Weights published openly on GitHub<br>
+          Version 1.0 · Challengeable<br><br>
+          <a class="mb-link" href="https://github.com/dablerfrost/conscience/blob/main/VYRION-INDEX.md" target="_blank">Full methodology ↗</a>
+        </div>
+      </div>
+      <div class="challenge-box">
+        <div class="cb-head">Find an error?</div>
+        <div class="cb-text">
+          Every number is sourced. If you believe a reading, weighting, or score is incorrect — open a GitHub Issue with your source. We publish all challenges and corrections within 7 days.
+          <br><br>
+          <a href="https://github.com/dablerfrost/conscience/issues" style="color:rgba(240,48,48,.5);text-decoration:none;" target="_blank">Open an issue ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-block">
+      <div class="sb-label">Prior Art Record</div>
+      <div class="method-box">
+        <div class="mb-text">
+          First published: March 18, 2026<br>
+          GitHub commit: dablerfrost/conscience<br>
+          X @DablerFrost · 10:22 PM HST<br>
+          Instagram @dablerfrost<br><br>
+          Creator: Tyler Frost / DablerFrost<br>
+          Location: Hilo, Hawaii<br><br>
+          <em style="color:rgba(0,255,157,.3);">"The planet has a score.<br>Now it has a daily number."</em>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-brand">VYRION · PUBLIC ARCHIVE</div>
+  <div class="ft-note">
+    dablerfrost.github.io/conscience/archive · @DablerFrost<br>
+    All data from public scientific datasets · No proprietary data used<br>
+    Methodology: github.com/dablerfrost/conscience
+  </div>
+</footer>
+
+</body>
+</html>
