@@ -1,3 +1,10 @@
+Methodology v1.0 formalizes the scoring framework 
+used to calculate scores published March 18-20, 2026. 
+All scores are recalculated against this published 
+methodology for full transparency.
+
+---
+
 # VYRION INDEX — METHODOLOGY & INDICATOR FRAMEWORK
 ## A Daily Investable Planetary Health Benchmark
 **Version 1.0 — March 2026**
