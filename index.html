@@ -863,10 +863,20 @@ footer {
 /* ═══════════════════════════════════════
    SHARE CTA
 ═══════════════════════════════════════ */
-.share-cta {
-  position:fixed;
-  bottom:28px; right:28px;
-  z-index:300;
+   
+  .share-cta {
+  display:flex; flex-direction:row; align-items:center; gap:16px;
+}
+```
+
+Lines **866–871** become those 3 lines.
+
+---
+
+**Change 2 — CSS (line 912)**
+Delete the responsive override entirely — line 912:
+```
+.share-cta { bottom:16px; right:16px; }
   display:flex; flex-direction:column; align-items:flex-end; gap:8px;
 }
 
@@ -1212,20 +1222,17 @@ footer {
     <span class="f-link">vyrion.earth/ledger</span>
     <span class="f-link">vyrion.earth/codex</span>
     <span class="f-link">vyrion.earth/challenge</span>
-    <span class="f-link">vyrion.earth/api</span>
   </div>
- <div class="f-note">
-    All pledge data sourced from public CDP disclosures, SEC filings, and company annual reports.<br>
+  <div class="f-attr">
     Satellite: ESA Copernicus/Sentinel-5P · Forest: Global Forest Watch/Hansen-UMD<br>
     Free. Public. Permanent. Find an error — we will publish your correction.<br>
     <a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-METHODOLOGY-v1.0.md" target="_blank" style="color:var(--g1);text-decoration:none;">↗ VYRION Methodology v1.0 — full indicator documentation</a>
   </div>
-   
-<!-- SHARE -->
-<div class="share-cta">
-  <button class="share-btn" onclick="doShare()">Share This Report ↗</button>
-  <div class="share-note">Every number sourced · Tell us where we're wrong</div>
-</div>
+  <div class="share-cta">
+    <button class="share-btn" onclick="doShare()">Share This Report ↗</button>
+    <div class="share-note">Every number sourced · Tell us where we're wrong</div>
+  </div>
+</footer>
 
 <script>
 /* ═══════════════════════════════════════
