@@ -888,7 +888,6 @@ function setScale(btn) {
   document.querySelectorAll('.nc-size').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   try { localStorage.setItem('vyrion-scale', scale); } catch(e){}
-  document.body.style.fontSize = 'calc(18px * ' + scale + ')';
 }
 // Restore saved scale
 // Restore saved scale — runs immediately, DOM already ready at bottom of body
