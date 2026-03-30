@@ -29,11 +29,11 @@
 
 /* ── RESET & BASE ─────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-size:21px;}
 body{
   background:var(--void);color:var(--t1);
   font-family:'Archivo',sans-serif;
-  font-size:calc(18px * var(--font-scale));
+  font-size:inherit;
   line-height:1.65;min-height:100vh;overflow-x:hidden;
   transition:background .35s,color .35s;
 }
@@ -882,13 +882,25 @@ try {
 // ─────────────────────────────────────────────────────────
 //  FONT SCALE
 // ─────────────────────────────────────────────────────────
+const SCALES = { '0.88':'17.8px', '1.0':'21px', '1.18':'24.2px' };
+
 function setScale(btn) {
   const scale = btn.dataset.scale;
-  document.documentElement.style.setProperty('--font-scale', scale);
+  document.documentElement.style.fontSize = SCALES[scale];
   document.querySelectorAll('.nc-size').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   try { localStorage.setItem('vyrion-scale', scale); } catch(e){}
 }
+// Restore saved scale
+try {
+  const saved = localStorage.getItem('vyrion-scale');
+  if (saved && SCALES[saved]) {
+    document.documentElement.style.fontSize = SCALES[saved];
+    document.querySelectorAll('.nc-size').forEach(b => {
+      b.classList.toggle('active', b.dataset.scale === saved);
+    });
+  }
+} catch(e){}
 // Restore saved scale
 // Restore saved scale — runs immediately, DOM already ready at bottom of body
   
