@@ -884,13 +884,13 @@ try {
 // ─────────────────────────────────────────────────────────
 //  FONT SCALE
 // ─────────────────────────────────────────────────────────
-function setScale(btn) function setScale(btn) {
+function setScale(btn) {
   const scale = btn.dataset.scale;
   document.documentElement.style.setProperty('--font-scale', scale);
   document.querySelectorAll('.nc-size').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   try { localStorage.setItem('vyrion-scale', scale); } catch(e){}
-  document.body.style.fontSize = 'calc(18px * ' + scale + ')';
+}
 }
 }
 // Restore saved scale
