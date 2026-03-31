@@ -6,302 +6,437 @@
 <title>VYRION CONSCIENCE — Corporate Climate Pledge Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700;800&family=Archivo:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ── THEME VARIABLES ──────────────────────────────────────── */
-:root {
+/* ── THEME ─────────────────────────────────────────────── */
+:root{
   --void:#030a05;--void2:#071210;--void3:#0d1c14;
   --glow:#00FF9D;--amber:#FFB84D;--breach:#F03030;--warn:#F09000;
   --t1:#e8f5ec;--t2:#8aab92;--t3:#4a7a58;
-  --border:rgba(0,255,157,0.10);--border2:rgba(0,255,157,0.06);
-  --breach-bg:rgba(240,48,48,0.07);--warn-bg:rgba(240,144,0,0.07);--track-bg:rgba(0,255,157,0.06);
-  --nav-bg:rgba(3,10,5,0.96);--mag-bg:rgba(5,15,10,0.97);
-  --scanline:rgba(0,255,157,0.006);
-  --font-scale:1;
+  --border:rgba(0,255,157,.10);--border2:rgba(0,255,157,.06);
+  --breach-bg:rgba(240,48,48,.07);--warn-bg:rgba(240,144,0,.07);--track-bg:rgba(0,255,157,.06);
+  --nav-bg:rgba(3,10,5,.97);--mag-bg:rgba(4,12,7,.98);
+  --scanline:rgba(0,255,157,.005);
 }
 [data-theme="light"]{
-  --void:#f0f7f3;--void2:#e3ede7;--void3:#d3e6da;
-  --glow:#009950;--amber:#c4880a;--breach:#c42020;--warn:#b86000;
-  --t1:#081a0c;--t2:#3a5a42;--t3:#6a8a72;
-  --border:rgba(0,153,80,0.18);--border2:rgba(0,153,80,0.10);
-  --breach-bg:rgba(196,32,32,0.08);--warn-bg:rgba(184,96,0,0.08);--track-bg:rgba(0,153,80,0.08);
-  --nav-bg:rgba(240,247,243,0.97);--mag-bg:rgba(230,242,235,0.98);
-  --scanline:rgba(0,0,0,0);
+  --void:#f0f7f3;--void2:#e4ede8;--void3:#d5e5db;
+  --glow:#008844;--amber:#b07800;--breach:#b82020;--warn:#a05800;
+  --t1:#06180a;--t2:#2e5238;--t3:#5a7a62;
+  --border:rgba(0,136,68,.18);--border2:rgba(0,136,68,.10);
+  --breach-bg:rgba(184,32,32,.08);--warn-bg:rgba(160,88,0,.08);--track-bg:rgba(0,136,68,.08);
+  --nav-bg:rgba(240,247,243,.98);--mag-bg:rgba(235,245,239,.99);
+  --scanline:transparent;
 }
 
-/* ── RESET & BASE ─────────────────────────────────────────── */
+/* ── RESET ─────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-size:18px}
 body{
   background:var(--void);color:var(--t1);
-  font-family:'Archivo',sans-serif;
-  font-size:calc(18px * var(--font-scale));
+  font-family:'Archivo',sans-serif;font-size:1rem;
   line-height:1.65;min-height:100vh;overflow-x:hidden;
-  transition:background .35s,color .35s;
+  transition:background .3s,color .3s;
 }
 body::after{
-  content:'';position:fixed;inset:0;
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:990;
   background:repeating-linear-gradient(0deg,transparent,transparent 3px,var(--scanline) 3px,var(--scanline) 4px);
-  pointer-events:none;z-index:900;
 }
-/* Theme transitions */
-.nav,.live-banner,.source-strip,.filter-bar,.c-card,.method-section,.footer,
-.v-badge,.lb-cell,.src-badge,.page-header{transition:background .35s,border-color .35s,color .35s}
+.nav,.live-banner,.c-card,.v-badge,.method-section,.footer,.src-badge,.lb-cell,.filter-bar,.source-strip,.page-header,.score-breakdown{
+  transition:background .3s,border-color .3s;
+}
 
-/* ── NAV ──────────────────────────────────────────────────── */
+/* ── NAV ────────────────────────────────────────────────── */
 .nav{
-  position:sticky;top:0;z-index:500;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 1.5rem;height:52px;
+  position:sticky;top:0;z-index:500;height:52px;
+  display:flex;align-items:center;gap:1rem;padding:0 1.8rem;
   background:var(--nav-bg);border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);gap:1rem;
+  backdrop-filter:blur(20px);
 }
-.nav-logo{font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:1rem;color:var(--glow);letter-spacing:.14em;text-decoration:none;flex-shrink:0}
+.nav-logo{
+  font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:.95rem;
+  color:var(--glow);letter-spacing:.15em;text-decoration:none;flex-shrink:0;
+}
 .nav-links{display:flex;gap:1.8rem;list-style:none;flex:1}
-.nav-links a{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);text-decoration:none;transition:color .2s;padding-bottom:2px}
+.nav-links a{
+  font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:.65rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--t2);text-decoration:none;transition:color .2s;padding-bottom:2px;
+}
 .nav-links a:hover{color:var(--t1)}
-.nav-links a.active{color:var(--glow);border-bottom:1px solid rgba(0,255,157,.35)}
-.nav-dot{width:6px;height:6px;background:var(--glow);border-radius:50%;animation:pdot 2.2s infinite;flex-shrink:0}
-@keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,157,.4)}50%{opacity:.5;box-shadow:0 0 0 6px rgba(0,255,157,0)}}
+.nav-links a.active{color:var(--glow);border-bottom:1px solid rgba(0,255,157,.4)}
+.nav-dot{width:6px;height:6px;background:var(--glow);border-radius:50%;flex-shrink:0;animation:pdot 2.2s infinite}
+@keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,157,.5)}50%{opacity:.4;box-shadow:0 0 0 7px rgba(0,255,157,0)}}
 
-/* NAV CONTROLS — theme + font scale */
-.nav-controls{display:flex;align-items:center;gap:.4rem;flex-shrink:0}
-.nc-sep{width:1px;height:18px;background:var(--border);margin:0 .2rem}
-.nc-btn{
-  font-family:'Courier Prime',monospace;font-size:.6rem;letter-spacing:.1em;
-  padding:.25rem .55rem;border-radius:2px;border:1px solid var(--border);
-  background:transparent;color:var(--t3);cursor:pointer;
-  transition:all .18s;white-space:nowrap;
+/* ── NAV CONTROLS ───────────────────────────────────────── */
+.nav-controls{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+.nc-sep{width:1px;height:16px;background:var(--border);margin:0 .15rem}
+/* Theme button */
+.nc-theme{
+  font-family:'Courier Prime',monospace;font-size:.58rem;font-weight:700;
+  letter-spacing:.12em;padding:.22rem .5rem;border-radius:2px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--t2);cursor:pointer;transition:all .2s;white-space:nowrap;
 }
-.nc-btn:hover{border-color:rgba(0,255,157,.3);color:var(--t1)}
-.nc-btn.active{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.4);color:var(--glow)}
-[data-theme="light"] .nc-btn.active{background:rgba(0,153,80,.1);border-color:rgba(0,153,80,.4);color:var(--glow)}
-.nc-size{
-  font-family:'Courier Prime',monospace;font-size:.62rem;font-weight:700;
-  width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+.nc-theme:hover,.nc-theme.active{
+  border-color:var(--glow);color:var(--glow);
+  background:rgba(0,255,157,.08);box-shadow:0 0 8px rgba(0,255,157,.12);
+}
+[data-theme="light"] .nc-theme:hover,[data-theme="light"] .nc-theme.active{
+  border-color:var(--glow);color:var(--glow);background:rgba(0,136,68,.1);box-shadow:none;
+}
+/* Font scale buttons */
+.nc-sz{
+  font-family:'Courier Prime',monospace;font-size:.6rem;font-weight:700;
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
   border-radius:2px;border:1px solid var(--border);
-  background:transparent;color:var(--t3);cursor:pointer;transition:all .18s;
+  background:transparent;color:var(--t3);cursor:pointer;transition:all .2s;
 }
-.nc-size:hover{border-color:rgba(0,255,157,.3);color:var(--t1)}
-.nc-size.active{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.4);color:var(--glow)}
+.nc-sz:hover{border-color:rgba(0,255,157,.4);color:var(--t1)}
+.nc-sz.active{
+  background:rgba(0,255,157,.15);
+  border-color:var(--glow);color:var(--glow);
+  box-shadow:0 0 8px rgba(0,255,157,.2);
+}
+[data-theme="light"] .nc-sz.active{
+  background:rgba(0,136,68,.12);border-color:var(--glow);
+  color:var(--glow);box-shadow:none;
+}
 
-/* ── LIVE TICKER ──────────────────────────────────────────── */
-.live-banner{display:flex;align-items:center;flex-wrap:wrap;background:var(--void2);border-bottom:1px solid var(--border)}
-.lb-cell{display:flex;flex-direction:column;gap:.15rem;padding:.8rem 1.4rem;border-right:1px solid var(--border);flex:1;min-width:130px}
+/* ── LIVE TICKER ────────────────────────────────────────── */
+.live-banner{
+  display:flex;flex-wrap:wrap;
+  background:var(--void2);border-bottom:1px solid var(--border);
+}
+.lb-cell{
+  flex:1;min-width:120px;padding:.75rem 1.4rem;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:.12rem;
+}
 .lb-cell:last-child{border-right:none}
-.lb-lbl{font-family:'Courier Prime',monospace;font-size:.6rem;color:var(--t3);letter-spacing:.16em;text-transform:uppercase}
-.lb-val{font-family:'Courier Prime',monospace;font-weight:700;font-size:1.1rem;color:var(--glow);letter-spacing:-.01em;line-height:1}
-.lb-val.amber{color:var(--amber)}
-.lb-sub{font-family:'Courier Prime',monospace;font-size:.57rem;color:var(--t3)}
-.lb-live-dot{display:inline-block;width:5px;height:5px;background:var(--glow);border-radius:50%;margin-right:4px;animation:pdot 2s infinite;vertical-align:middle}
-
-/* ── PAGE HEADER — BACKSPLASH ─────────────────────────────── */
-.page-header{
-  padding:3.2rem 2rem 2.4rem;
-  border-bottom:1px solid var(--border);
-  position:relative;overflow:hidden;
-  /* Background image — upload Vyrion_backsplash_image.jpg to conscience repo root */
-  background-image:url('Vyrion_backsplash_image.jpg');
-  background-size:cover;background-position:center 40%;
+.lb-lbl{
+  font-family:'Courier Prime',monospace;font-size:.55rem;
+  color:var(--t3);letter-spacing:.18em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.35rem;
 }
-/* Dark overlay so text stays readable */
+.lb-dot{
+  width:4px;height:4px;background:var(--glow);border-radius:50%;
+  animation:pdot 2s infinite;flex-shrink:0;
+}
+.lb-val{
+  font-family:'Courier Prime',monospace;font-weight:700;
+  font-size:1.05rem;color:var(--glow);line-height:1;letter-spacing:-.01em;
+}
+.lb-val.amber{color:var(--amber)}
+.lb-val.red{color:var(--breach)}
+.lb-val.white{color:var(--t1)}
+.lb-sub{font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);line-height:1.3}
+
+/* ── PAGE HEADER ─────────────────────────────────────────── */
+.page-header{
+  padding:3.5rem 2rem 2.8rem;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+  background-image:url('Vyrion_backsplash_image.jpg');
+  background-size:cover;background-position:center 38%;
+}
 .page-header::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(3,10,5,.92) 0%,rgba(3,10,5,.78) 40%,rgba(3,10,5,.88) 100%);
-  z-index:0;transition:background .35s;
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(120deg,rgba(3,10,5,.94) 0%,rgba(3,10,5,.76) 45%,rgba(3,10,5,.90) 100%);
+  transition:background .3s;
 }
 [data-theme="light"] .page-header::before{
-  background:linear-gradient(135deg,rgba(240,247,243,.93) 0%,rgba(240,247,243,.80) 40%,rgba(240,247,243,.90) 100%);
+  background:linear-gradient(120deg,rgba(240,247,243,.95) 0%,rgba(240,247,243,.82) 45%,rgba(240,247,243,.92) 100%);
 }
-/* Subtle particle shimmer over backsplash */
 .page-header::after{
-  content:'';position:absolute;inset:0;z-index:1;
-  background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(0,255,157,.04) 0%,transparent 70%);
-  animation:hglow 6s ease-in-out infinite alternate;pointer-events:none;
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 55% 60% at 72% 52%,rgba(0,255,157,.05) 0%,transparent 70%);
+  animation:hpulse 7s ease-in-out infinite alternate;
 }
-@keyframes hglow{0%{opacity:.5}100%{opacity:1}}
+@keyframes hpulse{0%{opacity:.4;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
 .page-header>*{position:relative;z-index:2}
 .bg-word{
-  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
+  position:absolute;right:-1.5rem;top:50%;transform:translateY(-50%);
   font-family:'Archivo Narrow',sans-serif;font-weight:800;
-  font-size:clamp(5rem,12vw,9rem);
-  color:rgba(0,255,157,.035);pointer-events:none;user-select:none;line-height:1;z-index:2;
+  font-size:clamp(5rem,13vw,10rem);
+  color:rgba(0,255,157,.03);pointer-events:none;user-select:none;z-index:2;
 }
 .eyebrow{
-  font-family:'Courier Prime',monospace;font-size:.68rem;color:var(--glow);
-  letter-spacing:.22em;text-transform:uppercase;margin-bottom:.5rem;
-  display:flex;align-items:center;gap:.6rem;
+  font-family:'Courier Prime',monospace;font-size:.65rem;color:var(--glow);
+  letter-spacing:.24em;text-transform:uppercase;margin-bottom:.55rem;
+  display:flex;align-items:center;gap:.55rem;
 }
-.eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--glow);opacity:.4}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--glow);opacity:.5}
 .page-title{
   font-family:'Archivo Narrow',sans-serif;font-weight:800;
-  font-size:clamp(2.2rem,5vw,3.5rem);color:var(--t1);
-  line-height:1;letter-spacing:-.02em;margin-bottom:.6rem;
+  font-size:clamp(2.4rem,5.5vw,3.8rem);color:var(--t1);
+  line-height:.95;letter-spacing:-.02em;margin-bottom:.65rem;
 }
-.page-sub{font-size:.85rem;color:var(--t2);max-width:64ch;line-height:1.7}
+.page-sub{font-size:.82rem;color:var(--t2);max-width:62ch;line-height:1.72}
 
-/* ── SOURCE STATUS STRIP ──────────────────────────────────── */
-.source-strip{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--void2)}
-.src-badge{flex:1;min-width:130px;padding:.85rem 1.1rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:.22rem}
+/* ── SOURCE STRIP ────────────────────────────────────────── */
+.source-strip{display:flex;flex-wrap:wrap;background:var(--void2);border-bottom:1px solid var(--border)}
+.src-badge{
+  flex:1;min-width:120px;padding:.8rem 1.1rem;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:.2rem;
+}
 .src-badge:last-child{border-right:none}
-.src-name{font-family:'Courier Prime',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:.4rem}
-.src-status{font-family:'Courier Prime',monospace;font-size:.58rem;color:var(--t3)}
-.src-link{font-family:'Courier Prime',monospace;font-size:.56rem;color:rgba(0,255,157,.35);text-decoration:none;transition:color .2s}
+.src-name{
+  font-family:'Courier Prime',monospace;font-size:.6rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.38rem;
+}
+.src-status{font-family:'Courier Prime',monospace;font-size:.56rem;color:var(--t3);line-height:1.3}
+.src-link{font-family:'Courier Prime',monospace;font-size:.54rem;color:rgba(0,255,157,.3);text-decoration:none;transition:color .18s}
 .src-link:hover{color:var(--glow)}
 .dot-live{width:5px;height:5px;background:var(--glow);border-radius:50%;flex-shrink:0;animation:pdot 2.2s infinite}
 .dot-static{width:5px;height:5px;background:var(--t3);border-radius:50%;flex-shrink:0}
 
-/* ── FILTER BAR ───────────────────────────────────────────── */
-.filter-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;padding:.85rem 2rem;border-bottom:1px solid var(--border);background:var(--void2)}
-.filter-btns{display:flex;gap:.45rem;flex-wrap:wrap}
-.f-btn{font-family:'Courier Prime',monospace;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;transition:all .18s}
-.f-btn:hover{border-color:rgba(0,255,157,.3);color:var(--t1)}
-.f-btn.active{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.4);color:var(--glow)}
-.f-btn.active.breach{background:var(--breach-bg);border-color:rgba(240,48,48,.35);color:var(--breach)}
-.f-btn.active.warn{background:var(--warn-bg);border-color:rgba(240,144,0,.35);color:var(--warn)}
-.f-btn.active.track{background:var(--track-bg);border-color:rgba(0,255,157,.4);color:var(--glow)}
-.filter-stats{display:flex;gap:1.4rem;flex-wrap:wrap}
-.fstat{font-family:'Courier Prime',monospace;font-size:.6rem;color:var(--t3);display:flex;align-items:center;gap:.3rem}
-.fstat span{font-weight:700}
-.fstat.breach span{color:var(--breach)}.fstat.warn span{color:var(--warn)}.fstat.track span{color:var(--glow)}.fstat.total span{color:var(--t1)}
+/* ── FILTER BAR ──────────────────────────────────────────── */
+.filter-bar{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  gap:.7rem;padding:.8rem 2rem;border-bottom:1px solid var(--border);
+  background:var(--void2);
+}
+.filter-btns{display:flex;gap:.4rem;flex-wrap:wrap}
+.f-btn{
+  font-family:'Courier Prime',monospace;font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.26rem .7rem;border-radius:2px;border:1px solid var(--border);
+  background:transparent;color:var(--t2);cursor:pointer;transition:all .18s;
+}
+.f-btn:hover{border-color:rgba(0,255,157,.35);color:var(--t1)}
+.f-btn.active{background:rgba(0,255,157,.09);border-color:rgba(0,255,157,.5);color:var(--glow)}
+.f-btn.active.fb-breach{background:var(--breach-bg);border-color:rgba(240,48,48,.4);color:var(--breach)}
+.f-btn.active.fb-warn{background:var(--warn-bg);border-color:rgba(240,144,0,.4);color:var(--warn)}
+.f-btn.active.fb-track{background:var(--track-bg);border-color:rgba(0,255,157,.5);color:var(--glow)}
+.fstats{display:flex;gap:1.3rem;flex-wrap:wrap}
+.fst{font-family:'Courier Prime',monospace;font-size:.58rem;color:var(--t3);display:flex;align-items:center;gap:.28rem}
+.fst b{font-weight:700}
+.fst.breach b{color:var(--breach)}.fst.warn b{color:var(--warn)}.fst.track b{color:var(--glow)}.fst.tot b{color:var(--t1)}
 
-/* ── COMPANY GRID ─────────────────────────────────────────── */
-.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border)}
+/* ── COMPANY GRID ────────────────────────────────────────── */
+.company-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:1px;background:var(--border);
+}
 @media(max-width:720px){.company-grid{grid-template-columns:1fr}}
 
-/* ── COMPANY CARD ─────────────────────────────────────────── */
-.c-card{background:var(--void2);padding:1.4rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .2s}
-.c-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,rgba(0,255,157,.08));opacity:.7}
+/* ── COMPANY CARD ────────────────────────────────────────── */
+.c-card{
+  background:var(--void2);padding:1.35rem;
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  transition:background .2s,transform .2s;
+}
+.c-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--card-accent,rgba(0,255,157,.06));
+  transition:opacity .2s;
+}
 .c-card:hover{background:var(--void3)}
 .c-card[data-band="breach"]{--card-accent:var(--breach)}
 .c-card[data-band="warning"]{--card-accent:var(--warn)}
 .c-card[data-band="on-track"]{--card-accent:var(--glow)}
 
-.c-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.85rem;gap:.5rem}
-.c-name{font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:1.05rem;color:var(--t1);letter-spacing:.04em;line-height:1}
-.c-meta{font-family:'Courier Prime',monospace;font-size:.58rem;color:var(--t3);margin-top:.2rem;letter-spacing:.06em}
+.c-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.8rem;gap:.5rem}
+.c-name{
+  font-family:'Archivo Narrow',sans-serif;font-weight:800;
+  font-size:1rem;color:var(--t1);letter-spacing:.04em;line-height:1;
+}
+.c-meta{font-family:'Courier Prime',monospace;font-size:.55rem;color:var(--t3);margin-top:.18rem;letter-spacing:.06em}
 .c-score-wrap{text-align:right;flex-shrink:0}
-.c-score-num{font-family:'Courier Prime',monospace;font-weight:700;font-size:1.8rem;line-height:1;letter-spacing:-.02em}
-.c-score-den{font-family:'Courier Prime',monospace;font-size:.68rem;color:var(--t3)}
-.c-band{font-family:'Courier Prime',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;margin-top:.1rem;text-align:right;padding:.1rem .4rem;border-radius:2px}
-.band-breach .c-score-num{color:var(--breach)}.band-breach .c-band{background:var(--breach-bg);color:var(--breach);border:1px solid rgba(240,48,48,.25)}
-.band-warning .c-score-num{color:var(--warn)}.band-warning .c-band{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(240,144,0,.25)}
-.band-track .c-score-num{color:var(--glow)}.band-track .c-band{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,255,157,.25)}
+.c-score-num{
+  font-family:'Courier Prime',monospace;font-weight:700;
+  font-size:1.75rem;line-height:1;letter-spacing:-.02em;
+}
+.c-score-den{font-family:'Courier Prime',monospace;font-size:.66rem;color:var(--t3)}
+.c-band{
+  font-family:'Courier Prime',monospace;font-size:.54rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-top:.08rem;text-align:right;padding:.09rem .38rem;border-radius:2px;
+  display:inline-block;
+}
+.band-breach .c-score-num{color:var(--breach)}
+.band-breach .c-band{background:var(--breach-bg);color:var(--breach);border:1px solid rgba(240,48,48,.3)}
+.band-warning .c-score-num{color:var(--warn)}
+.band-warning .c-band{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(240,144,0,.3)}
+.band-track .c-score-num{color:var(--glow)}
+.band-track .c-band{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,255,157,.3)}
 
 /* Score bar */
-.score-bar-wrap{margin-bottom:1rem;cursor:default}
-.score-bar-bg{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin-bottom:.25rem;position:relative}
-.score-bar-fill{height:100%;border-radius:2px;transition:width 1.3s cubic-bezier(.4,0,.2,1);width:0}
-.band-breach .score-bar-fill{background:linear-gradient(90deg,rgba(240,48,48,.5),var(--breach))}
-.band-warning .score-bar-fill{background:linear-gradient(90deg,rgba(240,144,0,.5),var(--warn))}
-.band-track .score-bar-fill{background:linear-gradient(90deg,rgba(0,255,157,.35),var(--glow))}
-.score-bar-labels{display:flex;justify-content:space-between;font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3)}
+.score-bar-wrap{margin-bottom:.9rem}
+.score-bar-bg{
+  height:3px;background:rgba(255,255,255,.06);
+  border-radius:2px;overflow:hidden;margin-bottom:.22rem;
+}
 [data-theme="light"] .score-bar-bg{background:rgba(0,0,0,.08)}
+.score-bar-fill{height:100%;border-radius:2px;width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.band-breach .score-bar-fill{background:linear-gradient(90deg,rgba(240,48,48,.4),var(--breach))}
+.band-warning .score-bar-fill{background:linear-gradient(90deg,rgba(240,144,0,.4),var(--warn))}
+.band-track .score-bar-fill{background:linear-gradient(90deg,rgba(0,255,157,.3),var(--glow))}
+.score-bar-labels{display:flex;justify-content:space-between;font-family:'Courier Prime',monospace;font-size:.52rem;color:var(--t3)}
 
 /* Pledge / Reality */
-.pr-block{margin-bottom:.85rem}
-.pr-row{display:flex;gap:.55rem;margin-bottom:.35rem;align-items:flex-start;cursor:default}
-.pr-tag{font-family:'Courier Prime',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;padding:.1rem .3rem;border-radius:2px;margin-top:.14rem;line-height:1.2}
+.pr-block{margin-bottom:.8rem}
+.pr-row{display:flex;gap:.5rem;margin-bottom:.3rem;align-items:flex-start}
+.pr-tag{
+  font-family:'Courier Prime',monospace;font-size:.54rem;letter-spacing:.1em;
+  text-transform:uppercase;flex-shrink:0;padding:.09rem .28rem;
+  border-radius:2px;margin-top:.13rem;line-height:1.2;
+}
 .tag-pledge{background:rgba(74,173,255,.08);color:#4AADFF;border:1px solid rgba(74,173,255,.25)}
 .tag-reality{background:var(--breach-bg);color:var(--breach);border:1px solid rgba(240,48,48,.25)}
 .tag-reality.warn{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(240,144,0,.25)}
 .tag-reality.ok{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,255,157,.25)}
-.pr-text{font-size:.75rem;color:var(--t1);line-height:1.5}
-.pr-src{font-family:'Courier Prime',monospace;font-size:.58rem;color:var(--t3);margin-left:calc(.3rem + 45px + .55rem);margin-top:-.22rem;margin-bottom:.22rem}
-.pr-src a{color:rgba(0,255,157,.35);text-decoration:none;transition:color .2s}
+.pr-text{font-size:.73rem;color:var(--t1);line-height:1.52}
+.pr-src{
+  font-family:'Courier Prime',monospace;font-size:.56rem;color:var(--t3);
+  margin-left:calc(.28rem + 43px + .5rem);margin-top:-.18rem;margin-bottom:.2rem;
+}
+.pr-src a{color:rgba(0,255,157,.35);text-decoration:none;transition:color .18s}
 .pr-src a:hover{color:var(--glow)}
 
 /* Validation badges */
-.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin-bottom:.75rem;padding-top:.75rem;border-top:1px solid var(--border2)}
-.v-badge{display:flex;flex-direction:column;gap:.12rem;padding:.48rem .48rem .42rem;border-radius:2px;border:1px solid var(--border2);background:rgba(0,0,0,.18);cursor:default;transition:border-color .18s,background .18s}
-.v-badge:hover{border-color:rgba(0,255,157,.2);background:rgba(0,0,0,.28)}
+.val-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.32rem;
+  margin-bottom:.7rem;padding-top:.7rem;border-top:1px solid var(--border2);
+}
+.v-badge{
+  display:flex;flex-direction:column;gap:.1rem;
+  padding:.45rem .44rem .4rem;border-radius:2px;
+  border:1px solid var(--border2);background:rgba(0,0,0,.16);
+  transition:border-color .18s,background .18s;
+}
+.v-badge:hover{border-color:rgba(0,255,157,.22);background:rgba(0,0,0,.26)}
 [data-theme="light"] .v-badge{background:rgba(0,0,0,.04)}
 [data-theme="light"] .v-badge:hover{background:rgba(0,0,0,.08)}
-.v-badge-name{font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
-.v-badge-val{font-family:'Courier Prime',monospace;font-weight:700;font-size:.85rem;line-height:1}
-.v-badge-sub{font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);line-height:1.3}
 .v-badge a{text-decoration:none;color:inherit;display:block}
-.v-badge a:hover .v-badge-val{text-decoration:underline;text-underline-offset:2px}
+.v-name{font-family:'Courier Prime',monospace;font-size:.52rem;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
+.v-val{font-family:'Courier Prime',monospace;font-weight:700;font-size:.82rem;line-height:1.1}
+.v-sub{font-family:'Courier Prime',monospace;font-size:.52rem;color:var(--t3);line-height:1.3}
 .cdp-A{color:var(--glow)}.cdp-B{color:var(--amber)}.cdp-C{color:var(--warn)}.cdp-D{color:var(--breach)}
-.im-good{color:var(--glow)}.im-mid{color:var(--amber)}.im-bad{color:var(--warn)}.im-worst{color:var(--breach)}
+.im-A{color:var(--glow)}.im-B{color:var(--amber)}.im-C{color:var(--warn)}.im-D,.im-F{color:var(--breach)}
 .sbti-yes{color:var(--glow)}.sbti-commit{color:var(--amber)}.sbti-no{color:var(--breach)}
 .law-0{color:var(--glow)}.law-low{color:var(--amber)}.law-mid{color:var(--warn)}.law-high{color:var(--breach)}
 
-/* Expand toggle */
-.expand-toggle{display:flex;align-items:center;justify-content:space-between;padding:.42rem .55rem;border:1px solid var(--border2);border-radius:2px;cursor:pointer;background:transparent;width:100%;color:var(--t3);font-family:'Courier Prime',monospace;font-size:.6rem;letter-spacing:.08em;transition:all .18s}
+/* Score breakdown */
+.expand-toggle{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.4rem .52rem;border:1px solid var(--border2);border-radius:2px;
+  cursor:pointer;background:transparent;width:100%;
+  color:var(--t3);font-family:'Courier Prime',monospace;font-size:.58rem;
+  letter-spacing:.08em;transition:all .18s;
+}
 .expand-toggle:hover{border-color:rgba(0,255,157,.25);color:var(--t2)}
-.expand-toggle .chevron{transition:transform .2s;font-size:.54rem}
+.expand-toggle.open{border-color:rgba(0,255,157,.2);color:var(--t2)}
+.chevron{transition:transform .22s;font-size:.52rem;flex-shrink:0}
 .expand-toggle.open .chevron{transform:rotate(180deg)}
-.score-breakdown{display:none;margin-top:.45rem;padding:.65rem .55rem;background:rgba(0,0,0,.28);border:1px solid var(--border2);border-radius:2px}
+.score-breakdown{
+  display:none;margin-top:.4rem;padding:.6rem .52rem;
+  background:rgba(0,0,0,.25);border:1px solid var(--border2);border-radius:2px;
+}
 .score-breakdown.open{display:block}
 [data-theme="light"] .score-breakdown{background:rgba(0,0,0,.04)}
-.sb-row{display:flex;justify-content:space-between;align-items:center;padding:.18rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-family:'Courier Prime',monospace;font-size:.63rem}
+.sb-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:.16rem 0;border-bottom:1px solid rgba(255,255,255,.04);
+  font-family:'Courier Prime',monospace;font-size:.6rem;
+}
 .sb-row:last-child{border-bottom:none}
 [data-theme="light"] .sb-row{border-bottom-color:rgba(0,0,0,.06)}
-.sb-factor{color:var(--t2)}.sb-weight{color:var(--t3);font-size:.56rem}.sb-pts{color:var(--t1);font-weight:700}
-.sb-total-row{display:flex;justify-content:space-between;padding:.3rem 0 0;margin-top:.22rem;border-top:1px solid var(--border);font-family:'Courier Prime',monospace;font-size:.66rem}
-.sb-total-row .sb-factor{color:var(--t1)}
-.sb-method{font-family:'Courier Prime',monospace;font-size:.56rem;color:var(--t3);margin-top:.45rem;padding-top:.4rem;border-top:1px solid var(--border2);line-height:1.5}
-.sb-method a{color:rgba(0,255,157,.35);text-decoration:none}
-.sb-method a:hover{color:var(--glow)}
+.sb-f{color:var(--t2);flex:1;padding-right:.5rem}
+.sb-w{color:var(--t3);font-size:.54rem;flex-shrink:0;padding-right:.6rem}
+.sb-p{color:var(--t1);font-weight:700;flex-shrink:0;text-align:right;min-width:36px}
+.sb-total{
+  display:flex;justify-content:space-between;padding:.28rem 0 0;
+  margin-top:.2rem;border-top:1px solid var(--border);
+  font-family:'Courier Prime',monospace;font-size:.64rem;
+}
+.sb-total .sb-f{color:var(--t1)}
+.sb-note{
+  font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);
+  margin-top:.42rem;padding-top:.38rem;border-top:1px solid var(--border2);line-height:1.5;
+}
+.sb-note a{color:rgba(0,255,157,.35);text-decoration:none}
+.sb-note a:hover{color:var(--glow)}
 
-/* ── METHODOLOGY SECTION ──────────────────────────────────── */
+/* ── METHODOLOGY ─────────────────────────────────────────── */
 .method-section{border-top:1px solid var(--border);padding:2rem;background:var(--void2)}
-.method-title{font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t1);margin-bottom:.8rem}
-.method-body{font-size:.77rem;color:var(--t2);line-height:1.75;max-width:80ch}
+.method-title{
+  font-family:'Archivo Narrow',sans-serif;font-weight:800;
+  font-size:.85rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--t1);margin-bottom:.75rem;
+}
+.method-body{font-size:.75rem;color:var(--t2);line-height:1.75;max-width:78ch}
 .method-body a{color:rgba(0,255,157,.5);text-decoration:none}
 .method-body a:hover{color:var(--glow)}
-.method-table{width:100%;border-collapse:collapse;margin-top:1rem;font-family:'Courier Prime',monospace;font-size:.66rem}
-.method-table th{text-align:left;padding:.4rem .8rem .4rem 0;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:400}
-.method-table td{padding:.4rem .8rem .4rem 0;color:var(--t2);border-bottom:1px solid var(--border2)}
+.method-table{width:100%;border-collapse:collapse;margin-top:.9rem;font-family:'Courier Prime',monospace;font-size:.63rem}
+.method-table th{
+  text-align:left;padding:.38rem .75rem .38rem 0;
+  color:var(--t3);letter-spacing:.08em;text-transform:uppercase;
+  border-bottom:1px solid var(--border);font-weight:400;
+}
+.method-table td{padding:.38rem .75rem .38rem 0;color:var(--t2);border-bottom:1px solid var(--border2)}
 .method-table td:last-child{color:var(--t1)}
 
-/* ── FOOTER ───────────────────────────────────────────────── */
-.footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 2rem;border-top:1px solid var(--border)}
-.footer-l{font-family:'Courier Prime',monospace;font-size:.62rem;color:var(--t3);line-height:1.7}
-.footer-l a{color:rgba(0,255,157,.4);text-decoration:none}
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;padding:1.4rem 2rem;border-top:1px solid var(--border);
+}
+.footer-l{font-family:'Courier Prime',monospace;font-size:.6rem;color:var(--t3);line-height:1.75}
+.footer-l a{color:rgba(0,255,157,.4);text-decoration:none;transition:color .18s}
 .footer-l a:hover{color:var(--glow)}
-.footer-r{display:flex;gap:1.5rem}
-.footer-r a{font-family:'Courier Prime',monospace;font-size:.62rem;color:rgba(0,255,157,.35);text-decoration:none;transition:color .2s}
+.footer-r{display:flex;gap:1.4rem}
+.footer-r a{font-family:'Courier Prime',monospace;font-size:.6rem;color:rgba(0,255,157,.3);text-decoration:none;transition:color .18s}
 .footer-r a:hover{color:var(--glow)}
 
-/* ── MAGNIFIER ────────────────────────────────────────────── */
+/* ── MAGNIFIER ───────────────────────────────────────────── */
 #mag{
   position:fixed;pointer-events:none;z-index:9999;
-  opacity:0;width:290px;
-  transition:opacity .16s cubic-bezier(.4,0,.2,1);
+  width:300px;opacity:0;
+  transition:opacity .14s cubic-bezier(.4,0,.2,1);
+  will-change:transform,opacity;
 }
 #mag.show{opacity:1}
 .mag-box{
   background:var(--mag-bg);
-  border:1px solid rgba(0,255,157,.18);
-  border-radius:3px;padding:.9rem 1rem;
-  box-shadow:0 12px 40px rgba(0,0,0,.65),0 0 0 1px rgba(0,255,157,.04);
+  border:1px solid rgba(0,255,157,.2);border-radius:3px;
+  padding:.85rem .95rem;
+  box-shadow:0 16px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,255,157,.05);
   position:relative;overflow:hidden;
 }
 [data-theme="light"] .mag-box{
-  border-color:rgba(0,153,80,.2);
-  box-shadow:0 8px 30px rgba(0,0,0,.15),0 0 0 1px rgba(0,153,80,.06);
+  border-color:rgba(0,136,68,.22);
+  box-shadow:0 8px 28px rgba(0,0,0,.14);
 }
 .mag-box::before{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,255,157,.5),transparent);
+  background:linear-gradient(90deg,transparent,rgba(0,255,157,.55),transparent);
 }
-[data-theme="light"] .mag-box::before{background:linear-gradient(90deg,transparent,rgba(0,153,80,.4),transparent)}
+[data-theme="light"] .mag-box::before{background:linear-gradient(90deg,transparent,rgba(0,136,68,.4),transparent)}
 .mag-brand{
-  font-family:'Archivo Narrow',sans-serif;font-weight:800;
-  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(0,255,157,.35);margin-bottom:.4rem;
-  display:flex;align-items:center;gap:.45rem;
+  font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:.55rem;
+  letter-spacing:.24em;text-transform:uppercase;color:rgba(0,255,157,.35);
+  margin-bottom:.38rem;display:flex;align-items:center;gap:.4rem;
 }
-.mag-brand::before{content:'';width:5px;height:5px;background:var(--glow);border-radius:50%;opacity:.55;animation:pdot 2s infinite;flex-shrink:0}
-[data-theme="light"] .mag-brand{color:rgba(0,153,80,.5)}
-.mag-title{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:.82rem;color:var(--t1);margin-bottom:.38rem;letter-spacing:.03em;line-height:1.3}
-.mag-body{font-size:.72rem;color:var(--t2);line-height:1.55;margin-bottom:.45rem}
-.mag-src{font-family:'Courier Prime',monospace;font-size:.6rem;color:rgba(0,255,157,.4);border-top:1px solid var(--border2);padding-top:.38rem;line-height:1.5}
-[data-theme="light"] .mag-src{color:rgba(0,153,80,.5)}
+.mag-brand::before{
+  content:'';width:4px;height:4px;background:var(--glow);border-radius:50%;
+  opacity:.6;animation:pdot 2s infinite;flex-shrink:0;
+}
+.mag-title{
+  font-family:'Archivo Narrow',sans-serif;font-weight:700;
+  font-size:.8rem;color:var(--t1);margin-bottom:.34rem;line-height:1.3;
+}
+.mag-body{font-size:.7rem;color:var(--t2);line-height:1.55;margin-bottom:.42rem}
+.mag-src{
+  font-family:'Courier Prime',monospace;font-size:.57rem;
+  color:rgba(0,255,157,.38);border-top:1px solid var(--border2);
+  padding-top:.35rem;line-height:1.5;
+}
+[data-theme="light"] .mag-src{color:rgba(0,136,68,.5)}
 
-/* ── UTILITIES ────────────────────────────────────────────── */
-.loading-pulse{animation:shimmer 1.4s infinite}
-@keyframes shimmer{0%,100%{opacity:.3}50%{opacity:.75}}
+/* ── UTILS ───────────────────────────────────────────────── */
+.loading-pulse{animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.75}}
 .hidden{display:none!important}
 </style>
 </head>
@@ -312,58 +447,57 @@ body::after{
   <a href="https://dablerfrost.github.io/conscience" class="nav-logo">VYRION</a>
   <ul class="nav-links">
     <li><a href="https://dablerfrost.github.io/conscience" class="active">CONSCIENCE</a></li>
-    <li><a href="atlas.html">ATLAS</a></li>
     <li><a href="shield.html">SHIELD</a></li>
     <li><a href="https://dablerfrost.github.io/conscience/archive">ARCHIVE</a></li>
   </ul>
   <div class="nav-controls">
-    <button class="nc-btn active" id="theme-btn" onclick="toggleTheme()">◐ DARK</button>
+    <button class="nc-theme active" id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode">◐ DARK</button>
     <div class="nc-sep"></div>
-    <button class="nc-size" data-scale="0.88" onclick="setScale(this)" title="Small text">S</button>
-    <button class="nc-size active" data-scale="1.0" onclick="setScale(this)" title="Medium text">M</button>
-    <button class="nc-size" data-scale="1.18" onclick="setScale(this)" title="Large text">L</button>
+    <button class="nc-sz" data-scale="0.88" onclick="setScale(this)" title="Small text (16px)">S</button>
+    <button class="nc-sz active" data-scale="1.0" onclick="setScale(this)" title="Medium text (18px)">M</button>
+    <button class="nc-sz" data-scale="1.22" onclick="setScale(this)" title="Large text (22px)">L</button>
   </div>
   <div class="nav-dot"></div>
 </nav>
 
-<!-- LIVE TICKER -->
+<!-- TICKER -->
 <div class="live-banner">
   <div class="lb-cell" data-mag="co2">
-    <div class="lb-lbl"><span class="lb-live-dot"></span>Atmospheric CO₂</div>
+    <div class="lb-lbl"><span class="lb-dot"></span>Atmospheric CO₂</div>
     <div class="lb-val" id="co2-val"><span class="loading-pulse">—.—</span></div>
     <div class="lb-sub" id="co2-sub">ppm · NOAA Mauna Loa · fetching…</div>
   </div>
   <div class="lb-cell" data-mag="index">
     <div class="lb-lbl">VYRION Index</div>
-    <div class="lb-val amber">41.2 <span style="font-size:.65rem;color:var(--t3)">± 1.8</span></div>
-    <div class="lb-sub">/ 100 · Day 12 · Mar 29, 2026</div>
+    <div class="lb-val amber" id="idx-val">41.2 <span style="font-size:.62rem;color:var(--t3)">± 1.8</span></div>
+    <div class="lb-sub" id="idx-sub">/ 100 · Day 13 · Mar 30, 2026</div>
   </div>
   <div class="lb-cell" data-mag="coverage">
-    <div class="lb-lbl">Companies Monitored</div>
-    <div class="lb-val" style="color:var(--t1)">11</div>
+    <div class="lb-lbl">Companies Tracked</div>
+    <div class="lb-val white">11</div>
     <div class="lb-sub">7 Breach · 3 Warning · 1 On Track</div>
   </div>
   <div class="lb-cell" data-mag="lawsuits">
-    <div class="lb-lbl">Total Active Lawsuits</div>
-    <div class="lb-val" style="color:var(--breach)">97</div>
-    <div class="lb-sub">Sabin Center Climate Litigation DB</div>
+    <div class="lb-lbl">Active Lawsuits</div>
+    <div class="lb-val red">97</div>
+    <div class="lb-sub">Sabin Center · Columbia Law</div>
   </div>
   <div class="lb-cell" data-mag="refresh">
-    <div class="lb-lbl">Sources Last Checked</div>
-    <div class="lb-val" id="check-ts" style="font-size:.72rem;padding-top:.18rem"><span class="loading-pulse">—</span></div>
-    <div class="lb-sub">UTC · Auto-refresh 15 min</div>
+    <div class="lb-lbl">Sources Checked</div>
+    <div class="lb-val" id="ts-val" style="font-size:.68rem;padding-top:.15rem"><span class="loading-pulse">—</span></div>
+    <div class="lb-sub">UTC · auto-refresh 15 min</div>
   </div>
 </div>
 
-<!-- PAGE HEADER -->
+<!-- HEADER -->
 <header class="page-header">
   <div class="bg-word">CONSCIENCE</div>
   <div class="eyebrow">Module 01 · Corporate Climate Pledge Verification</div>
   <h1 class="page-title">CONSCIENCE</h1>
-  <p class="page-sub">Pledge vs. reality for 11 major corporations. Scores computed against Paris Agreement 1.5°C pathways and SBTi criteria using CDP public responses, InfluenceMap lobbying grades, Sabin Center climate litigation, SBTi registry, and live SEC EDGAR filings. Find an error — we publish the correction.</p>
+  <p class="page-sub">Pledge vs. reality for 11 major corporations. Scores derived from CDP disclosures, InfluenceMap lobbying grades, Sabin Center climate litigation, SBTi registry, and live SEC EDGAR filings — cross-referenced against Paris Agreement 1.5°C pathways. Find an error — we publish the correction.</p>
 </header>
 
-<!-- SOURCE VALIDATION STRIP -->
+<!-- SOURCE STRIP -->
 <div class="source-strip">
   <div class="src-badge" data-mag="src-cdp">
     <div class="src-name"><span class="dot-static"></span>CDP</div>
@@ -372,12 +506,12 @@ body::after{
   </div>
   <div class="src-badge" data-mag="src-im">
     <div class="src-name"><span class="dot-static"></span>InfluenceMap</div>
-    <div class="src-status">Corporate lobbying grades A+–F</div>
+    <div class="src-status">Lobbying grades A+–F · continuous</div>
     <a class="src-link" href="https://influencemap.org/" target="_blank">influencemap.org →</a>
   </div>
   <div class="src-badge" data-mag="src-sabin">
     <div class="src-name"><span class="dot-static"></span>Sabin Center</div>
-    <div class="src-status">Climate litigation database</div>
+    <div class="src-status">Climate litigation · Columbia Law</div>
     <a class="src-link" href="https://climatecasechart.com/" target="_blank">climatecasechart.com →</a>
   </div>
   <div class="src-badge" data-mag="src-sbti">
@@ -393,44 +527,45 @@ body::after{
   <div class="src-badge" data-mag="src-tpi">
     <div class="src-name"><span class="dot-static"></span>TPI</div>
     <div class="src-status">Transition Pathway Initiative</div>
-    <a class="src-link" href="https://www.transitionpathwayinitiative.org/" target="_blank">transitionpathwayinitiative.org →</a>
+    <a class="src-link" href="https://www.transitionpathwayinitiative.org/" target="_blank">tpi.org →</a>
   </div>
 </div>
 
-<!-- FILTER BAR -->
+<!-- FILTER -->
 <div class="filter-bar">
   <div class="filter-btns">
-    <button class="f-btn active" data-filter="all">All <span id="f-all">11</span></button>
-    <button class="f-btn breach" data-filter="breach">Breach <span id="f-breach">7</span></button>
-    <button class="f-btn warn" data-filter="warning">Warning <span id="f-warn">3</span></button>
-    <button class="f-btn track" data-filter="on-track">On Track <span id="f-track">1</span></button>
+    <button class="f-btn active"    data-filter="all">All <span id="f-all">11</span></button>
+    <button class="f-btn fb-breach" data-filter="breach">Breach <span id="f-breach">7</span></button>
+    <button class="f-btn fb-warn"   data-filter="warning">Warning <span id="f-warn">3</span></button>
+    <button class="f-btn fb-track" data-filter="on-track">On Track <span id="f-track">1</span></button>
   </div>
-  <div class="filter-stats">
-    <div class="fstat total">Tracking <span>11</span> companies</div>
-    <div class="fstat breach">Breach <span>7</span></div>
-    <div class="fstat warn">Warning <span>3</span></div>
-    <div class="fstat track">On Track <span>1</span></div>
+  <div class="fstats">
+    <div class="fst tot">Tracking <b>11</b></div>
+    <div class="fst breach">Breach <b>7</b></div>
+    <div class="fst warn">Warning <b>3</b></div>
+    <div class="fst track">On Track <b>1</b></div>
   </div>
 </div>
 
-<!-- COMPANY GRID -->
+<!-- GRID -->
 <div class="company-grid" id="grid"></div>
 
 <!-- METHODOLOGY -->
 <section class="method-section">
   <div class="method-title">Scoring Methodology</div>
   <div class="method-body">
-    CONSCIENCE scores are computed on a 0–100 scale using four weighted data sources. Scores reflect point-in-time analysis of publicly available disclosures. Updated as new CDP cycles, InfluenceMap assessments, or material regulatory events occur. All source data is linked per company card.
+    CONSCIENCE scores use a 0–100 scale computed from four weighted public data sources, cross-referenced against Paris Agreement 1.5°C pathways and Science Based Targets initiative criteria. All source data is linked per company card.
     <br><br>
-    Open Proof Protocol: find an error in any score or data point and it will be published as a public correction. Contact: <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a> · Methodology: <a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-METHODOLOGY-v1.0.md" target="_blank">VYRION-METHODOLOGY-v1.0.md</a>
+    Open Proof Protocol: find an error → <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a> — corrections published within 24 hours.
+    Full derivation: <a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank">CONSCIENCE-METHODOLOGY.md</a>
   </div>
   <table class="method-table">
-    <thead><tr><th>Factor</th><th>Weight</th><th>Source</th><th>Description</th></tr></thead>
+    <thead><tr><th>Factor</th><th>Max</th><th>Source</th><th>How It's Scored</th></tr></thead>
     <tbody>
-      <tr><td>Pledge Quality</td><td>30 pts</td><td>Company filings, SBTi registry</td><td>Ambition, scope (1/2/3), deadline, science-alignment</td></tr>
-      <tr><td>CDP Performance</td><td>25 pts</td><td>CDP 2023 public responses</td><td>A=25, B=18, C=10, D=4 (partial for intermediate grades)</td></tr>
-      <tr><td>Lobbying Alignment</td><td>25 pts</td><td>InfluenceMap company profiles</td><td>A+=25→F=0; negative for obstructionist lobbying</td></tr>
-      <tr><td>Legal Exposure</td><td>20 pts</td><td>Sabin Center climate litigation DB</td><td>Base 20; −0.5 per active climate lawsuit; floor 0</td></tr>
+      <tr><td>Pledge Quality</td><td>30</td><td>Company filings · SBTi registry</td><td>Ambition, scope (1/2/3), deadline, third-party validation</td></tr>
+      <tr><td>CDP Performance</td><td>25</td><td>CDP 2023 public responses</td><td>A=25 · B=18 · C=10 · D=4</td></tr>
+      <tr><td>Lobbying Alignment</td><td>25</td><td>InfluenceMap profiles</td><td>A+=25 → F=0; negative for obstruction</td></tr>
+      <tr><td>Legal Exposure</td><td>20</td><td>Sabin Center litigation DB</td><td>Base 20 − (0.5 × active cases); floor 0</td></tr>
     </tbody>
   </table>
 </section>
@@ -438,12 +573,13 @@ body::after{
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-l">
-    VYRION CONSCIENCE · Module 01 · v2.2<br>
-    Data: CDP · InfluenceMap · Sabin Center · SBTi · SEC EDGAR · All sources open license<br>
-    Methodology: <a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-METHODOLOGY-v1.0.md" target="_blank">VYRION-METHODOLOGY-v1.0.md</a> · <a href="https://github.com/dablerfrost/conscience" target="_blank">github.com/dablerfrost/conscience</a> · Tyler Frost / DablerFrost · Hilo, Hawaii
+    VYRION CONSCIENCE · Module 01 · v2.4 · March 30, 2026<br>
+    Data: CDP · InfluenceMap · Sabin Center · SBTi · SEC EDGAR · All public-domain or open-license sources<br>
+    Methodology: <a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank">CONSCIENCE-METHODOLOGY.md</a> ·
+    <a href="https://github.com/dablerfrost/conscience" target="_blank">github.com/dablerfrost/conscience</a> ·
+    Tyler Frost / DablerFrost · Hilo, Hawaii
   </div>
   <div class="footer-r">
-    <a href="atlas.html">ATLAS →</a>
     <a href="shield.html">SHIELD →</a>
     <a href="https://dablerfrost.github.io/conscience/archive">ARCHIVE →</a>
   </div>
@@ -452,388 +588,333 @@ body::after{
 <!-- MAGNIFIER -->
 <div id="mag">
   <div class="mag-box">
-    <div class="mag-brand">VYRION · CONSCIENCE · MODULE 01</div>
-    <div class="mag-title" id="mag-t">—</div>
-    <div class="mag-body" id="mag-b">—</div>
-    <div class="mag-src" id="mag-s">—</div>
+    <div class="mag-brand">VYRION · CONSCIENCE · v2.4</div>
+    <div class="mag-title" id="mag-t"></div>
+    <div class="mag-body"  id="mag-b"></div>
+    <div class="mag-src"   id="mag-s"></div>
   </div>
 </div>
 
 <script>
+'use strict';
 // ─────────────────────────────────────────────────────────
-//  STATIC MAG DATA (source strips + ticker cells)
+//  MAGNIFIER DATA — static elements
 // ─────────────────────────────────────────────────────────
-const STATIC_MAG = {
-  'co2':{t:'Atmospheric CO₂ — NOAA Mauna Loa Observatory',b:'Real-time CO₂ concentration fetched from NOAA\'s Global Monitoring Laboratory. The Mauna Loa record is the world\'s longest continuous atmospheric CO₂ dataset, running since 1958. Pre-industrial baseline: ~280 ppm. VYRION Index uses this as one of 6 Atmosphere system indicators (22% weight).',s:'NOAA GML · gml.noaa.gov/ccgg/trends · Daily measurement · Fetched live'},
-  'index':{t:'VYRION Index — Daily Planetary Health Score',b:'The world\'s first daily investable planetary health benchmark. Scoring 41.2 ± 1.8 / 100 against a pre-industrial 1850–1900 baseline of 100/100. Computed across 8 Earth systems: Atmosphere (22%), Ocean (18%), Ice (14%), Forest (13%), Biodiversity (12%), Freshwater (10%), Soil (7%), Corporate Accountability (4%). Day-to-day changes <±0.5 are within measurement error.',s:'VYRION-METHODOLOGY-v1.0.md · github.com/dablerfrost/conscience · Day 12 · March 29, 2026'},
-  'coverage':{t:'CONSCIENCE Coverage — 11 Companies Monitored',b:'CONSCIENCE monitors 11 major corporations across Oil & Gas, Aviation, Food & Beverage, Retail, and Technology sectors. Coverage prioritises companies with material climate pledges and significant emissions footprints. Selection is documented in CONSCIENCE-METHODOLOGY.md. Expansion planned.',s:'VYRION CONSCIENCE · Module 01 · v2.2 · dablerfrost.github.io/conscience'},
-  'lawsuits':{t:'Total Active Climate Lawsuits — Tracked Companies',b:'Aggregate count of active climate-related lawsuits against the 11 tracked companies, sourced from the Sabin Center for Climate Change Law database at Columbia Law School. Legal exposure is one of four CONSCIENCE scoring factors (20 pts max). Counts updated monthly.',s:'Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law School'},
-  'refresh':{t:'Auto-Refresh — Live Data Sources',b:'CONSCIENCE automatically refreshes live data sources on page load and every 15 minutes thereafter. Live sources: NOAA GML CO₂ (direct API), SEC EDGAR filing dates (data.sec.gov submissions API). Static sources (CDP, InfluenceMap, SBTi, TPI) are updated when new annual assessments are published.',s:'NOAA GML API · data.sec.gov/submissions · Auto-refresh interval: 15 minutes'},
-  'src-cdp':{t:'CDP — Carbon Disclosure Project',b:'CDP runs the world\'s largest environmental disclosure system. Each year, companies respond to standardised questionnaires on climate governance, risk, and performance. CDP grades A (Leadership) → D (Disclosure). Grade A requires not just disclosure but demonstrated management and action. CONSCIENCE uses the most recent public CDP response for each company.',s:'Carbon Disclosure Project · cdp.net/en/responses · Annual cycle · 23,000+ companies'},
-  'src-im':{t:'InfluenceMap — Corporate Lobbying Assessment',b:'InfluenceMap assesses corporate engagement with climate-related policy, tracking both direct lobbying positions and trade association affiliations. Grades range from A+ (strongly supportive) to F (actively obstructionist). Lobbying misalignment is penalised heavily in CONSCIENCE scoring, as it represents direct interference with the policy environment needed for Paris Agreement compliance.',s:'InfluenceMap · influencemap.org · Continuous assessment · Peer-reviewed methodology'},
-  'src-sabin':{t:'Sabin Center — Climate Litigation Database',b:'The Sabin Center for Climate Change Law at Columbia Law School maintains the world\'s most comprehensive database of climate change litigation. CONSCIENCE tracks active cases against monitored companies. Legal exposure functions as both a risk signal and a measure of accountability gap — companies facing climate lawsuits have typically failed to align actions with stated pledges.',s:'Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law School · Updated continuously'},
-  'src-sbti':{t:'SBTi — Science Based Targets Initiative',b:'The Science Based Targets initiative validates corporate emission reduction targets against climate science. SBTi-approved 1.5°C targets are the highest standard: they require absolute emission reductions across Scope 1, 2, and 3 in line with limiting warming to 1.5°C. "Committed" means intent filed but targets not yet validated. "Not committed" means no SBTi engagement.',s:'Science Based Targets initiative · sciencebasedtargets.org/companies-taking-action · Joint initiative: CDP, UNGC, WRI, WWF'},
-  'src-edgar':{t:'SEC EDGAR — Live Corporate Filing Verification',b:'The SEC Electronic Data Gathering, Analysis, and Retrieval system contains all public company filings. CONSCIENCE queries the SEC EDGAR submissions API in real-time to retrieve the date of each company\'s most recent 10-K (U.S. companies) or 20-F (foreign private issuers). This verifies that climate disclosures are cross-referenced against current regulatory filings.',s:'U.S. Securities and Exchange Commission · data.sec.gov/submissions · CORS-open public API · Real-time'},
-  'src-tpi':{t:'TPI — Transition Pathway Initiative',b:'The Transition Pathway Initiative assesses companies on management quality (Levels 1–5) and carbon performance relative to low-carbon transition benchmarks. Level 5 = aligned with well-below 2°C. TPI scores provide an independent corroboration of CONSCIENCE scoring, particularly for management systems and governance quality.',s:'Transition Pathway Initiative · transitionpathwayinitiative.org · London School of Economics · Asset owner-driven'}
+const MAG = {
+  co2:{t:'Atmospheric CO₂ — NOAA Mauna Loa Observatory',b:'Real-time CO₂ concentration from NOAA\'s Global Monitoring Laboratory. Mauna Loa has the world\'s longest continuous atmospheric CO₂ record, running since 1958. Pre-industrial baseline ≈ 280 ppm. VYRION uses this as one of 6 Atmosphere indicators (22% weight in the Index).',s:'NOAA GML · gml.noaa.gov/ccgg/trends · Daily · Fetched live'},
+  index:{t:'VYRION Index — Daily Planetary Health Benchmark',b:'The world\'s first daily investable planetary health benchmark. Score of 41.2 ± 1.8 / 100 against a pre-industrial 1850–1900 baseline of 100. Computed across 8 Earth systems: Atmosphere 22%, Ocean 18%, Ice 14%, Forest 13%, Biodiversity 12%, Freshwater 10%, Soil 7%, Corporate Accountability 4%. Changes <±0.5 are within measurement error.',s:'VYRION-METHODOLOGY-v1.0.md · github.com/dablerfrost/conscience · Day 13 · March 30, 2026'},
+  coverage:{t:'CONSCIENCE Coverage — 11 Companies',b:'11 major corporations tracked across Oil & Gas, Aviation, Food & Beverage, Retail, and Technology. Selected for material climate pledges and significant emissions footprints. Expansion planned. Full selection criteria in CONSCIENCE-METHODOLOGY.md.',s:'VYRION CONSCIENCE · Module 01 · v2.4'},
+  lawsuits:{t:'Total Active Climate Lawsuits',b:'Aggregate active climate litigation against the 11 tracked companies, per Sabin Center for Climate Change Law at Columbia Law School. Legal exposure = one of the four CONSCIENCE scoring factors (20 pts max). Counts refreshed monthly.',s:'Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law School'},
+  refresh:{t:'Auto-Refresh — Live Data',b:'CONSCIENCE refreshes on page load and every 15 minutes. Live: NOAA GML CO₂ (direct API), SEC EDGAR filing dates (data.sec.gov). Static sources (CDP, InfluenceMap, SBTi, TPI) update when annual assessments publish.',s:'NOAA GML · data.sec.gov/submissions · 15 min interval'},
+  'src-cdp':{t:'CDP — Carbon Disclosure Project',b:'World\'s largest environmental disclosure system. Companies respond annually to standardised climate questionnaires. Grades: A (Leadership) → D (Disclosure only). A requires demonstrated governance, strategy, and action — not just reporting. CDP grades are independent; companies cannot buy a better score.',s:'CDP · cdp.net/en/responses · Annual cycle · 23,000+ companies'},
+  'src-im':{t:'InfluenceMap — Corporate Lobbying',b:'Assesses corporate engagement with climate policy including direct lobbying and trade association affiliations. A+ = strongly supportive of Paris-aligned policy. F = actively lobbying against climate legislation. Lobbying misalignment is penalised heavily in CONSCIENCE — a company cannot claim net zero while blocking the laws needed to get there.',s:'InfluenceMap · influencemap.org · Continuous · Peer-reviewed'},
+  'src-sabin':{t:'Sabin Center — Climate Litigation',b:'The world\'s most comprehensive climate litigation database, maintained by Columbia Law School. CONSCIENCE tracks active cases against monitored companies. High case counts signal a pledge-vs-reality gap large enough that third parties have found it legally actionable.',s:'Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law'},
+  'src-sbti':{t:'SBTi — Science Based Targets',b:'SBTi validates corporate emission targets against climate science. Approved 1.5°C = the highest tier: absolute reductions across all scopes, science-aligned. "Committed" = intent filed, not yet validated. "Not committed" = no SBTi engagement at all.',s:'SBTi · sciencebasedtargets.org/companies-taking-action · CDP/UNGC/WRI/WWF'},
+  'src-edgar':{t:'SEC EDGAR — Live Filing Verification',b:'CONSCIENCE queries the SEC EDGAR submissions API in real-time for each company\'s most recent 10-K or 20-F filing date. This cross-references climate disclosures against current regulatory filings — the same documents investors and regulators rely on.',s:'SEC EDGAR · data.sec.gov/submissions · CORS-open public API · Real-time'},
+  'src-tpi':{t:'TPI — Transition Pathway Initiative',b:'Rates companies on management quality (1–5) and carbon performance vs low-carbon transition benchmarks. Level 5 = aligned with well-below 2°C. TPI provides independent corroboration of CONSCIENCE scoring, particularly on governance quality.',s:'TPI · transitionpathwayinitiative.org · London School of Economics'},
+  'sz-s':{t:'Font Size: Small (16px)',b:'Reduces the site-wide font size to 16px. Useful on larger monitors or for dense data scanning. Click to apply.',s:'VYRION CONSCIENCE display settings · Saved in your browser'},
+  'sz-m':{t:'Font Size: Medium (18px)',b:'Default reading size — 18px. Optimised for comfortable reading across all CONSCIENCE data tables, score cards, and source citations.',s:'VYRION CONSCIENCE display settings · Saved in your browser'},
+  'sz-l':{t:'Font Size: Large (22px)',b:'Increases the site-wide font size to 22px. Best for accessibility, presentations, or smaller screens. Click to apply.',s:'VYRION CONSCIENCE display settings · Saved in your browser'},
 };
 
 // ─────────────────────────────────────────────────────────
-//  COMPANY DATA
+//  COMPANY DATA — 11 companies
 // ─────────────────────────────────────────────────────────
 const COMPANIES = [
-  {
-    id:'exxon',name:'ExxonMobil',ticker:'XOM',sector:'Oil & Gas',cik:'0000034088',
-    score:8,band:'breach',bandLabel:'BREACH',
-    pledge:'Net zero Scope 1 & 2 emissions by 2050. Paris alignment claimed.',
-    pledgeSrc:'ExxonMobil 2023 Sustainability Report',pledgeUrl:'https://corporate.exxonmobil.com/sustainability-and-society/sustainability-report',
-    reality:'No Scope 3 target — 99% of total lifecycle emissions unaddressed. Production expansion plans through 2028. Lobbying spend vs. climate policy $7M+ (2023).',
-    realitySrc:'CDP 2023 · SEC 10-K 2024 · InfluenceMap Profile',realityClass:'',
-    cdpGrade:'D',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'F',imUrl:'https://influencemap.org/company/ExxonMobil',
-    sabin:27,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=exxon',
-    sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 2/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (Scope 1&2 only, no Scope 3)',weight:'30 pts max',pts:3},{factor:'CDP Grade D',weight:'25 pts max',pts:4},{factor:'InfluenceMap Grade F',weight:'25 pts max',pts:0},{factor:'Legal Exposure (27 cases)',weight:'20 pts max',pts:1}]
-  },
-  {
-    id:'bp',name:'BP',ticker:'BP',sector:'Oil & Gas',cik:'0000313807',
-    score:11,band:'breach',bandLabel:'BREACH',
-    pledge:'Net zero by 2050. Cut oil & gas production 25% by 2030 (revised from 40% in 2023).',
-    pledgeSrc:'BP Strategy Update 2023',pledgeUrl:'https://www.bp.com/en/global/corporate/news-and-insights/press-releases/bp-sets-out-new-ambition-for-a-net-zero-future.html',
-    reality:'Reversed 2030 production cut targets under investor pressure. Upstream investment increasing. No SBTi commitment.',
-    realitySrc:'BP 2023 Annual Report · CDP 2023 · Bloomberg Energy',realityClass:'',
-    cdpGrade:'C',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'D-',imUrl:'https://influencemap.org/company/BP',
-    sabin:12,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=bp',
-    sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (backtracked 2030 targets)',weight:'30 pts max',pts:2},{factor:'CDP Grade C',weight:'25 pts max',pts:10},{factor:'InfluenceMap Grade D−',weight:'25 pts max',pts:2},{factor:'Legal Exposure (12 cases)',weight:'20 pts max',pts:-3}]
-  },
-  {
-    id:'shell',name:'Shell',ticker:'SHEL',sector:'Oil & Gas',cik:'0000806517',
-    score:19,band:'breach',bandLabel:'BREACH',
-    pledge:'Net zero by 2050. 30% reduction in emissions intensity by 2035 vs 2016.',
-    pledgeSrc:'Shell Energy Transition Strategy 2023',pledgeUrl:'https://www.shell.com/sustainability/our-climate-target.html',
-    reality:'Dutch court ordered faster emissions cuts (Milieudefensie v Shell, 2021) — Shell appealing. Absolute emissions increased. Intensity metric masks volume growth.',
-    realitySrc:'Milieudefensie v Shell (Sabin) · CDP 2023 · Shell Annual Report 2024',realityClass:'',
-    cdpGrade:'C',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'D',imUrl:'https://influencemap.org/company/Shell',
-    sabin:19,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=shell',
-    sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (intensity metric, no absolute)',weight:'30 pts max',pts:8},{factor:'CDP Grade C',weight:'25 pts max',pts:10},{factor:'InfluenceMap Grade D',weight:'25 pts max',pts:3},{factor:'Legal Exposure (19 active cases)',weight:'20 pts max',pts:-2}]
-  },
-  {
-    id:'delta',name:'Delta Air Lines',ticker:'DAL',sector:'Aviation',cik:'0000027904',
-    score:14,band:'breach',bandLabel:'BREACH',
-    pledge:'Carbon neutral by 2030 via offsets and SAF. Net zero by 2050.',
-    pledgeSrc:'Delta Sustainability Report 2023',pledgeUrl:'https://www.delta.com/us/en/about-delta/sustainability',
-    reality:'SAF at <1% of total fuel use. Offset quality questioned by FTC (2023 investigation). Absolute emissions recovering to pre-pandemic levels.',
-    realitySrc:'Delta 10-K 2024 · FTC Inquiry 2023 · CDP 2023',realityClass:'',
-    cdpGrade:'C',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'D',imUrl:'https://influencemap.org/company/Delta-Air-Lines',
-    sabin:3,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=delta',
-    sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 2/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (offset-dependent; SAF <1%)',weight:'30 pts max',pts:4},{factor:'CDP Grade C',weight:'25 pts max',pts:10},{factor:'InfluenceMap Grade D',weight:'25 pts max',pts:3},{factor:'Legal Exposure (3 cases)',weight:'20 pts max',pts:-3}]
-  },
-  {
-    id:'starbucks',name:'Starbucks',ticker:'SBUX',sector:'Food & Beverage',cik:'0000829224',
-    score:29,band:'breach',bandLabel:'BREACH',
-    pledge:'−50% emissions vs 2019 baseline by 2030. Carbon positive by 2030.',
-    pledgeSrc:'Starbucks Global Environmental & Social Impact Report FY2024',pledgeUrl:'https://stories.starbucks.com/stories/sustainability/',
-    reality:'FY2024: +3.3% emissions vs 2019 (moving away from target). Waste to landfill +6%. Scope 3 = 90.9% of footprint — dominant driver is dairy supply chain.',
-    realitySrc:'Starbucks FY2024 Impact Report · CDP 2023 B · SEC 10-K 2024',realityClass:'',
-    cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'C',imUrl:'https://influencemap.org/company/Starbucks',
-    sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=starbucks',
-    sbti:'Committed',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (committed SBTi; 2030 ambitious)',weight:'30 pts max',pts:14},{factor:'CDP Grade B',weight:'25 pts max',pts:18},{factor:'InfluenceMap Grade C',weight:'25 pts max',pts:10},{factor:'Legal Exposure + emissions diverging from target',weight:'20 pts max',pts:-13}]
-  },
-  {
-    id:'walmart',name:'Walmart',ticker:'WMT',sector:'Retail',cik:'0000104169',
-    score:38,band:'warning',bandLabel:'WARNING',
-    pledge:'Zero emissions in own operations by 2040. Project Gigaton: 1B tons from supply chain by 2030.',
-    pledgeSrc:'Walmart ESG Report 2024',pledgeUrl:'https://corporate.walmart.com/esgreport',
-    reality:'Supply chain (Scope 3) emissions growing despite Gigaton commitments. Own operations ~35% renewable. Gigaton methodology third-party verified but results mixed.',
-    realitySrc:'Walmart FY2024 ESG Report · CDP 2023 · Project Gigaton Progress',realityClass:'warn',
-    cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'C',imUrl:'https://influencemap.org/company/Walmart',
-    sabin:2,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=walmart',
-    sbti:'Approved (ops)',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (ops + supply chain; 3rd-party verified)',weight:'30 pts max',pts:18},{factor:'CDP Grade B',weight:'25 pts max',pts:18},{factor:'InfluenceMap Grade C',weight:'25 pts max',pts:10},{factor:'Legal Exposure (2 cases)',weight:'20 pts max',pts:-8}]
-  },
-  {
-    id:'meta',name:'Meta',ticker:'META',sector:'Technology',cik:'0001326801',
-    score:43,band:'warning',bandLabel:'WARNING',
-    pledge:'Net zero across value chain by 2030. 100% renewable energy in operations since 2020.',
-    pledgeSrc:'Meta Sustainability Report 2023',pledgeUrl:'https://sustainability.fb.com/',
-    reality:'AI expansion driving 25%+ energy demand increase. New gas power plant agreements signed. Scope 3 (supply chain + user devices) growing rapidly.',
-    realitySrc:'Meta 10-K 2024 · CDP 2023 · Bloomberg New Energy Finance',realityClass:'warn',
-    cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'C-',imUrl:'https://influencemap.org/company/Facebook-Meta',
-    sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=meta',
-    sbti:'Committed',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (2030 net zero; 1.5°C claimed)',weight:'30 pts max',pts:20},{factor:'CDP Grade B',weight:'25 pts max',pts:18},{factor:'InfluenceMap Grade C−',weight:'25 pts max',pts:8},{factor:'Legal Exposure + AI growth risk',weight:'20 pts max',pts:-3}]
-  },
-  {
-    id:'amazon',name:'Amazon',ticker:'AMZN',sector:'Tech / Retail',cik:'0001018724',
-    score:47,band:'warning',bandLabel:'WARNING',
-    pledge:'Net zero carbon by 2040 (Climate Pledge). 100% renewable energy by 2025.',
-    pledgeSrc:'Amazon Climate Pledge 2020; Sustainability Report 2023',pledgeUrl:'https://sustainability.aboutamazon.com/',
-    reality:'Missed 2025 renewable energy target. Emissions +18% (2021–22). AWS and logistics growth outpacing renewable procurement.',
-    realitySrc:'Amazon Sustainability Report 2023 · CDP 2023 · Bloomberg Green',realityClass:'warn',
-    cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'C',imUrl:'https://influencemap.org/company/Amazon',
-    sabin:3,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=amazon',
-    sbti:'Committed',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (2040 net zero; missed 2025 interim)',weight:'30 pts max',pts:20},{factor:'CDP Grade B',weight:'25 pts max',pts:18},{factor:'InfluenceMap Grade C',weight:'25 pts max',pts:10},{factor:'Legal Exposure (3 cases)',weight:'20 pts max',pts:-1}]
-  },
-  {
-    id:'microsoft',name:'Microsoft',ticker:'MSFT',sector:'Technology',cik:'0000789019',
-    score:61,band:'on-track',bandLabel:'ON TRACK',
-    pledge:'Carbon negative by 2030. Remove all historical emissions by 2050.',
-    pledgeSrc:'Microsoft Sustainability Report 2024',pledgeUrl:'https://www.microsoft.com/en-us/sustainability',
-    reality:'Emissions +29% since 2020 pledge due to AI data center expansion. Company acknowledged divergence in 2024 annual report. Nuclear and clean energy offtakes in progress.',
-    realitySrc:'Microsoft 2024 Environmental Sustainability Report · CDP 2023 · SEC 10-K',realityClass:'warn',
-    cdpGrade:'A-',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'B-',imUrl:'https://influencemap.org/company/Microsoft',
-    sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=microsoft',
-    sbti:'Approved 1.5°C',sbtiClass:'sbti-yes',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 4/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (carbon negative; SBTi 1.5°C approved)',weight:'30 pts max',pts:26},{factor:'CDP Grade A−',weight:'25 pts max',pts:22},{factor:'InfluenceMap Grade B−',weight:'25 pts max',pts:15},{factor:'Legal Exposure + emission increase risk',weight:'20 pts max',pts:-2}]
-  },
-  {
-    id:'unilever',name:'Unilever',ticker:'ULVR',sector:'Consumer Goods',cik:'0000049519',
-    score:72,band:'on-track',bandLabel:'ON TRACK',
-    pledge:'Net zero across value chain by 2039. Zero deforestation. −50% by 2030 in operations.',
-    pledgeSrc:'Unilever Climate Transition Action Plan 2023',pledgeUrl:'https://www.unilever.com/planet-and-society/climate-action/',
-    reality:'−23% operational emissions since 2015. Scope 3 improving slowly. Some palm oil supply chain concerns remain. Generally on track.',
-    realitySrc:'Unilever Annual Report 2024 · CDP 2023 · Supply Chain Due Diligence',realityClass:'ok',
-    cdpGrade:'A-',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'B',imUrl:'https://influencemap.org/company/Unilever',
-    sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=unilever',
-    sbti:'Approved 1.5°C',sbtiClass:'sbti-yes',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 4/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (2039 net zero; SBTi 1.5°C; 2030 interim)',weight:'30 pts max',pts:28},{factor:'CDP Grade A−',weight:'25 pts max',pts:22},{factor:'InfluenceMap Grade B',weight:'25 pts max',pts:17},{factor:'Legal Exposure (1 case)',weight:'20 pts max',pts:5}]
-  },
-  {
-    id:'apple',name:'Apple',ticker:'AAPL',sector:'Technology',cik:'0000320193',
-    score:84,band:'on-track',bandLabel:'ON TRACK',
-    pledge:'Carbon neutral across all products and supply chain by 2030.',
-    pledgeSrc:'Apple Environmental Progress Report 2024',pledgeUrl:'https://www.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2024.pdf',
-    reality:'62% reduction in emissions since 2015. 100% renewable energy since 2018. Supplier Clean Energy Program: >80% of manufacturing energy now clean.',
-    realitySrc:'Apple EPR 2024 · CDP 2023 · SEC 10-K · SBTi Registry',realityClass:'ok',
-    cdpGrade:'A',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
-    im:'B+',imUrl:'https://influencemap.org/company/Apple',
-    sabin:0,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=apple',
-    sbti:'Approved 1.5°C',sbtiClass:'sbti-yes',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
-    tpi:'Level 5/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
-    sb:[{factor:'Pledge Quality (2030 full value chain; SBTi 1.5°C; interim met)',weight:'30 pts max',pts:30},{factor:'CDP Grade A',weight:'25 pts max',pts:25},{factor:'InfluenceMap Grade B+',weight:'25 pts max',pts:19},{factor:'Legal Exposure (0 cases)',weight:'20 pts max',pts:10}]
-  }
+  {id:'exxon',name:'ExxonMobil',ticker:'XOM',sector:'Oil & Gas',cik:'0000034088',score:8,band:'breach',bandLabel:'BREACH',
+   pledge:'Net zero Scope 1 & 2 emissions by 2050. Paris alignment claimed.',
+   pledgeSrc:'ExxonMobil 2023 Sustainability Report',pledgeUrl:'https://corporate.exxonmobil.com/sustainability-and-society/sustainability-report',
+   reality:'No Scope 3 target — 99% of total lifecycle emissions unaddressed. Production expansion through 2028. Lobbying spend vs. climate policy $7M+ (2023).',
+   realitySrc:'CDP 2023 · SEC 10-K 2024 · InfluenceMap',realityClass:'',
+   cdpGrade:'D',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'F',imUrl:'https://influencemap.org/company/ExxonMobil',
+   sabin:27,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=exxon',
+   sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 2/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — Scope 1&2 only, no Scope 3',w:'30 max',p:3},{f:'CDP Grade D',w:'25 max',p:4},{f:'InfluenceMap Grade F',w:'25 max',p:0},{f:'Legal Exposure — 27 active cases',w:'20 max',p:1}]},
+
+  {id:'bp',name:'BP',ticker:'BP',sector:'Oil & Gas',cik:'0000313807',score:11,band:'breach',bandLabel:'BREACH',
+   pledge:'Net zero by 2050. Cut oil & gas production 25% by 2030 (revised down from 40% in 2023).',
+   pledgeSrc:'BP Strategy Update 2023',pledgeUrl:'https://www.bp.com/en/global/corporate/news-and-insights/press-releases/bp-sets-out-new-ambition-for-a-net-zero-future.html',
+   reality:'Reversed 2030 production cut targets under investor pressure. Upstream investment increasing. No SBTi commitment.',
+   realitySrc:'BP 2023 Annual Report · CDP 2023 · Bloomberg Energy',realityClass:'',
+   cdpGrade:'C',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'D-',imUrl:'https://influencemap.org/company/BP',
+   sabin:12,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=bp',
+   sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — backtracked 2030 targets',w:'30 max',p:2},{f:'CDP Grade C',w:'25 max',p:10},{f:'InfluenceMap Grade D−',w:'25 max',p:2},{f:'Legal Exposure — 12 active cases',w:'20 max',p:-3}]},
+
+  {id:'shell',name:'Shell',ticker:'SHEL',sector:'Oil & Gas',cik:'0000806517',score:19,band:'breach',bandLabel:'BREACH',
+   pledge:'Net zero by 2050. 30% emissions intensity reduction by 2035 vs 2016.',
+   pledgeSrc:'Shell Energy Transition Strategy 2023',pledgeUrl:'https://www.shell.com/sustainability/our-climate-target.html',
+   reality:'Dutch court ordered faster cuts (Milieudefensie v Shell, 2021) — Shell appealing. Absolute emissions increased. Intensity metric masks volume growth.',
+   realitySrc:'Milieudefensie v Shell · CDP 2023 · Shell Annual Report 2024',realityClass:'',
+   cdpGrade:'C',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'D',imUrl:'https://influencemap.org/company/Shell',
+   sabin:19,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=shell',
+   sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — intensity metric, no absolute target',w:'30 max',p:8},{f:'CDP Grade C',w:'25 max',p:10},{f:'InfluenceMap Grade D',w:'25 max',p:3},{f:'Legal Exposure — 19 active cases + court order',w:'20 max',p:-2}]},
+
+  {id:'delta',name:'Delta Air Lines',ticker:'DAL',sector:'Aviation',cik:'0000027904',score:14,band:'breach',bandLabel:'BREACH',
+   pledge:'Carbon neutral by 2030 via offsets and SAF. Net zero by 2050.',
+   pledgeSrc:'Delta Sustainability Report 2023',pledgeUrl:'https://www.delta.com/us/en/about-delta/sustainability',
+   reality:'SAF at <1% of total fuel. Offset quality under FTC inquiry (2023). Absolute emissions recovering to pre-pandemic levels.',
+   realitySrc:'Delta 10-K 2024 · FTC Inquiry 2023 · CDP 2023',realityClass:'',
+   cdpGrade:'C',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'D',imUrl:'https://influencemap.org/company/Delta-Air-Lines',
+   sabin:3,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=delta',
+   sbti:'Not committed',sbtiClass:'sbti-no',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 2/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — offset-dependent, SAF <1%',w:'30 max',p:4},{f:'CDP Grade C',w:'25 max',p:10},{f:'InfluenceMap Grade D',w:'25 max',p:3},{f:'Legal Exposure + FTC inquiry signal',w:'20 max',p:-3}]},
+
+  {id:'starbucks',name:'Starbucks',ticker:'SBUX',sector:'Food & Beverage',cik:'0000829224',score:29,band:'breach',bandLabel:'BREACH',
+   pledge:'−50% emissions vs 2019 baseline by 2030. Carbon positive by 2030.',
+   pledgeSrc:'Starbucks FY2024 Global Environmental & Social Impact Report',pledgeUrl:'https://stories.starbucks.com/stories/sustainability/',
+   reality:'FY2024: +3.3% emissions vs 2019 — moving away from target. Waste to landfill +6%. Scope 3 = 90.9% of footprint; dominant driver is dairy.',
+   realitySrc:'Starbucks FY2024 Impact Report · CDP 2023 · SEC 10-K 2024',realityClass:'',
+   cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'C',imUrl:'https://influencemap.org/company/Starbucks',
+   sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=starbucks',
+   sbti:'Committed',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — SBTi committed; 2030 ambitious',w:'30 max',p:14},{f:'CDP Grade B',w:'25 max',p:18},{f:'InfluenceMap Grade C',w:'25 max',p:9},{f:'Performance divergence: emissions rising vs 2030 target',w:'20 max',p:-12}]},
+
+  {id:'walmart',name:'Walmart',ticker:'WMT',sector:'Retail',cik:'0000104169',score:38,band:'warning',bandLabel:'WARNING',
+   pledge:'Zero emissions own operations by 2040. Project Gigaton: 1B tonnes from supply chain by 2030.',
+   pledgeSrc:'Walmart ESG Report FY2024',pledgeUrl:'https://corporate.walmart.com/esgreport',
+   reality:'Scope 3 supply chain emissions growing despite Gigaton. Own operations ~35% renewable. Gigaton methodology third-party verified, results mixed.',
+   realitySrc:'Walmart FY2024 ESG Report · CDP 2023 · Gigaton Progress Report',realityClass:'warn',
+   cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'C',imUrl:'https://influencemap.org/company/Walmart',
+   sabin:2,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=walmart',
+   sbti:'Approved (ops)',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — ops + supply chain; 3rd-party verified',w:'30 max',p:18},{f:'CDP Grade B',w:'25 max',p:18},{f:'InfluenceMap Grade C',w:'25 max',p:9},{f:'Legal Exposure + Scope 3 trajectory',w:'20 max',p:-7}]},
+
+  {id:'meta',name:'Meta',ticker:'META',sector:'Technology',cik:'0001326801',score:43,band:'warning',bandLabel:'WARNING',
+   pledge:'Net zero across value chain by 2030. 100% renewable in owned operations since 2020.',
+   pledgeSrc:'Meta Sustainability Report 2023',pledgeUrl:'https://sustainability.fb.com/',
+   reality:'AI expansion driving 25%+ energy demand increase. New gas power plant agreements signed 2024. Scope 3 growing rapidly.',
+   realitySrc:'Meta 10-K 2024 · CDP 2023 · Bloomberg New Energy Finance',realityClass:'warn',
+   cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'C-',imUrl:'https://influencemap.org/company/Facebook-Meta',
+   sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=meta',
+   sbti:'Committed',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — 2030 net zero; 1.5°C claimed',w:'30 max',p:20},{f:'CDP Grade B',w:'25 max',p:18},{f:'InfluenceMap Grade C−',w:'25 max',p:7},{f:'Legal + AI data center gas agreements',w:'20 max',p:-2}]},
+
+  {id:'amazon',name:'Amazon',ticker:'AMZN',sector:'Tech / Retail',cik:'0001018724',score:47,band:'warning',bandLabel:'WARNING',
+   pledge:'Net zero carbon by 2040 (Climate Pledge). 100% renewable energy by 2025.',
+   pledgeSrc:'Amazon Climate Pledge · Sustainability Report 2023',pledgeUrl:'https://sustainability.aboutamazon.com/',
+   reality:'Missed 2025 renewable energy target. Emissions +18% (2021–22). AWS and logistics growth outpacing renewable procurement.',
+   realitySrc:'Amazon Sustainability Report 2023 · CDP 2023 · Bloomberg Green',realityClass:'warn',
+   cdpGrade:'B',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'C',imUrl:'https://influencemap.org/company/Amazon',
+   sabin:3,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=amazon',
+   sbti:'Committed',sbtiClass:'sbti-commit',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 3/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — 2040 net zero; missed 2025 interim',w:'30 max',p:20},{f:'CDP Grade B',w:'25 max',p:18},{f:'InfluenceMap Grade C',w:'25 max',p:9},{f:'Legal Exposure — 3 active cases',w:'20 max',p:0}]},
+
+  {id:'microsoft',name:'Microsoft',ticker:'MSFT',sector:'Technology',cik:'0000789019',score:61,band:'on-track',bandLabel:'ON TRACK',
+   pledge:'Carbon negative by 2030. Remove all historical emissions by 2050.',
+   pledgeSrc:'Microsoft Sustainability Report 2024',pledgeUrl:'https://www.microsoft.com/en-us/sustainability',
+   reality:'Emissions +29% since 2020 pledge due to AI data center expansion — disclosed in own 2024 report. Nuclear and clean energy offtakes in progress.',
+   realitySrc:'Microsoft 2024 Environmental Sustainability Report · CDP 2023 · SEC 10-K',realityClass:'warn',
+   cdpGrade:'A-',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'B-',imUrl:'https://influencemap.org/company/Microsoft',
+   sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=microsoft',
+   sbti:'Approved 1.5°C',sbtiClass:'sbti-yes',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 4/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — carbon negative; SBTi 1.5°C approved',w:'30 max',p:26},{f:'CDP Grade A−',w:'25 max',p:22},{f:'InfluenceMap Grade B−',w:'25 max',p:13},{f:'Legal + disclosed emission increase',w:'20 max',p:0}]},
+
+  {id:'unilever',name:'Unilever',ticker:'ULVR',sector:'Consumer Goods',cik:'0000049519',score:72,band:'on-track',bandLabel:'ON TRACK',
+   pledge:'Net zero across value chain by 2039. Zero deforestation. −50% by 2030 in operations.',
+   pledgeSrc:'Unilever Climate Transition Action Plan 2023',pledgeUrl:'https://www.unilever.com/planet-and-society/climate-action/',
+   reality:'−23% operational emissions since 2015. Scope 3 improving slowly. Some palm oil supply chain concerns remain.',
+   realitySrc:'Unilever Annual Report 2024 · CDP 2023 · Supply Chain Due Diligence',realityClass:'ok',
+   cdpGrade:'A-',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'B',imUrl:'https://influencemap.org/company/Unilever',
+   sabin:1,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=unilever',
+   sbti:'Approved 1.5°C',sbtiClass:'sbti-yes',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 4/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — 2039 net zero; SBTi 1.5°C; 2030 interim',w:'30 max',p:28},{f:'CDP Grade A−',w:'25 max',p:22},{f:'InfluenceMap Grade B',w:'25 max',p:16},{f:'Legal Exposure — 1 case; palm oil risk',w:'20 max',p:6}]},
+
+  {id:'apple',name:'Apple',ticker:'AAPL',sector:'Technology',cik:'0000320193',score:84,band:'on-track',bandLabel:'ON TRACK',
+   pledge:'Carbon neutral across all products and supply chain by 2030.',
+   pledgeSrc:'Apple Environmental Progress Report 2024',pledgeUrl:'https://www.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2024.pdf',
+   reality:'62% emission reduction since 2015. 100% renewable energy since 2018. Supplier Clean Energy Program: >80% of manufacturing energy now clean.',
+   realitySrc:'Apple EPR 2024 · CDP 2023 · SEC 10-K · SBTi Registry',realityClass:'ok',
+   cdpGrade:'A',cdpYear:'2023',cdpUrl:'https://www.cdp.net/en/responses',
+   im:'B+',imUrl:'https://influencemap.org/company/Apple',
+   sabin:0,sabinUrl:'https://climatecasechart.com/case-list/?organization_name=apple',
+   sbti:'Approved 1.5°C',sbtiClass:'sbti-yes',sbtiUrl:'https://sciencebasedtargets.org/companies-taking-action',
+   tpi:'Level 5/5',tpiUrl:'https://www.transitionpathwayinitiative.org/',
+   sb:[{f:'Pledge Quality — 2030 full value chain; SBTi 1.5°C; interim met',w:'30 max',p:30},{f:'CDP Grade A — Leadership tier',w:'25 max',p:25},{f:'InfluenceMap Grade B+',w:'25 max',p:19},{f:'Legal Exposure — 0 cases',w:'20 max',p:10}]}
 ];
 
 // ─────────────────────────────────────────────────────────
-//  DYNAMIC MAG CONTENT — per-company context
+//  DYNAMIC MAGNIFIER — per-company context
 // ─────────────────────────────────────────────────────────
-function getMagContent(el) {
+function getMag(el) {
   const key = el.dataset.mag;
   if (!key) return null;
+  if (MAG[key]) return MAG[key];
 
-  // Static keys
-  if (STATIC_MAG[key]) return STATIC_MAG[key];
-
-  // Dynamic — find company
   const card = el.closest('[data-id]');
   const co = card ? COMPANIES.find(c => c.id === card.dataset.id) : null;
   if (!co) return null;
 
-  if (key === 'score-bar') return {
-    t:`CONSCIENCE Score — ${co.name} · ${co.score}/100`,
-    b:`${co.name} scores ${co.score}/100 on the CONSCIENCE scale. Band: ${co.bandLabel}. Score is computed from four weighted factors: Pledge Quality (30 pts), CDP Performance (25 pts), Lobbying Alignment (25 pts), Legal Exposure (20 pts). Click "Score calculation" below to see the breakdown. Threshold: Breach 0–30, Warning 31–60, On Track 61–100.`,
-    s:`VYRION CONSCIENCE · CONSCIENCE-METHODOLOGY.md · Paris Agreement 1.5°C pathway alignment`
+  if (key==='score-bar') return {
+    t:`${co.name} — CONSCIENCE Score: ${co.score}/100`,
+    b:`Score computed from 4 factors: Pledge Quality (30 pts), CDP ${co.cdpYear} Performance (25 pts), InfluenceMap Lobbying Alignment (25 pts), Legal Exposure (20 pts). Band: ${co.bandLabel}. Threshold: Breach 0–30, Warning 31–60, On Track 61–100. Open the "Score calculation" dropdown below to see the full breakdown.`,
+    s:`VYRION CONSCIENCE · CONSCIENCE-METHODOLOGY.md · Paris Agreement 1.5°C pathway basis`
   };
-  if (key === 'pledge-row') return {
+  if (key==='pledge-row') return {
     t:`Stated Pledge — ${co.name}`,
-    b:`What ${co.name} has publicly committed to. Source: ${co.pledgeSrc}. CONSCIENCE assesses this pledge against two criteria: (1) Paris Agreement 1.5°C pathway science, and (2) SBTi criteria for corporate science-based targets. Pledges are scored on ambition, scope coverage (Scope 1/2/3), deadline, and third-party validation status.`,
-    s:co.pledgeSrc + ' · ' + co.pledgeUrl
+    b:`What ${co.name} has publicly committed to. Source: ${co.pledgeSrc}. CONSCIENCE assesses this pledge on four criteria: ambition level, scope coverage (1/2/3), deadline, and third-party validation (SBTi status). The pledge is scored against the Paris Agreement 1.5°C pathway — not the company's own baseline.`,
+    s:co.pledgeSrc
   };
-  if (key === 'reality-row') return {
+  if (key==='reality-row') return {
     t:`Verified Reality — ${co.name}`,
-    b:`What the data shows about ${co.name}'s actual performance vs. their stated pledge. Sources: ${co.realitySrc}. CONSCIENCE cross-references company self-reporting against CDP independent responses, SEC regulatory filings, InfluenceMap lobbying analysis, and Sabin Center litigation records. Gap between pledge and reality is the core CONSCIENCE accountability signal.`,
+    b:`What the data actually shows about ${co.name}'s performance vs. their pledge. Sources cross-referenced: ${co.realitySrc}. CONSCIENCE compares company self-reporting against CDP independent responses, SEC regulatory filings, InfluenceMap lobbying analysis, and Sabin Center litigation records. The gap between pledge and reality is the core CONSCIENCE signal.`,
     s:co.realitySrc
   };
-  if (key === 'cdp-badge') return {
+  if (key==='cdp-b') return {
     t:`CDP ${co.cdpYear} Grade — ${co.name}: ${co.cdpGrade}`,
-    b:`CDP graded ${co.name} "${co.cdpGrade}" in their ${co.cdpYear} climate questionnaire. A = Leadership (gold standard): demonstrates best practice governance, strategy, and transparent disclosure. B = Management. C = Awareness. D = Disclosure only. CDP is independent — companies cannot pay for a better grade.`,
-    s:`Carbon Disclosure Project · ${co.cdpYear} public response · cdp.net/en/responses`
+    b:`CDP independently assessed ${co.name} as grade "${co.cdpGrade}". A = Leadership (best practice in governance, strategy, and disclosure — fewer than 2% of companies qualify). B = Management. C = Awareness. D = Disclosure only. CDP grades are independent — companies cannot influence their own grade through fees or advocacy.`,
+    s:`CDP ${co.cdpYear} · cdp.net/en/responses · Independent assessment`
   };
-  if (key === 'im-badge') return {
-    t:`InfluenceMap Lobbying Grade — ${co.name}: ${co.im}`,
-    b:`InfluenceMap assessed ${co.name}'s climate policy engagement as "${co.im}". This grade reflects their direct lobbying positions, trade association memberships, and policy interference activities. A–B = constructive climate policy engagement. C–D = mixed or obstructive. F = actively lobbying against climate legislation. Lobbying against climate policy while pledging net-zero is a key CONSCIENCE indicator.`,
-    s:`InfluenceMap · ${co.imUrl} · Continuous assessment · Peer-reviewed`
+  if (key==='im-b') return {
+    t:`InfluenceMap Grade — ${co.name}: ${co.im}`,
+    b:`InfluenceMap assessed ${co.name}'s climate policy engagement as "${co.im}". This reflects direct lobbying positions, trade association memberships, and policy interference. A–B = supportive. C–D = mixed or obstructive. F = actively lobbying against climate legislation. A company pledging net zero while funding obstruction of climate policy is a core CONSCIENCE accountability signal.`,
+    s:`InfluenceMap · influencemap.org/company/${co.name.replace(/\s/g,'')} · Continuous`
   };
-  if (key === 'sbti-badge') return {
+  if (key==='sbti-b') return {
     t:`SBTi Status — ${co.name}: ${co.sbti}`,
-    b:`${co.name}'s Science Based Targets initiative status is "${co.sbti}". Approved 1.5°C targets are the highest standard — requiring absolute reductions across all scopes aligned with limiting warming to 1.5°C. "Committed" means a target letter has been filed but not yet validated. "Not committed" means no SBTi engagement. SBTi status is a key component of Pledge Quality scoring.`,
-    s:`SBTi Registry · sciencebasedtargets.org/companies-taking-action · CDP/UNGC/WRI/WWF`
+    b:`${co.name}'s SBTi status: "${co.sbti}". Approved 1.5°C = highest standard, requiring absolute reductions across all scopes aligned with 1.5°C science. Committed = target letter filed, not yet validated. Not committed = no SBTi engagement. SBTi status is a primary component of Pledge Quality scoring.`,
+    s:`SBTi Registry · sciencebasedtargets.org/companies-taking-action`
   };
-  if (key === 'sabin-badge') return {
-    t:`Active Climate Lawsuits — ${co.name}: ${co.sabin} cases`,
-    b:`The Sabin Center database lists ${co.sabin} active climate-related case${co.sabin !== 1 ? 's' : ''} involving ${co.name}. CONSCIENCE applies a legal exposure penalty of −0.5 pts per active case (base 20 pts, floor 0). High lawsuit counts typically indicate significant pledge-vs-reality gaps that third parties — governments, NGOs, or citizens — have found legally actionable.`,
-    s:`Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law School`
+  if (key==='sabin-b') return {
+    t:`Climate Lawsuits — ${co.name}: ${co.sabin} active`,
+    b:`The Sabin Center lists ${co.sabin} active climate case${co.sabin!==1?'s':''} involving ${co.name}. CONSCIENCE applies −0.5 pts per active case (base 20 pts, floor 0). High lawsuit counts indicate pledge-vs-reality gaps that third parties — governments, NGOs, or citizens — have found legally actionable. Zero cases (as with Apple) reflects genuine legal alignment.`,
+    s:`Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law`
   };
-  if (key === 'tpi-badge') return {
-    t:`TPI Management Quality — ${co.name}: ${co.tpi}`,
-    b:`The Transition Pathway Initiative rated ${co.name} at ${co.tpi} on their management quality scale. Level 1 = Unaware; 2 = Acknowledging; 3 = Developing; 4 = Integrated; 5 = Strategic. TPI provides an independent corroboration of CONSCIENCE scoring, particularly useful for assessing whether climate commitments are embedded in actual business strategy versus surface-level communications.`,
-    s:`Transition Pathway Initiative · transitionpathwayinitiative.org · London School of Economics`
+  if (key==='tpi-b') return {
+    t:`TPI Score — ${co.name}: ${co.tpi}`,
+    b:`The Transition Pathway Initiative rated ${co.name} at ${co.tpi}. Level 1 = Unaware; 2 = Acknowledging; 3 = Developing; 4 = Integrated; 5 = Strategic. TPI is an independent corroboration of CONSCIENCE scoring — particularly for whether climate strategy is embedded in actual business decisions vs. surface communications.`,
+    s:`TPI · transitionpathwayinitiative.org · London School of Economics`
   };
-  if (key === 'edgar-badge') return {
-    t:`SEC EDGAR Live Verification — ${co.name}`,
-    b:`CONSCIENCE queries the SEC EDGAR API in real-time to verify ${co.name}'s most recent regulatory filing. CIK: ${co.cik.replace(/^0+/,'')}. The filing date confirms the currency of financial and operational disclosures used in CONSCIENCE scoring. Climate disclosures in 10-K filings are cross-referenced against sustainability report claims.`,
-    s:`SEC EDGAR · data.sec.gov/submissions/CIK${co.cik}.json · Real-time fetch · CORS-open API`
+  if (key==='edgar-b') return {
+    t:`SEC EDGAR — ${co.name} (CIK ${co.cik.replace(/^0+/,'')})`,
+    b:`CONSCIENCE fetches ${co.name}'s latest 10-K or 20-F filing date from the SEC EDGAR submissions API in real-time. This verifies that climate disclosures cited in CONSCIENCE scores are cross-referenced against current regulatory filings — the same documents used by institutional investors and securities regulators.`,
+    s:`SEC EDGAR · data.sec.gov/submissions/CIK${co.cik}.json · CORS-open public API`
   };
   return null;
 }
 
 // ─────────────────────────────────────────────────────────
-//  EDGAR FETCH
+//  RENDER
 // ─────────────────────────────────────────────────────────
-async function fetchEdgar(company) {
-  try {
-    const r = await fetch(`https://data.sec.gov/submissions/CIK${company.cik}.json`);
-    if (!r.ok) throw new Error();
-    const d = await r.json();
-    const forms = d.filings.recent.form;
-    const dates = d.filings.recent.filingDate;
-    for (let i = 0; i < forms.length; i++) {
-      if (forms[i] === '10-K' || forms[i] === '20-F') {
-        return { form:forms[i], date:dates[i], cik:company.cik.replace(/^0+/,'') };
-      }
-    }
-    return null;
-  } catch(e) { return null; }
-}
-
-function edgarUrl(cik) {
-  return `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&type=10-K&dateb=&owner=include&count=5`;
-}
-
-// ─────────────────────────────────────────────────────────
-//  NOAA CO2
-// ─────────────────────────────────────────────────────────
-async function fetchCO2() {
-  try {
-    const r = await fetch('https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_daily_mlo.txt');
-    const txt = await r.text();
-    const lines = txt.split('\n').filter(l => l.trim() && !l.startsWith('#'));
-    for (let i = lines.length - 1; i >= 0; i--) {
-      const parts = lines[i].trim().split(/\s+/);
-      if (parts.length >= 5) {
-        const val = parseFloat(parts[4]);
-        if (!isNaN(val) && val > 0) {
-          return { ppm:val.toFixed(2), date:`${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}` };
-        }
-      }
-    }
-    return null;
-  } catch(e) { return null; }
-}
-
-// ─────────────────────────────────────────────────────────
-//  RENDER CARDS
-// ─────────────────────────────────────────────────────────
-function cdpClass(g){if(!g)return'cdp-D';if(g.startsWith('A'))return'cdp-A';if(g.startsWith('B'))return'cdp-B';if(g.startsWith('C'))return'cdp-C';return'cdp-D'}
-function imClass(g){if(!g)return'im-worst';if(g.startsWith('A'))return'im-good';if(g.startsWith('B'))return'im-mid';if(g.startsWith('C'))return'im-bad';return'im-worst'}
-function lawClass(n){if(n===0)return'law-0';if(n<=3)return'law-low';if(n<=12)return'law-mid';return'law-high'}
+function cdpCls(g){return g?g.startsWith('A')?'cdp-A':g.startsWith('B')?'cdp-B':g.startsWith('C')?'cdp-C':'cdp-D':'cdp-D'}
+function imCls(g){return g?g.startsWith('A')?'im-A':g.startsWith('B')?'im-B':g.startsWith('C')?'im-C':'im-F':'im-F'}
+function lawCls(n){return n===0?'law-0':n<=3?'law-low':n<=12?'law-mid':'law-high'}
 
 function renderCard(co) {
   const bc = co.band==='breach'?'band-breach':co.band==='warning'?'band-warning':'band-track';
-  const sbRows = co.sb.map(r=>`<div class="sb-row"><span class="sb-factor">${r.factor}</span><span class="sb-weight">${r.weight}</span><span class="sb-pts">${r.pts>0?'+':''}${r.pts}</span></div>`).join('');
-  const sbTotal = co.sb.reduce((a,r)=>a+r.pts,0);
+  const sbRows = co.sb.map(r=>`
+    <div class="sb-row">
+      <span class="sb-f">${r.f}</span>
+      <span class="sb-w">${r.w}</span>
+      <span class="sb-p">${r.p>0?'+':''}${r.p}</span>
+    </div>`).join('');
+  const total = co.sb.reduce((a,r)=>a+r.p,0);
   return `
-  <div class="c-card ${bc}" data-band="${co.band}" data-id="${co.id}">
-    <div class="c-head">
-      <div>
-        <div class="c-name">${co.name}</div>
-        <div class="c-meta">${co.ticker} · ${co.sector} · CIK ${co.cik.replace(/^0+/,'')}</div>
-      </div>
-      <div class="c-score-wrap">
-        <div class="c-score-num">${co.score}<span class="c-score-den">/100</span></div>
-        <div class="c-band">${co.bandLabel}</div>
-      </div>
+<div class="c-card ${bc}" data-band="${co.band}" data-id="${co.id}">
+  <div class="c-head">
+    <div>
+      <div class="c-name">${co.name}</div>
+      <div class="c-meta">${co.ticker} · ${co.sector} · CIK ${co.cik.replace(/^0+/,'')}</div>
     </div>
-    <div class="score-bar-wrap" data-mag="score-bar">
-      <div class="score-bar-bg"><div class="score-bar-fill" data-target="${co.score}" style="width:0"></div></div>
-      <div class="score-bar-labels"><span>0 BREACH</span><span>30</span><span>60</span><span>ON TRACK 100</span></div>
+    <div class="c-score-wrap">
+      <div class="c-score-num">${co.score}<span class="c-score-den">/100</span></div>
+      <div class="c-band">${co.bandLabel}</div>
     </div>
-    <div class="pr-block">
-      <div class="pr-row" data-mag="pledge-row">
-        <span class="pr-tag tag-pledge">PLEDGE</span>
-        <span class="pr-text">${co.pledge}</span>
-      </div>
-      <div class="pr-src"><a href="${co.pledgeUrl}" target="_blank">↗ ${co.pledgeSrc}</a></div>
-      <div class="pr-row" data-mag="reality-row">
-        <span class="pr-tag tag-reality ${co.realityClass}">REALITY</span>
-        <span class="pr-text">${co.reality}</span>
-      </div>
-      <div class="pr-src">Sources: ${co.realitySrc}</div>
+  </div>
+
+  <div class="score-bar-wrap" data-mag="score-bar">
+    <div class="score-bar-bg">
+      <div class="score-bar-fill" data-target="${co.score}"></div>
     </div>
-    <div class="val-grid">
-      <div class="v-badge" data-mag="cdp-badge"><a href="${co.cdpUrl}" target="_blank">
-        <div class="v-badge-name">CDP ${co.cdpYear}</div>
-        <div class="v-badge-val ${cdpClass(co.cdpGrade)}">${co.cdpGrade}</div>
-        <div class="v-badge-sub">Climate disclosure</div>
-      </a></div>
-      <div class="v-badge" data-mag="im-badge"><a href="${co.imUrl}" target="_blank">
-        <div class="v-badge-name">InfluenceMap</div>
-        <div class="v-badge-val ${imClass(co.im)}">${co.im}</div>
-        <div class="v-badge-sub">Lobbying alignment</div>
-      </a></div>
-      <div class="v-badge" data-mag="sbti-badge"><a href="${co.sbtiUrl}" target="_blank">
-        <div class="v-badge-name">SBTi</div>
-        <div class="v-badge-val ${co.sbtiClass}" style="font-size:.66rem;line-height:1.2">${co.sbti}</div>
-        <div class="v-badge-sub">Science Based Targets</div>
-      </a></div>
-      <div class="v-badge" data-mag="sabin-badge"><a href="${co.sabinUrl}" target="_blank">
-        <div class="v-badge-name">Sabin Center</div>
-        <div class="v-badge-val ${lawClass(co.sabin)}">${co.sabin}</div>
-        <div class="v-badge-sub">Active lawsuits</div>
-      </a></div>
-      <div class="v-badge" data-mag="tpi-badge"><a href="${co.tpiUrl}" target="_blank">
-        <div class="v-badge-name">TPI</div>
-        <div class="v-badge-val" style="font-size:.76rem;color:var(--t2)">${co.tpi}</div>
-        <div class="v-badge-sub">Mgmt quality</div>
-      </a></div>
-      <div class="v-badge" data-mag="edgar-badge" id="edgar-card-${co.id}">
-        <div class="v-badge-name">SEC EDGAR</div>
-        <div class="v-badge-val loading-pulse" style="font-size:.68rem;color:var(--t3)" id="edgar-val-${co.id}">—</div>
-        <div class="v-badge-sub" id="edgar-sub-${co.id}">Fetching…</div>
-      </div>
+    <div class="score-bar-labels"><span>0 BREACH</span><span>30</span><span>60</span><span>ON TRACK 100</span></div>
+  </div>
+
+  <div class="pr-block">
+    <div class="pr-row" data-mag="pledge-row">
+      <span class="pr-tag tag-pledge">PLEDGE</span>
+      <span class="pr-text">${co.pledge}</span>
     </div>
-    <button class="expand-toggle" onclick="toggleBreakdown('${co.id}',this)">
-      <span>Score calculation · ${co.sb.length} factors · formula per CONSCIENCE-v1.0</span>
-      <span class="chevron">▼</span>
-    </button>
-    <div class="score-breakdown" id="bd-${co.id}">
-      ${sbRows}
-      <div class="sb-total-row">
-        <span class="sb-factor">CONSCIENCE Score (computed)</span>
-        <span class="sb-pts">${sbTotal} / 100</span>
-      </div>
-      <div class="sb-method">
-        Methodology: <a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-METHODOLOGY-v1.0.md" target="_blank">VYRION-METHODOLOGY-v1.0.md</a> ·
-        Open Proof Protocol: <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a>
-      </div>
+    <div class="pr-src"><a href="${co.pledgeUrl}" target="_blank">↗ ${co.pledgeSrc}</a></div>
+    <div class="pr-row" data-mag="reality-row">
+      <span class="pr-tag tag-reality ${co.realityClass}">REALITY</span>
+      <span class="pr-text">${co.reality}</span>
     </div>
-  </div>`;
+    <div class="pr-src">${co.realitySrc}</div>
+  </div>
+
+  <div class="val-grid">
+    <div class="v-badge" data-mag="cdp-b"><a href="${co.cdpUrl}" target="_blank">
+      <div class="v-name">CDP ${co.cdpYear}</div>
+      <div class="v-val ${cdpCls(co.cdpGrade)}">${co.cdpGrade}</div>
+      <div class="v-sub">Disclosure grade</div>
+    </a></div>
+    <div class="v-badge" data-mag="im-b"><a href="${co.imUrl}" target="_blank">
+      <div class="v-name">InfluenceMap</div>
+      <div class="v-val ${imCls(co.im)}">${co.im}</div>
+      <div class="v-sub">Lobbying grade</div>
+    </a></div>
+    <div class="v-badge" data-mag="sbti-b"><a href="${co.sbtiUrl}" target="_blank">
+      <div class="v-name">SBTi</div>
+      <div class="v-val ${co.sbtiClass}" style="font-size:.65rem;line-height:1.2">${co.sbti}</div>
+      <div class="v-sub">Science targets</div>
+    </a></div>
+    <div class="v-badge" data-mag="sabin-b"><a href="${co.sabinUrl}" target="_blank">
+      <div class="v-name">Sabin Center</div>
+      <div class="v-val ${lawCls(co.sabin)}">${co.sabin}</div>
+      <div class="v-sub">Active lawsuits</div>
+    </a></div>
+    <div class="v-badge" data-mag="tpi-b"><a href="${co.tpiUrl}" target="_blank">
+      <div class="v-name">TPI</div>
+      <div class="v-val" style="font-size:.75rem;color:var(--t2)">${co.tpi}</div>
+      <div class="v-sub">Mgmt quality</div>
+    </a></div>
+    <div class="v-badge" data-mag="edgar-b" id="ec-${co.id}">
+      <div class="v-name">SEC EDGAR</div>
+      <div class="v-val loading-pulse" style="font-size:.67rem;color:var(--t3)" id="ev-${co.id}">—</div>
+      <div class="v-sub" id="es-${co.id}">Fetching…</div>
+    </div>
+  </div>
+
+  <button class="expand-toggle" onclick="toggleBD('${co.id}',this)">
+    <span>Score calculation · ${co.sb.length} factors · CONSCIENCE-METHODOLOGY.md</span>
+    <span class="chevron">▼</span>
+  </button>
+  <div class="score-breakdown" id="bd-${co.id}">
+    ${sbRows}
+    <div class="sb-total">
+      <span class="sb-f">CONSCIENCE Score (computed total)</span>
+      <span class="sb-p">${total} / 100</span>
+    </div>
+    <div class="sb-note">
+      Full derivation: <a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank">CONSCIENCE-METHODOLOGY.md</a> ·
+      Errors: <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a>
+    </div>
+  </div>
+</div>`;
 }
 
-function toggleBreakdown(id, btn) {
+function toggleBD(id, btn) {
   document.getElementById('bd-'+id).classList.toggle('open');
   btn.classList.toggle('open');
 }
@@ -844,16 +925,13 @@ function toggleBreakdown(id, btn) {
 document.querySelectorAll('.f-btn').forEach(b => {
   b.addEventListener('click', () => {
     const f = b.dataset.filter;
-    document.querySelectorAll('.f-btn').forEach(x => {
-      x.classList.remove('active','breach','warn','track');
-    });
+    document.querySelectorAll('.f-btn').forEach(x =>
+      x.classList.remove('active')
+    );
     b.classList.add('active');
-    if(f==='breach') b.classList.add('breach');
-    if(f==='warning') b.classList.add('warn');
-    if(f==='on-track') b.classList.add('track');
-    document.querySelectorAll('.c-card').forEach(c => {
-      c.classList.toggle('hidden', f !== 'all' && c.dataset.band !== f);
-    });
+    document.querySelectorAll('.c-card').forEach(c =>
+      c.classList.toggle('hidden', f !== 'all' && c.dataset.band !== f)
+    );
   });
 });
 
@@ -862,48 +940,64 @@ document.querySelectorAll('.f-btn').forEach(b => {
 // ─────────────────────────────────────────────────────────
 function toggleTheme() {
   const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  const isLight = html.getAttribute('data-theme') === 'light';
+  html.setAttribute('data-theme', isLight ? 'dark' : 'light');
   const btn = document.getElementById('theme-btn');
-  btn.textContent = isDark ? '◑ LIGHT' : '◐ DARK';
-  btn.classList.toggle('active', true);
-  try { localStorage.setItem('vyrion-theme', isDark ? 'light' : 'dark'); } catch(e){}
+  btn.textContent = isLight ? '◐ DARK' : '◑ LIGHT';
+  try { localStorage.setItem('vc-theme', isLight ? 'dark' : 'light'); } catch(e) {}
 }
-// Restore saved theme
-try {
-  const saved = localStorage.getItem('vyrion-theme');
-  if (saved === 'light') {
-    document.documentElement.setAttribute('data-theme','light');
-    document.addEventListener('DOMContentLoaded', () => {
+// Restore
+(function(){
+  try {
+    const t = localStorage.getItem('vc-theme');
+    if (t === 'light') {
+      document.documentElement.setAttribute('data-theme','light');
       const btn = document.getElementById('theme-btn');
-      if(btn) btn.textContent = '◑ LIGHT';
-    });
-  }
-} catch(e){}
+      if (btn) btn.textContent = '◑ LIGHT';
+    }
+  } catch(e) {}
+})();
 
 // ─────────────────────────────────────────────────────────
-//  FONT SCALE
+//  FONT SCALE — sets html root font-size directly in px
+//  This is bulletproof: all rem/em units scale with it.
 // ─────────────────────────────────────────────────────────
+const SCALES = { '0.88': 16, '1.0': 18, '1.22': 22 };
+
 function setScale(btn) {
-  const scale = btn.dataset.scale;
-  document.documentElement.style.setProperty('--font-scale', scale);
-  document.querySelectorAll('.nc-size').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  try { localStorage.setItem('vyrion-scale', scale); } catch(e){}
+  const px = SCALES[btn.dataset.scale] || 18;
+  document.documentElement.style.fontSize = px + 'px';
+  document.querySelectorAll('.nc-sz').forEach(b =>
+    b.classList.toggle('active', b === btn)
+  );
+  try { localStorage.setItem('vc-scale', btn.dataset.scale); } catch(e) {}
 }
-}
-}
-// Restore saved scale
-// Restore saved scale — runs immediately, DOM already ready at bottom of body
-try {
-  const saved = localStorage.getItem('vyrion-scale');
-  if (saved) {
-    document.documentElement.style.setProperty('--font-scale', saved);
-    document.querySelectorAll('.nc-size').forEach(b => {
-      b.classList.toggle('active', b.dataset.scale === saved);
-    });
-  }
-} catch(e){}
+// Restore — runs immediately, DOM is ready at bottom of body
+(function(){
+  try {
+    const s = localStorage.getItem('vc-scale');
+    if (s && SCALES[s]) {
+      document.documentElement.style.fontSize = SCALES[s] + 'px';
+      // Mark correct button active after render
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.nc-sz').forEach(b =>
+          b.classList.toggle('active', b.dataset.scale === s)
+        );
+      });
+    }
+  } catch(e) {}
+})();
+
+// Add mag data to S/M/L buttons after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  const sBtn = document.querySelector('[data-scale="0.88"]');
+  const mBtn = document.querySelector('[data-scale="1.0"]');
+  const lBtn = document.querySelector('[data-scale="1.22"]');
+  if (sBtn) sBtn.dataset.mag = 'sz-s';
+  if (mBtn) mBtn.dataset.mag = 'sz-m';
+  if (lBtn) lBtn.dataset.mag = 'sz-l';
+  attachMag(document);
+});
 
 // ─────────────────────────────────────────────────────────
 //  MAGNIFIER ENGINE
@@ -912,35 +1006,42 @@ const magEl  = document.getElementById('mag');
 const magT   = document.getElementById('mag-t');
 const magB   = document.getElementById('mag-b');
 const magS   = document.getElementById('mag-s');
-let magActive = false;
+let mx = 0, my = 0, magActive = false;
 
 document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
   if (!magActive) return;
-  const pad = 22, w = magEl.offsetWidth || 290, h = magEl.offsetHeight || 170;
-  const vw = window.innerWidth, vh = window.innerHeight;
-  let x = e.clientX + pad, y = e.clientY - 14;
-  if (x + w > vw - 8) x = e.clientX - w - pad;
-  if (y + h > vh - 8) y = e.clientY - h - 4;
-  if (y < 8) y = 8;
-  magEl.style.left = x + 'px';
-  magEl.style.top  = y + 'px';
+  positionMag();
 });
 
-// Attach magnifier to all [data-mag] elements — including dynamically rendered cards
-function attachMag(container) {
-  (container || document).querySelectorAll('[data-mag]').forEach(el => {
-    if (el._magAttached) return;
-    el._magAttached = true;
-    el.addEventListener('mouseenter', () => {
-      const d = getMagContent(el);
+function positionMag() {
+  const PAD = 20, W = 300, H = magEl.offsetHeight || 180;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  let x = mx + PAD, y = my - 14;
+  if (x + W > vw - 6) x = mx - W - PAD;
+  if (y + H > vh - 6) y = vh - H - 6;
+  if (y < 6) y = 6;
+  if (x < 6) x = 6;
+  magEl.style.left = x + 'px';
+  magEl.style.top  = y + 'px';
+}
+
+function attachMag(root) {
+  (root || document).querySelectorAll('[data-mag]').forEach(el => {
+    // Remove old listeners by cloning
+    const fresh = el.cloneNode(true);
+    el.parentNode?.replaceChild(fresh, el);
+    fresh.addEventListener('mouseenter', () => {
+      const d = getMag(fresh);
       if (!d) return;
       magT.textContent = d.t;
       magB.textContent = d.b;
       magS.textContent = d.s;
-      magEl.classList.add('show');
       magActive = true;
+      positionMag();
+      magEl.classList.add('show');
     });
-    el.addEventListener('mouseleave', () => {
+    fresh.addEventListener('mouseleave', () => {
       magEl.classList.remove('show');
       magActive = false;
     });
@@ -948,131 +1049,78 @@ function attachMag(container) {
 }
 
 // ─────────────────────────────────────────────────────────
-//  LIVE DATA LOADER — reads conscience-data.json (GitHub Actions daily)
-//  Falls back to direct API calls if JSON not available yet.
+//  LIVE DATA FUNCTIONS
 // ─────────────────────────────────────────────────────────
-
-async function loadConscienceData() {
+async function fetchCO2() {
   try {
-    const r = await fetch('conscience-data.json?v=' + Date.now());
-    if (!r.ok) throw new Error('conscience-data.json not found');
+    const r = await fetch('https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_daily_mlo.txt');
+    if (!r.ok) throw new Error();
+    const txt = await r.text();
+    const lines = txt.split('\n').filter(l => l.trim() && !l.startsWith('#'));
+    for (let i = lines.length - 1; i >= 0; i--) {
+      const p = lines[i].trim().split(/\s+/);
+      if (p.length >= 5) {
+        const v = parseFloat(p[4]);
+        if (!isNaN(v) && v > 0) {
+          return {
+            ppm: v.toFixed(2),
+            date: `${p[0]}-${p[1].padStart(2,'0')}-${p[2].padStart(2,'0')}`
+          };
+        }
+      }
+    }
+  } catch(e) {}
+  return null;
+}
+
+async function fetchEdgar(co) {
+  try {
+    const r = await fetch(`https://data.sec.gov/submissions/CIK${co.cik}.json`);
+    if (!r.ok) throw new Error();
     const d = await r.json();
-    if (d.meta?.generated) {
-      const age = Date.now() - new Date(d.meta.generated).getTime();
-      if (age > 36 * 3600 * 1000) console.warn('[CONSCIENCE] Data >36h old — GitHub Actions may have failed');
+    const forms = d.filings.recent.form;
+    const dates = d.filings.recent.filingDate;
+    const accs  = d.filings.recent.accessionNumber;
+    let annual = null, k8count = 0, k8recent = null;
+    const cut90 = new Date(Date.now() - 90*86400000).toISOString().slice(0,10);
+    for (let i = 0; i < forms.length; i++) {
+      if (!annual && (forms[i]==='10-K'||forms[i]==='20-F')) {
+        annual = { form:forms[i], date:dates[i] };
+      }
+      if (forms[i]==='8-K') {
+        if (!k8recent) k8recent = dates[i];
+        if (dates[i] >= cut90) k8count++;
+      }
+      if (annual && k8recent && dates[i] < cut90 && k8count > 0) break;
     }
-    return d;
-  } catch(e) {
-    console.warn('[CONSCIENCE] conscience-data.json unavailable, using live API fallback');
-    return null;
-  }
-}
-
-function formatDateStr(iso) {
-  try { return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
-  catch(e) { return iso; }
-}
-
-async function applyConscienceData(d) {
-  // CO2
-  const co2 = d?.atmosphere?.co2;
-  if (co2?.ppm) {
-    document.getElementById('co2-val').textContent = co2.ppm;
-    document.getElementById('co2-sub').textContent = `ppm · NOAA Mauna Loa · ${co2.date}`;
-  }
-
-  // VYRION Index score from JSON (Tyler sets this manually each morning)
-  const idx = d?.vyrion_index;
-  if (idx?.score) {
-    const idxEl = document.querySelector('.lb-val.amber');
-    if (idxEl) idxEl.innerHTML = `${idx.score} <span style="font-size:.65rem;color:var(--t3)">± ${idx.uncertainty || 1.8}</span>`;
-    const idxSub = idxEl?.nextElementSibling;
-    if (idxSub && idx.day && idx.date) idxSub.textContent = `/ 100 · Day ${idx.day} · ${formatDateStr(idx.date)}`;
-  }
-
-  // Global temp anomaly badge
-  const temp = d?.atmosphere?.global_temp_anomaly;
-  if (temp?.anomaly_celsius !== undefined && !document.getElementById('temp-anomaly-badge')) {
-    const sign = temp.anomaly_celsius >= 0 ? '+' : '';
-    const el = document.createElement('div');
-    el.id = 'temp-anomaly-badge';
-    el.style.cssText = 'font-family:"Courier Prime",monospace;font-size:.55rem;color:var(--breach);margin-top:.1rem';
-    el.textContent = `${sign}${temp.anomaly_celsius}°C vs 20th-C avg · NOAA`;
-    document.getElementById('check-ts')?.parentNode?.appendChild(el);
-  }
-
-  // EDGAR per company
-  const companies = d?.companies || {};
-  let edgarOk = 0;
-  for (const [id, co] of Object.entries(companies)) {
-    const edgar = co?.edgar;
-    if (!edgar) continue;
-    const vEl = document.getElementById('edgar-val-' + id);
-    const sEl = document.getElementById('edgar-sub-' + id);
-    if (!vEl || !sEl) continue;
-    if (edgar.annual_filing?.date) {
-      vEl.textContent = edgar.annual_filing.date;
-      vEl.classList.remove('loading-pulse');
-      vEl.style.color = 'var(--glow)'; vEl.style.fontSize = '.7rem';
-      const fUrl = edgar.annual_filing?.url || `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${edgar.cik}&type=10-K`;
-      let sub = `<a href="${fUrl}" target="_blank" style="color:rgba(0,255,157,.4);text-decoration:none">${edgar.annual_filing.form} →</a>`;
-      if (edgar.count_8k_90d >= 3) sub += `<span style="color:var(--warn);font-size:.54rem;display:block;margin-top:.08rem">${edgar.count_8k_90d} events/90d ⚠</span>`;
-      else if (edgar.count_8k_90d > 0) sub += `<span style="color:var(--t3);font-size:.54rem;display:block;margin-top:.08rem">${edgar.count_8k_90d} events/90d</span>`;
-      sEl.innerHTML = sub;
-      edgarOk++;
-    } else {
-      vEl.textContent = 'N/A'; vEl.classList.remove('loading-pulse');
-      vEl.style.color = 'var(--t3)'; sEl.textContent = 'EDGAR offline';
-    }
-  }
-  return edgarOk;
+    return { annual, k8count, k8recent, cik: co.cik.replace(/^0+/,'') };
+  } catch(e) { return null; }
 }
 
 // ─────────────────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────────────────
 async function init() {
-  // 1. Render all 11 company cards
+  // 1. Render cards
   const grid = document.getElementById('grid');
   grid.innerHTML = COMPANIES.map(renderCard).join('');
 
-  // 2. Animate score bars
+  // 2. Animate bars
   requestAnimationFrame(() => setTimeout(() => {
-    document.querySelectorAll('.score-bar-fill').forEach(el => {
+    grid.querySelectorAll('.score-bar-fill').forEach(el => {
       el.style.width = el.dataset.target + '%';
     });
-  }, 180));
+  }, 120));
 
-  // 3. Attach magnifier to new cards
+  // 3. Attach magnifier to newly rendered cards
   attachMag(grid);
 
   // 4. Timestamp
-  const now = new Date();
-  document.getElementById('check-ts').textContent =
-    now.toUTCString().replace(' GMT','').replace(/:\d\d /,' ').trim() + ' UTC';
+  document.getElementById('ts-val').textContent =
+    new Date().toUTCString().replace(' GMT','').replace(/:\d{2} /,' ').trim();
 
-  // 5. Try conscience-data.json first (written daily by GitHub Actions)
-  const cdata = await loadConscienceData();
-
-  if (cdata) {
-    // ── HAPPY PATH: pre-fetched GitHub Actions data ─────────
-    const edgarOk = await applyConscienceData(cdata);
-    const generated = cdata.meta?.generated_date || 'today';
-    document.getElementById('edgar-status').textContent =
-      `${edgarOk}/11 verified · Data: ${generated} · GitHub Actions`;
-
-    // CO2 fallback if not in JSON
-    if (!cdata.atmosphere?.co2) {
-      const co2 = await fetchCO2();
-      if (co2) {
-        document.getElementById('co2-val').textContent = co2.ppm;
-        document.getElementById('co2-sub').textContent = `ppm · NOAA Mauna Loa · ${co2.date}`;
-      }
-    }
-
-  } else {
-    // ── FALLBACK: call APIs directly from browser ────────────
-    const co2 = await fetchCO2();
+  // 5. NOAA CO2 (live)
+  fetchCO2().then(co2 => {
     if (co2) {
       document.getElementById('co2-val').textContent = co2.ppm;
       document.getElementById('co2-sub').textContent = `ppm · NOAA Mauna Loa · ${co2.date}`;
@@ -1080,33 +1128,45 @@ async function init() {
       document.getElementById('co2-val').textContent = '424.8';
       document.getElementById('co2-sub').textContent = 'ppm · NOAA Mauna Loa · estimate';
     }
+  });
 
-    document.getElementById('edgar-status').textContent = 'Fetching live…';
-    let ok = 0;
-    const results = await Promise.allSettled(COMPANIES.map(co => fetchEdgar(co)));
-    results.forEach((res, i) => {
-      const co = COMPANIES[i];
-      const vEl = document.getElementById('edgar-val-'+co.id);
-      const sEl = document.getElementById('edgar-sub-'+co.id);
-      if (!vEl || !sEl) return;
-      if (res.status==='fulfilled' && res.value) {
-        const {form,date,cik} = res.value;
-        vEl.textContent = date; vEl.classList.remove('loading-pulse');
-        vEl.style.color='var(--glow)'; vEl.style.fontSize='.7rem';
-        sEl.innerHTML = `<a href="${edgarUrl(cik)}" target="_blank" style="color:rgba(0,255,157,.4);text-decoration:none">${form} →</a>`;
-        ok++;
-      } else {
-        vEl.textContent = 'N/A'; vEl.classList.remove('loading-pulse');
-        vEl.style.color='var(--t3)'; sEl.textContent='EDGAR offline';
+  // 6. SEC EDGAR — all 11 companies in parallel
+  document.getElementById('edgar-status').textContent = 'Fetching…';
+  let ok = 0;
+  const results = await Promise.allSettled(COMPANIES.map(co => fetchEdgar(co)));
+  results.forEach((res, i) => {
+    const co = COMPANIES[i];
+    const vEl = document.getElementById('ev-'+co.id);
+    const sEl = document.getElementById('es-'+co.id);
+    if (!vEl || !sEl) return;
+    if (res.status === 'fulfilled' && res.value?.annual) {
+      const {annual, k8count, cik} = res.value;
+      vEl.textContent = annual.date;
+      vEl.classList.remove('loading-pulse');
+      vEl.style.color = 'var(--glow)';
+      vEl.style.fontSize = '.68rem';
+      const url = `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&type=10-K`;
+      let sub = `<a href="${url}" target="_blank" style="color:rgba(0,255,157,.38);text-decoration:none">${annual.form} filing →</a>`;
+      if (k8count >= 3) {
+        sub += `<span style="color:var(--warn);font-size:.52rem;display:block;margin-top:.06rem">${k8count} 8-K events / 90d ⚠</span>`;
+      } else if (k8count > 0) {
+        sub += `<span style="color:var(--t3);font-size:.52rem;display:block;margin-top:.06rem">${k8count} 8-K / 90d</span>`;
       }
-    });
-    document.getElementById('edgar-status').textContent =
-      `${ok}/11 verified · ${new Date().toISOString().slice(0,10)} · Live`;
-  }
+      sEl.innerHTML = sub;
+      ok++;
+    } else {
+      vEl.textContent = 'N/A';
+      vEl.classList.remove('loading-pulse');
+      vEl.style.color = 'var(--t3)';
+      sEl.textContent = 'Offline';
+    }
+  });
+
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('edgar-status').textContent =
+    `${ok}/11 verified · ${today}`;
 }
 
-// Attach magnifier to static elements on load
-document.addEventListener('DOMContentLoaded', () => attachMag());
 init();
 setInterval(init, 15 * 60 * 1000);
 </script>
