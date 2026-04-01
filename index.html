@@ -2,27 +2,28 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="VYRION CONSCIENCE — Corporate Climate Pledge Tracker. Pledge vs. reality for 11 major corporations, scored against Paris Agreement 1.5°C pathways.">
 <title>VYRION CONSCIENCE — Corporate Climate Pledge Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700;800&family=Archivo:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ── THEME ─────────────────────────────────────────────── */
 :root{
-  --void:#030a05;--void2:#071210;--void3:#0d1c14;
-  --glow:#00FF9D;--amber:#FFB84D;--breach:#F03030;--warn:#F09000;
-  --t1:#e8f5ec;--t2:#8aab92;--t3:#4a7a58;
-  --border:rgba(0,255,157,.10);--border2:rgba(0,255,157,.06);
-  --breach-bg:rgba(240,48,48,.07);--warn-bg:rgba(240,144,0,.07);--track-bg:rgba(0,255,157,.06);
-  --nav-bg:rgba(3,10,5,.97);--mag-bg:rgba(4,12,7,.98);
-  --scanline:rgba(0,255,157,.005);
+  --void:#020912;--void2:#061624;--void3:#0b2035;
+  --glow:#00D4FF;--amber:#FFB84D;--breach:#F03030;--warn:#F09000;
+  --t1:#e4f2ff;--t2:#6a9ab8;--t3:#2d6080;
+  --border:rgba(0,212,255,.12);--border2:rgba(0,212,255,.07);
+  --breach-bg:rgba(240,48,48,.07);--warn-bg:rgba(240,144,0,.07);--track-bg:rgba(0,212,255,.07);
+  --nav-bg:rgba(2,9,18,.97);--mag-bg:rgba(3,12,24,.98);
+  --scanline:rgba(0,212,255,.004);
 }
 [data-theme="light"]{
-  --void:#f0f7f3;--void2:#e4ede8;--void3:#d5e5db;
-  --glow:#008844;--amber:#b07800;--breach:#b82020;--warn:#a05800;
-  --t1:#06180a;--t2:#2e5238;--t3:#5a7a62;
-  --border:rgba(0,136,68,.18);--border2:rgba(0,136,68,.10);
-  --breach-bg:rgba(184,32,32,.08);--warn-bg:rgba(160,88,0,.08);--track-bg:rgba(0,136,68,.08);
-  --nav-bg:rgba(240,247,243,.98);--mag-bg:rgba(235,245,239,.99);
+  --void:#f0f5ff;--void2:#e4eeff;--void3:#d5e5ff;
+  --glow:#0066CC;--amber:#b07800;--breach:#b82020;--warn:#a05800;
+  --t1:#060e1e;--t2:#1e4a7a;--t3:#3a6090;
+  --border:rgba(0,102,204,.18);--border2:rgba(0,102,204,.10);
+  --breach-bg:rgba(184,32,32,.09);--warn-bg:rgba(160,88,0,.09);--track-bg:rgba(0,102,204,.09);
+  --nav-bg:rgba(240,245,255,.98);--mag-bg:rgba(235,244,255,.99);
   --scanline:transparent;
 }
 
@@ -61,9 +62,9 @@ body::after{
   color:var(--t2);text-decoration:none;transition:color .2s;padding-bottom:2px;
 }
 .nav-links a:hover{color:var(--t1)}
-.nav-links a.active{color:var(--glow);border-bottom:1px solid rgba(0,255,157,.4)}
+.nav-links a.active{color:var(--glow);border-bottom:1px solid rgba(0,212,255,.4)}
 .nav-dot{width:6px;height:6px;background:var(--glow);border-radius:50%;flex-shrink:0;animation:pdot 2.2s infinite}
-@keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,157,.5)}50%{opacity:.4;box-shadow:0 0 0 7px rgba(0,255,157,0)}}
+@keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,212,255,.5)}50%{opacity:.4;box-shadow:0 0 0 7px rgba(0,255,157,0)}}
 
 /* ── NAV CONTROLS ───────────────────────────────────────── */
 .nav-controls{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
@@ -77,7 +78,7 @@ body::after{
 }
 .nc-theme:hover,.nc-theme.active{
   border-color:var(--glow);color:var(--glow);
-  background:rgba(0,255,157,.08);box-shadow:0 0 8px rgba(0,255,157,.12);
+  background:rgba(0,212,255,.08);box-shadow:0 0 8px rgba(0,212,255,.12);
 }
 [data-theme="light"] .nc-theme:hover,[data-theme="light"] .nc-theme.active{
   border-color:var(--glow);color:var(--glow);background:rgba(0,136,68,.1);box-shadow:none;
@@ -89,11 +90,11 @@ body::after{
   border-radius:2px;border:1px solid var(--border);
   background:transparent;color:var(--t3);cursor:pointer;transition:all .2s;
 }
-.nc-sz:hover{border-color:rgba(0,255,157,.4);color:var(--t1)}
+.nc-sz:hover{border-color:rgba(0,212,255,.4);color:var(--t1)}
 .nc-sz.active{
-  background:rgba(0,255,157,.15);
+  background:rgba(0,212,255,.15);
   border-color:var(--glow);color:var(--glow);
-  box-shadow:0 0 8px rgba(0,255,157,.2);
+  box-shadow:0 0 8px rgba(0,212,255,.2);
 }
 [data-theme="light"] .nc-sz.active{
   background:rgba(0,136,68,.12);border-color:var(--glow);
@@ -146,7 +147,7 @@ body::after{
 }
 .page-header::after{
   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse 55% 60% at 72% 52%,rgba(0,255,157,.05) 0%,transparent 70%);
+  background:radial-gradient(ellipse 55% 60% at 72% 52%,rgba(0,212,255,.05) 0%,transparent 70%);
   animation:hpulse 7s ease-in-out infinite alternate;
 }
 @keyframes hpulse{0%{opacity:.4;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
@@ -155,7 +156,7 @@ body::after{
   position:absolute;right:-1.5rem;top:50%;transform:translateY(-50%);
   font-family:'Archivo Narrow',sans-serif;font-weight:800;
   font-size:clamp(5rem,13vw,10rem);
-  color:rgba(0,255,157,.03);pointer-events:none;user-select:none;z-index:2;
+  color:rgba(0,212,255,.03);pointer-events:none;user-select:none;z-index:2;
 }
 .eyebrow{
   font-family:'Courier Prime',monospace;font-size:.65rem;color:var(--glow);
@@ -184,7 +185,7 @@ body::after{
   display:flex;align-items:center;gap:.38rem;
 }
 .src-status{font-family:'Courier Prime',monospace;font-size:.56rem;color:var(--t3);line-height:1.3}
-.src-link{font-family:'Courier Prime',monospace;font-size:.54rem;color:rgba(0,255,157,.3);text-decoration:none;transition:color .18s}
+.src-link{font-family:'Courier Prime',monospace;font-size:.54rem;color:rgba(0,212,255,.3);text-decoration:none;transition:color .18s}
 .src-link:hover{color:var(--glow)}
 .dot-live{width:5px;height:5px;background:var(--glow);border-radius:50%;flex-shrink:0;animation:pdot 2.2s infinite}
 .dot-static{width:5px;height:5px;background:var(--t3);border-radius:50%;flex-shrink:0}
@@ -202,11 +203,11 @@ body::after{
   padding:.26rem .7rem;border-radius:2px;border:1px solid var(--border);
   background:transparent;color:var(--t2);cursor:pointer;transition:all .18s;
 }
-.f-btn:hover{border-color:rgba(0,255,157,.35);color:var(--t1)}
-.f-btn.active{background:rgba(0,255,157,.09);border-color:rgba(0,255,157,.5);color:var(--glow)}
+.f-btn:hover{border-color:rgba(0,212,255,.35);color:var(--t1)}
+.f-btn.active{background:rgba(0,212,255,.09);border-color:rgba(0,212,255,.5);color:var(--glow)}
 .f-btn.active.fb-breach{background:var(--breach-bg);border-color:rgba(240,48,48,.4);color:var(--breach)}
 .f-btn.active.fb-warn{background:var(--warn-bg);border-color:rgba(240,144,0,.4);color:var(--warn)}
-.f-btn.active.fb-track{background:var(--track-bg);border-color:rgba(0,255,157,.5);color:var(--glow)}
+.f-btn.active.fb-track{background:var(--track-bg);border-color:rgba(0,212,255,.5);color:var(--glow)}
 .fstats{display:flex;gap:1.3rem;flex-wrap:wrap}
 .fst{font-family:'Courier Prime',monospace;font-size:.58rem;color:var(--t3);display:flex;align-items:center;gap:.28rem}
 .fst b{font-weight:700}
@@ -228,7 +229,7 @@ body::after{
 }
 .c-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--card-accent,rgba(0,255,157,.06));
+  background:var(--card-accent,rgba(0,212,255,.06));
   transition:opacity .2s;
 }
 .c-card:hover{background:var(--void3)}
@@ -239,7 +240,7 @@ body::after{
 .c-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.8rem;gap:.5rem}
 .c-name{
   font-family:'Archivo Narrow',sans-serif;font-weight:800;
-  font-size:1rem;color:var(--t1);letter-spacing:.04em;line-height:1;
+  font-size:1.12rem;color:var(--t1);letter-spacing:.04em;line-height:1;
 }
 .c-meta{font-family:'Courier Prime',monospace;font-size:.55rem;color:var(--t3);margin-top:.18rem;letter-spacing:.06em}
 .c-score-wrap{text-align:right;flex-shrink:0}
@@ -259,7 +260,7 @@ body::after{
 .band-warning .c-score-num{color:var(--warn)}
 .band-warning .c-band{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(240,144,0,.3)}
 .band-track .c-score-num{color:var(--glow)}
-.band-track .c-band{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,255,157,.3)}
+.band-track .c-band{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,212,255,.3)}
 
 /* Score bar */
 .score-bar-wrap{margin-bottom:.9rem}
@@ -271,7 +272,7 @@ body::after{
 .score-bar-fill{height:100%;border-radius:2px;width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
 .band-breach .score-bar-fill{background:linear-gradient(90deg,rgba(240,48,48,.4),var(--breach))}
 .band-warning .score-bar-fill{background:linear-gradient(90deg,rgba(240,144,0,.4),var(--warn))}
-.band-track .score-bar-fill{background:linear-gradient(90deg,rgba(0,255,157,.3),var(--glow))}
+.band-track .score-bar-fill{background:linear-gradient(90deg,rgba(0,212,255,.3),var(--glow))}
 .score-bar-labels{display:flex;justify-content:space-between;font-family:'Courier Prime',monospace;font-size:.52rem;color:var(--t3)}
 
 /* Pledge / Reality */
@@ -285,13 +286,13 @@ body::after{
 .tag-pledge{background:rgba(74,173,255,.08);color:#4AADFF;border:1px solid rgba(74,173,255,.25)}
 .tag-reality{background:var(--breach-bg);color:var(--breach);border:1px solid rgba(240,48,48,.25)}
 .tag-reality.warn{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(240,144,0,.25)}
-.tag-reality.ok{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,255,157,.25)}
+.tag-reality.ok{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,212,255,.25)}
 .pr-text{font-size:.73rem;color:var(--t1);line-height:1.52}
 .pr-src{
   font-family:'Courier Prime',monospace;font-size:.56rem;color:var(--t3);
   margin-left:calc(.28rem + 43px + .5rem);margin-top:-.18rem;margin-bottom:.2rem;
 }
-.pr-src a{color:rgba(0,255,157,.35);text-decoration:none;transition:color .18s}
+.pr-src a{color:rgba(0,212,255,.35);text-decoration:none;transition:color .18s}
 .pr-src a:hover{color:var(--glow)}
 
 /* Validation badges */
@@ -305,7 +306,7 @@ body::after{
   border:1px solid var(--border2);background:rgba(0,0,0,.16);
   transition:border-color .18s,background .18s;
 }
-.v-badge:hover{border-color:rgba(0,255,157,.22);background:rgba(0,0,0,.26)}
+.v-badge:hover{border-color:rgba(0,212,255,.22);background:rgba(0,0,0,.26)}
 [data-theme="light"] .v-badge{background:rgba(0,0,0,.04)}
 [data-theme="light"] .v-badge:hover{background:rgba(0,0,0,.08)}
 .v-badge a{text-decoration:none;color:inherit;display:block}
@@ -325,8 +326,8 @@ body::after{
   color:var(--t3);font-family:'Courier Prime',monospace;font-size:.58rem;
   letter-spacing:.08em;transition:all .18s;
 }
-.expand-toggle:hover{border-color:rgba(0,255,157,.25);color:var(--t2)}
-.expand-toggle.open{border-color:rgba(0,255,157,.2);color:var(--t2)}
+.expand-toggle:hover{border-color:rgba(0,212,255,.25);color:var(--t2)}
+.expand-toggle.open{border-color:rgba(0,212,255,.2);color:var(--t2)}
 .chevron{transition:transform .22s;font-size:.52rem;flex-shrink:0}
 .expand-toggle.open .chevron{transform:rotate(180deg)}
 .score-breakdown{
@@ -355,7 +356,7 @@ body::after{
   font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);
   margin-top:.42rem;padding-top:.38rem;border-top:1px solid var(--border2);line-height:1.5;
 }
-.sb-note a{color:rgba(0,255,157,.35);text-decoration:none}
+.sb-note a{color:rgba(0,212,255,.35);text-decoration:none}
 .sb-note a:hover{color:var(--glow)}
 
 /* ── METHODOLOGY ─────────────────────────────────────────── */
@@ -366,7 +367,7 @@ body::after{
   color:var(--t1);margin-bottom:.75rem;
 }
 .method-body{font-size:.75rem;color:var(--t2);line-height:1.75;max-width:78ch}
-.method-body a{color:rgba(0,255,157,.5);text-decoration:none}
+.method-body a{color:rgba(0,212,255,.5);text-decoration:none}
 .method-body a:hover{color:var(--glow)}
 .method-table{width:100%;border-collapse:collapse;margin-top:.9rem;font-family:'Courier Prime',monospace;font-size:.63rem}
 .method-table th{
@@ -383,10 +384,10 @@ body::after{
   flex-wrap:wrap;gap:1rem;padding:1.4rem 2rem;border-top:1px solid var(--border);
 }
 .footer-l{font-family:'Courier Prime',monospace;font-size:.6rem;color:var(--t3);line-height:1.75}
-.footer-l a{color:rgba(0,255,157,.4);text-decoration:none;transition:color .18s}
+.footer-l a{color:rgba(0,212,255,.4);text-decoration:none;transition:color .18s}
 .footer-l a:hover{color:var(--glow)}
 .footer-r{display:flex;gap:1.4rem}
-.footer-r a{font-family:'Courier Prime',monospace;font-size:.6rem;color:rgba(0,255,157,.3);text-decoration:none;transition:color .18s}
+.footer-r a{font-family:'Courier Prime',monospace;font-size:.6rem;color:rgba(0,212,255,.3);text-decoration:none;transition:color .18s}
 .footer-r a:hover{color:var(--glow)}
 
 /* ── MAGNIFIER ───────────────────────────────────────────── */
@@ -399,9 +400,9 @@ body::after{
 #mag.show{opacity:1}
 .mag-box{
   background:var(--mag-bg);
-  border:1px solid rgba(0,255,157,.2);border-radius:3px;
+  border:1px solid rgba(0,212,255,.2);border-radius:3px;
   padding:.85rem .95rem;
-  box-shadow:0 16px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,255,157,.05);
+  box-shadow:0 16px 48px rgba(0,0,0,.7),0 0 0 1px rgba(0,212,255,.05);
   position:relative;overflow:hidden;
 }
 [data-theme="light"] .mag-box{
@@ -410,12 +411,12 @@ body::after{
 }
 .mag-box::before{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,255,157,.55),transparent);
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,.55),transparent);
 }
 [data-theme="light"] .mag-box::before{background:linear-gradient(90deg,transparent,rgba(0,136,68,.4),transparent)}
 .mag-brand{
   font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:.55rem;
-  letter-spacing:.24em;text-transform:uppercase;color:rgba(0,255,157,.35);
+  letter-spacing:.24em;text-transform:uppercase;color:rgba(0,212,255,.35);
   margin-bottom:.38rem;display:flex;align-items:center;gap:.4rem;
 }
 .mag-brand::before{
@@ -429,7 +430,7 @@ body::after{
 .mag-body{font-size:.7rem;color:var(--t2);line-height:1.55;margin-bottom:.42rem}
 .mag-src{
   font-family:'Courier Prime',monospace;font-size:.57rem;
-  color:rgba(0,255,157,.38);border-top:1px solid var(--border2);
+  color:rgba(0,212,255,.38);border-top:1px solid var(--border2);
   padding-top:.35rem;line-height:1.5;
 }
 [data-theme="light"] .mag-src{color:rgba(0,136,68,.5)}
@@ -438,6 +439,197 @@ body::after{
 .loading-pulse{animation:pulse 1.4s infinite}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.75}}
 .hidden{display:none!important}
+
+/* ─── RESPONSIVE BREAKPOINTS ──────────────────────────────── */
+@media(max-width:1024px){
+  :root{--pad:1.3rem}
+  .company-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr))}
+}
+@media(max-width:720px){
+  html{font-size:16px !important}
+  .nav{padding:0 .9rem;gap:.5rem;height:48px}
+  .nav-logo{font-size:.8rem}
+  .nav-links{display:none}
+  .nav-controls{gap:.22rem}
+  .nc-sep{display:none}
+  .nc-sz{width:22px;height:22px;font-size:.52rem}
+  .nc-theme{font-size:.52rem;padding:.16rem .32rem}
+  .ticker{flex-wrap:wrap}
+  .t-cell,.lb-cell{min-width:50%;border-bottom:1px solid var(--border)}
+  .page-header{padding:1.8rem .9rem 1.5rem}
+  .toolbar{padding:.7rem .9rem;gap:.4rem}
+  .search-wrap{min-width:120px;max-width:100%;flex:1 1 120px}
+  .btn-export{margin-left:0}
+  .filter-bar,.filter-btns{gap:.28rem}
+  .f-btn{font-size:.54rem;padding:.2rem .5rem}
+  .company-grid{grid-template-columns:1fr;gap:0;border-top:1px solid var(--border)}
+  .c-card{border-bottom:1px solid var(--border)}
+  .val-grid{grid-template-columns:repeat(3,1fr)}
+  .method-section,.changelog-section,.footer{padding:1.4rem .9rem}
+  .method-table,.cl-table{font-size:.52rem}
+  .bg-word{display:none}
+}
+@media(max-width:400px){
+  .val-grid{grid-template-columns:repeat(2,1fr)}
+  .f-btn{font-size:.5rem;padding:.18rem .4rem}
+  .nav-logo{font-size:.75rem}
+}
+@media(hover:none){#mag{display:none!important}}
+
+/* ─── TOOLBAR ─────────────────────────────────────────────── */
+.toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;
+  gap:.55rem;padding:.8rem 1.8rem;
+  border-bottom:1px solid var(--border);background:var(--void2);
+}
+.search-wrap{position:relative;flex:1;min-width:130px;max-width:260px}
+.search-wrap::before{
+  content:'⌕';position:absolute;left:.5rem;top:50%;transform:translateY(-50%);
+  color:var(--t3);font-size:.85rem;pointer-events:none;line-height:1;
+}
+#search-input{
+  width:100%;padding:.28rem .55rem .28rem 1.5rem;
+  font-family:'Courier Prime',monospace;font-size:.6rem;
+  background:rgba(0,0,0,.22);border:1px solid var(--border);
+  border-radius:2px;color:var(--t1);outline:none;transition:border-color .18s;
+}
+[data-theme="light"] #search-input{background:rgba(0,0,0,.04)}
+#search-input:focus{border-color:rgba(0,212,255,.4)}
+#search-input::placeholder{color:var(--t3)}
+.ctrl-lbl{font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.ctrl-sel{
+  font-family:'Courier Prime',monospace;font-size:.58rem;
+  background:rgba(0,0,0,.22);border:1px solid var(--border);
+  border-radius:2px;color:var(--t1);padding:.26rem 1.3rem .26rem .5rem;
+  cursor:pointer;outline:none;transition:border-color .18s;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a7a58'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .4rem center;
+  background-color:rgba(0,0,0,.22);
+}
+[data-theme="light"] .ctrl-sel{background-color:rgba(0,0,0,.04)}
+.ctrl-sel:focus{border-color:rgba(0,212,255,.4)}
+.ctrl-sel option{background:var(--void2);color:var(--t1)}
+.btn-export{
+  font-family:'Courier Prime',monospace;font-size:.56rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.25rem .65rem;border-radius:2px;
+  border:1px solid rgba(0,212,255,.22);background:rgba(0,212,255,.05);
+  color:var(--glow);cursor:pointer;transition:all .2s;white-space:nowrap;
+  margin-left:auto;
+}
+.btn-export:hover{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.5);box-shadow:0 0 10px rgba(0,255,157,.1)}
+.result-count{font-family:'Courier Prime',monospace;font-size:.54rem;color:var(--t3);white-space:nowrap}
+.result-count b{color:var(--t1);font-weight:700}
+#no-results{
+  display:none;padding:3rem 1.8rem;text-align:center;
+  font-family:'Courier Prime',monospace;font-size:.68rem;color:var(--t3);
+  background:var(--void2);
+}
+#no-results.show{display:block}
+#no-results a{color:var(--glow);text-decoration:none}
+
+/* ─── ANCHOR LINK ─────────────────────────────────────────── */
+.c-anchor{
+  font-size:.58rem;color:var(--t3);text-decoration:none;
+  opacity:0;transition:opacity .18s;margin-left:.28rem;vertical-align:middle;
+}
+.c-card:hover .c-anchor{opacity:.5}
+.c-anchor:hover{opacity:1 !important;color:var(--glow)}
+.c-card.highlighted{outline:2px solid var(--glow);outline-offset:-2px}
+.c-card{scroll-margin-top:60px}
+
+/* ─── CHANGELOG ───────────────────────────────────────────── */
+.changelog-section{border-top:1px solid var(--border);padding:2rem 1.8rem;background:var(--void)}
+.changelog-title{font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--t1);margin-bottom:.2rem}
+.changelog-sub{font-family:'Courier Prime',monospace;font-size:.58rem;color:var(--t3);margin-bottom:.85rem;line-height:1.6}
+.changelog-sub a{color:rgba(0,212,255,.36);text-decoration:none}
+.changelog-sub a:hover{color:var(--glow)}
+.cl-table{width:100%;border-collapse:collapse;font-family:'Courier Prime',monospace;font-size:.58rem;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cl-table th{text-align:left;padding:.28rem .55rem .28rem 0;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:400;white-space:nowrap}
+.cl-table td{padding:.3rem .55rem .3rem 0;color:var(--t2);border-bottom:1px solid var(--border2);vertical-align:top}
+.cl-table td:first-child{color:var(--t3);white-space:nowrap}
+.cl-table td:nth-child(3){color:var(--breach);font-weight:700}
+.cl-table td:nth-child(4){color:var(--glow);font-weight:700}
+.cl-pill{display:inline-block;padding:.05rem .28rem;border-radius:2px;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase}
+.cl-new{background:rgba(74,173,255,.08);color:#4AADFF;border:1px solid rgba(74,173,255,.22)}
+.cl-plat{background:var(--track-bg);color:var(--glow);border:1px solid rgba(0,212,255,.22)}
+
+
+/* ── SCORE RING ─────────────────────────────────────────────── */
+.score-ring-wrap{position:relative;width:72px;height:72px;flex-shrink:0}
+.score-ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:5}
+[data-theme="light"] .ring-track{stroke:rgba(0,0,0,.08)}
+.ring-fill{fill:none;stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1)}
+.band-breach .ring-fill{stroke:var(--breach)}
+.band-warning .ring-fill{stroke:var(--warn)}
+.band-track .ring-fill{stroke:var(--glow)}
+.ring-inner{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+}
+.ring-score{font-family:'Courier Prime',monospace;font-weight:700;font-size:1.1rem;line-height:1;letter-spacing:-.03em}
+.ring-denom{font-family:'Courier Prime',monospace;font-size:.44rem;color:var(--t3);line-height:1;margin-top:.08rem}
+.band-breach .ring-score{color:var(--breach)}
+.band-warning .ring-score{color:var(--warn)}
+.band-track .ring-score{color:var(--glow)}
+/* Card header layout update */
+.c-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.8rem;gap:.8rem}
+.c-head-left{flex:1;min-width:0}
+/* Teal card shimmer */
+.c-card::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(0,212,255,.025) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.c-card:hover::after{opacity:1}
+/* Enhanced score bar gradient */
+.band-track .bar-fill{
+  background:linear-gradient(90deg,rgba(0,150,255,.4),rgba(0,212,255,.8),rgba(0,230,255,1));
+  box-shadow:0 0 8px rgba(0,212,255,.3);
+}
+/* Nav glow tweak */
+.nav-logo{text-shadow:0 0 20px rgba(0,212,255,.3)}
+/* Ticker dot pulse cyan */
+@keyframes pdot{
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,212,255,.5)}
+  50%{opacity:.4;box-shadow:0 0 0 7px rgba(0,212,255,0)}
+}
+/* Source strip: live dot cyan */
+.dot-live{background:var(--glow)}
+/* Page header glow: cyan */
+.page-header::after{
+  background:radial-gradient(ellipse 55% 60% at 72% 52%,rgba(0,212,255,.06) 0%,transparent 70%);
+}
+/* Mag top line */
+.mag-box::before{
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,.6),transparent);
+}
+/* Export button cyber blue */
+.btn-export{
+  border-color:rgba(0,212,255,.28);background:rgba(0,212,255,.06);color:var(--glow);
+}
+.btn-export:hover{
+  background:rgba(0,212,255,.14);border-color:rgba(0,212,255,.55);
+  box-shadow:0 0 12px rgba(0,212,255,.15);
+}
+/* nc-theme/sz active glow */
+.nc-theme.on,.nc-sz.on{
+  box-shadow:0 0 10px rgba(0,212,255,.2);
+}
+/* Changelog pills */
+.cl-plat{background:rgba(0,212,255,.08);color:var(--glow);border:1px solid rgba(0,212,255,.25)}
+/* Band track glow on card */
+.band-track .c-card::before{box-shadow:0 0 12px rgba(0,212,255,.15)}
+/* Score band pill */
+.band-track .c-band-pill{
+  background:rgba(0,212,255,.1);color:var(--glow);border:1px solid rgba(0,212,255,.35);
+  box-shadow:0 0 8px rgba(0,212,255,.1);
+}
+/* Search focus */
+#search-input:focus{border-color:rgba(0,212,255,.5);box-shadow:0 0 0 2px rgba(0,212,255,.08)}
+
 </style>
 </head>
 <body>
@@ -470,12 +662,12 @@ body::after{
   <div class="lb-cell" data-mag="index">
     <div class="lb-lbl">VYRION Index</div>
     <div class="lb-val amber" id="idx-val">41.2 <span style="font-size:.62rem;color:var(--t3)">± 1.8</span></div>
-    <div class="lb-sub" id="idx-sub">/ 100 · Day 13 · Mar 30, 2026</div>
+    <div class="lb-sub" id="idx-sub">/ 100 · Day 14 · Mar 31, 2026</div>
   </div>
   <div class="lb-cell" data-mag="coverage">
     <div class="lb-lbl">Companies Tracked</div>
     <div class="lb-val white">11</div>
-    <div class="lb-sub">5 Breach · 3 Warning · 3 On Track</div>
+    <div class="lb-sub">7 Breach · 3 Warning · 1 On Track</div>
   </div>
   <div class="lb-cell" data-mag="lawsuits">
     <div class="lb-lbl">Active Lawsuits</div>
@@ -531,24 +723,71 @@ body::after{
   </div>
 </div>
 
-<!-- FILTER -->
-<div class="filter-bar">
+<!-- TOOLBAR: search + sort + sector + band filter + CSV export -->
+<div class="toolbar">
+  <div class="search-wrap">
+    <input id="search-input" type="text" placeholder="Search company or ticker…" autocomplete="off" oninput="applyFilters()">
+  </div>
+  <span class="ctrl-lbl">SORT</span>
+  <select class="ctrl-sel" id="sort-sel" onchange="applyFilters()">
+    <option value="score-desc">Score ↓ High–Low</option>
+    <option value="score-asc">Score ↑ Low–High</option>
+    <option value="name-asc">Name A–Z</option>
+    <option value="name-desc">Name Z–A</option>
+    <option value="lawsuits-desc">Lawsuits ↓</option>
+    <option value="sector-asc">Sector A–Z</option>
+  </select>
+  <span class="ctrl-lbl">SECTOR</span>
+  <select class="ctrl-sel" id="sector-sel" onchange="applyFilters()">
+    <option value="all">All Sectors</option>
+    <option value="Oil &amp; Gas">Oil &amp; Gas</option>
+    <option value="Technology">Technology</option>
+    <option value="Tech / Retail">Tech / Retail</option>
+    <option value="Retail">Retail</option>
+    <option value="Aviation">Aviation</option>
+    <option value="Food &amp; Beverage">Food &amp; Beverage</option>
+    <option value="Consumer Goods">Consumer Goods</option>
+  </select>
   <div class="filter-btns">
-    <button class="f-btn active"    data-filter="all">All <span id="f-all">11</span></button>
-    <button class="f-btn fb-breach" data-filter="breach">Breach <span id="f-breach">5</span></button>
-    <button class="f-btn fb-warn"   data-filter="warning">Warning <span id="f-warn">3</span></button>
-    <button class="f-btn fb-track" data-filter="on-track">On Track <span id="f-track">3</span></button>
+    <button class="f-btn active"    data-band="all">All</button>
+    <button class="f-btn fb-breach" data-band="breach">Breach</button>
+    <button class="f-btn fb-warn"   data-band="warning">Warning</button>
+    <button class="f-btn fb-track" data-band="on-track">On Track</button>
   </div>
-  <div class="fstats">
-    <div class="fst tot">Tracking <b>11</b></div>
-    <div class="fst breach">Breach <b>5</b></div>
-    <div class="fst warn">Warning <b>3</b></div>
-    <div class="fst track">On Track <b>3</b></div>
-  </div>
+  <span class="result-count" id="result-count"><b id="vis-count">11</b> / 11</span>
+  <button class="btn-export" onclick="exportCSV()" title="Download all data as CSV">↓ CSV</button>
 </div>
 
 <!-- GRID -->
 <div class="company-grid" id="grid"></div>
+<div id="no-results">No companies match your filters. <a href="#" onclick="clearFilters();return false;">Clear filters</a></div>
+
+<!-- CHANGELOG -->
+<section class="changelog-section" id="changelog">
+  <div class="changelog-title">Score Changelog</div>
+  <div class="changelog-sub">
+    Every score change, correction, and new entry is logged here permanently. Original entries are never deleted.<br>
+    Open Proof Protocol: <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a> ·
+    <a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank">CONSCIENCE-METHODOLOGY.md</a>
+  </div>
+  <table class="cl-table">
+    <thead><tr><th>Date</th><th>Company</th><th>Previous</th><th>New Score</th><th>Band</th><th>Reason</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>2026-03-18</td><td>All 11 companies</td><td>—</td><td>Established</td>
+        <td><span class="cl-pill cl-new">NEW</span></td>
+        <td>Initial scoring: CONSCIENCE v1.0 baseline. All scores derived from CDP 2023, InfluenceMap, Sabin Center (March 2026), SBTi registry, SEC EDGAR.</td>
+        <td><a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank" style="color:rgba(0,212,255,.35);text-decoration:none">CONSCIENCE-METHODOLOGY.md →</a></td>
+      </tr>
+      <tr>
+        <td>2026-03-30</td><td>Platform</td><td>v2.3</td><td>v2.6</td>
+        <td><span class="cl-pill cl-plat">PLATFORM</span></td>
+        <td>v2.6 deployed: sort, sector filter, search, CSV export, anchor links, changelog, full responsive design. No score values changed.</td>
+        <td><a href="https://github.com/dablerfrost/conscience" target="_blank" style="color:rgba(0,212,255,.35);text-decoration:none">github.com/dablerfrost/conscience →</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
 <!-- METHODOLOGY -->
 <section class="method-section">
@@ -573,7 +812,7 @@ body::after{
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-l">
-    VYRION CONSCIENCE · Module 01 · v2.4 · March 30, 2026<br>
+    VYRION CONSCIENCE · Module 01 · v2.6 · March 31, 2026<br>
     Data: CDP · InfluenceMap · Sabin Center · SBTi · SEC EDGAR · All public-domain or open-license sources<br>
     Methodology: <a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank">CONSCIENCE-METHODOLOGY.md</a> ·
     <a href="https://github.com/dablerfrost/conscience" target="_blank">github.com/dablerfrost/conscience</a> ·
@@ -582,6 +821,7 @@ body::after{
   <div class="footer-r">
     <a href="shield.html">SHIELD →</a>
     <a href="https://dablerfrost.github.io/conscience/archive">ARCHIVE →</a>
+    <a href="#changelog">CHANGELOG →</a>
   </div>
 </footer>
 
@@ -603,7 +843,7 @@ body::after{
 const MAG = {
   co2:{t:'Atmospheric CO₂ — NOAA Mauna Loa Observatory',b:'Real-time CO₂ concentration from NOAA\'s Global Monitoring Laboratory. Mauna Loa has the world\'s longest continuous atmospheric CO₂ record, running since 1958. Pre-industrial baseline ≈ 280 ppm. VYRION uses this as one of 6 Atmosphere indicators (22% weight in the Index).',s:'NOAA GML · gml.noaa.gov/ccgg/trends · Daily · Fetched live'},
   index:{t:'VYRION Index — Daily Planetary Health Benchmark',b:'The world\'s first daily investable planetary health benchmark. Score of 41.2 ± 1.8 / 100 against a pre-industrial 1850–1900 baseline of 100. Computed across 8 Earth systems: Atmosphere 22%, Ocean 18%, Ice 14%, Forest 13%, Biodiversity 12%, Freshwater 10%, Soil 7%, Corporate Accountability 4%. Changes <±0.5 are within measurement error.',s:'VYRION-METHODOLOGY-v1.0.md · github.com/dablerfrost/conscience · Day 13 · March 30, 2026'},
-  coverage:{t:'CONSCIENCE Coverage — 11 Companies',b:'11 major corporations tracked across Oil & Gas, Aviation, Food & Beverage, Retail, and Technology. Selected for material climate pledges and significant emissions footprints. Expansion planned. Full selection criteria in CONSCIENCE-METHODOLOGY.md.',s:'VYRION CONSCIENCE · Module 01 · v2.4'},
+  coverage:{t:'CONSCIENCE Coverage — 11 Companies',b:'11 major corporations tracked across Oil & Gas, Aviation, Food & Beverage, Retail, and Technology. Selected for material climate pledges and significant emissions footprints. Expansion planned. Full selection criteria in CONSCIENCE-METHODOLOGY.md.',s:'VYRION CONSCIENCE · Module 01 · v2.6'},
   lawsuits:{t:'Total Active Climate Lawsuits',b:'Aggregate active climate litigation against the 11 tracked companies, per Sabin Center for Climate Change Law at Columbia Law School. Legal exposure = one of the four CONSCIENCE scoring factors (20 pts max). Counts refreshed monthly.',s:'Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law School'},
   refresh:{t:'Auto-Refresh — Live Data',b:'CONSCIENCE refreshes on page load and every 15 minutes. Live: NOAA GML CO₂ (direct API), SEC EDGAR filing dates (data.sec.gov). Static sources (CDP, InfluenceMap, SBTi, TPI) update when annual assessments publish.',s:'NOAA GML · data.sec.gov/submissions · 15 min interval'},
   'src-cdp':{t:'CDP — Carbon Disclosure Project',b:'World\'s largest environmental disclosure system. Companies respond annually to standardised climate questionnaires. Grades: A (Leadership) → D (Disclosure only). A requires demonstrated governance, strategy, and action — not just reporting. CDP grades are independent; companies cannot buy a better score.',s:'CDP · cdp.net/en/responses · Annual cycle · 23,000+ companies'},
@@ -611,6 +851,10 @@ const MAG = {
   'src-sabin':{t:'Sabin Center — Climate Litigation',b:'The world\'s most comprehensive climate litigation database, maintained by Columbia Law School. CONSCIENCE tracks active cases against monitored companies. High case counts signal a pledge-vs-reality gap large enough that third parties have found it legally actionable.',s:'Sabin Center for Climate Change Law · climatecasechart.com · Columbia Law'},
   'src-sbti':{t:'SBTi — Science Based Targets',b:'SBTi validates corporate emission targets against climate science. Approved 1.5°C = the highest tier: absolute reductions across all scopes, science-aligned. "Committed" = intent filed, not yet validated. "Not committed" = no SBTi engagement at all.',s:'SBTi · sciencebasedtargets.org/companies-taking-action · CDP/UNGC/WRI/WWF'},
   'src-edgar':{t:'SEC EDGAR — Live Filing Verification',b:'CONSCIENCE queries the SEC EDGAR submissions API in real-time for each company\'s most recent 10-K or 20-F filing date. This cross-references climate disclosures against current regulatory filings — the same documents investors and regulators rely on.',s:'SEC EDGAR · data.sec.gov/submissions · CORS-open public API · Real-time'},
+  'search':{t:'Search Companies',b:'Filter all 11 company cards in real-time by company name or ticker symbol. Works alongside sector filter, band filter, and sort. Case-insensitive. Results count updates live.',s:'Client-side search · no server required'},
+  'sort':{t:'Sort Companies',b:'Sort the company cards by: Score High→Low (default), Score Low→High, Name A→Z, Name Z→A, Lawsuit Count High→Low, or Sector A→Z. Sort is applied immediately alongside any active filters.',s:'Client-side sort · no server required'},
+  'sector':{t:'Filter by Sector',b:'Filter visible cards by industry sector: Oil & Gas, Technology, Tech / Retail, Retail, Aviation, Food & Beverage, Consumer Goods. Combine with band filter and search for precision institutional-grade views.',s:'CONSCIENCE company registry · VICS sector classification'},
+  'export':{t:'Export Data as CSV',b:'Downloads a CSV file containing all 11 companies with: Name, Ticker, Sector, Score, Band, CDP Grade, InfluenceMap Grade, SBTi Status, Active Lawsuit Count, TPI Level, CIK, and latest EDGAR filing date. Drops directly into Excel or Bloomberg.',s:'Client-side CSV · Blob API · no server required'},
   'src-tpi':{t:'TPI — Transition Pathway Initiative',b:'Rates companies on management quality (1–5) and carbon performance vs low-carbon transition benchmarks. Level 5 = aligned with well-below 2°C. TPI provides independent corroboration of CONSCIENCE scoring, particularly on governance quality.',s:'TPI · transitionpathwayinitiative.org · London School of Economics'},
   'sz-s':{t:'Font Size: Small (16px)',b:'Reduces the site-wide font size to 16px. Useful on larger monitors or for dense data scanning. Click to apply.',s:'VYRION CONSCIENCE display settings · Saved in your browser'},
   'sz-m':{t:'Font Size: Medium (18px)',b:'Default reading size — 18px. Optimised for comfortable reading across all CONSCIENCE data tables, score cards, and source citations.',s:'VYRION CONSCIENCE display settings · Saved in your browser'},
@@ -831,19 +1075,29 @@ function renderCard(co) {
     </div>`).join('');
   const total = co.sb.reduce((a,r)=>a+r.p,0);
   return `
-<div class="c-card ${bc}" data-band="${co.band}" data-id="${co.id}">
+<div class="c-card ${bc}" id="co-${co.id}" data-band="${co.band}" data-id="${co.id}" data-score="${co.score}" data-name="${co.name.toLowerCase()}" data-ticker="${co.ticker.toLowerCase()}" data-sabin="${co.sabin}">
   <div class="c-head">
-    <div>
-      <div class="c-name">${co.name}</div>
+    <div class="c-head-left">
+      <div class="c-name">${co.name}<a class="c-anchor" href="#co-${co.id}" onclick="copyAnchor(event,'${co.id}')" title="Copy link to card">⧉</a></div>
       <div class="c-meta">${co.ticker} · ${co.sector} · CIK ${co.cik.replace(/^0+/,'')}</div>
+      <div class="c-band-pill" style="margin-top:.5rem;display:inline-block">${co.bandLabel}</div>
     </div>
-    <div class="c-score-wrap">
-      <div class="c-score-num">${co.score}<span class="c-score-den">/100</span></div>
-      <div class="c-band">${co.bandLabel}</div>
+    <div class="score-ring-wrap" data-mag="score-bar">
+      <svg viewBox="0 0 72 72" width="72" height="72">
+        <circle class="ring-track" cx="36" cy="36" r="30"/>
+        <circle class="ring-fill" cx="36" cy="36" r="30"
+          stroke-dasharray="188.5"
+          stroke-dashoffset="188.5"
+          data-filled="${(188.5*(1-co.score/100)).toFixed(1)}"/>
+      </svg>
+      <div class="ring-inner">
+        <div class="ring-score">${co.score}</div>
+        <div class="ring-denom">/100</div>
+      </div>
     </div>
   </div>
 
-  <div class="score-bar-wrap" data-mag="score-bar">
+  <div class="score-bar-wrap">
     <div class="score-bar-bg">
       <div class="score-bar-fill" data-target="${co.score}"></div>
     </div>
@@ -922,18 +1176,7 @@ function toggleBD(id, btn) {
 // ─────────────────────────────────────────────────────────
 //  FILTER
 // ─────────────────────────────────────────────────────────
-document.querySelectorAll('.f-btn').forEach(b => {
-  b.addEventListener('click', () => {
-    const f = b.dataset.filter;
-    document.querySelectorAll('.f-btn').forEach(x =>
-      x.classList.remove('active')
-    );
-    b.classList.add('active');
-    document.querySelectorAll('.c-card').forEach(c =>
-      c.classList.toggle('hidden', f !== 'all' && c.dataset.band !== f)
-    );
-  });
-});
+// filter buttons handled by applyFilters() below
 
 // ─────────────────────────────────────────────────────────
 //  THEME TOGGLE
@@ -1103,7 +1346,7 @@ async function fetchEdgar(co) {
 async function init() {
   // 1. Render cards
   const grid = document.getElementById('grid');
-  grid.innerHTML = COMPANIES.map(renderCard).join('');
+  grid.innerHTML = getSorted ? getSorted().map(renderCard).join('') : COMPANIES.map(renderCard).join('');
 
   // 2. Animate bars
   requestAnimationFrame(() => setTimeout(() => {
@@ -1146,7 +1389,7 @@ async function init() {
       vEl.style.color = 'var(--glow)';
       vEl.style.fontSize = '.68rem';
       const url = `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&type=10-K`;
-      let sub = `<a href="${url}" target="_blank" style="color:rgba(0,255,157,.38);text-decoration:none">${annual.form} filing →</a>`;
+      let sub = `<a href="${url}" target="_blank" style="color:rgba(0,212,255,.38);text-decoration:none">${annual.form} filing →</a>`;
       if (k8count >= 3) {
         sub += `<span style="color:var(--warn);font-size:.52rem;display:block;margin-top:.06rem">${k8count} 8-K events / 90d ⚠</span>`;
       } else if (k8count > 0) {
@@ -1169,6 +1412,145 @@ async function init() {
 
 init();
 setInterval(init, 15 * 60 * 1000);
+
+// ─── SORT + FILTER ENGINE ────────────────────────────────
+let activeBand = 'all';
+
+function getSorted() {
+  const s = document.getElementById('sort-sel')?.value || 'score-desc';
+  return [...COMPANIES].sort((a, b) => {
+    if (s === 'score-desc') return b.score - a.score;
+    if (s === 'score-asc')  return a.score - b.score;
+    if (s === 'name-asc')   return a.name.localeCompare(b.name);
+    if (s === 'name-desc')  return b.name.localeCompare(a.name);
+    if (s === 'lawsuits-desc') return b.sabin - a.sabin;
+    if (s === 'sector-asc') return a.sector.localeCompare(b.sector);
+    return 0;
+  });
+}
+
+function applyFilters() {
+  const q   = (document.getElementById('search-input')?.value || '').toLowerCase().trim();
+  const sec = document.getElementById('sector-sel')?.value || 'all';
+  const sorted = getSorted();
+  const grid = document.getElementById('grid');
+  grid.innerHTML = sorted.map(renderCard).join('');
+  animateBars(grid);
+  attachMag(grid);
+  reattachEdgar();
+
+  let vis = 0;
+  sorted.forEach(co => {
+    const card = document.getElementById('co-' + co.id);
+    if (!card) return;
+    const nameMatch = !q || co.name.toLowerCase().includes(q) || co.ticker.toLowerCase().includes(q);
+    const bandMatch = activeBand === 'all' || co.band === activeBand;
+    const secMatch  = sec === 'all' || co.sector === sec;
+    const show = nameMatch && bandMatch && secMatch;
+    card.classList.toggle('hidden', !show);
+    if (show) vis++;
+  });
+
+  const vc = document.getElementById('vis-count');
+  if (vc) vc.textContent = vis;
+  const nr = document.getElementById('no-results');
+  if (nr) nr.classList.toggle('show', vis === 0);
+}
+
+document.querySelectorAll('.f-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    activeBand = b.dataset.band;
+    document.querySelectorAll('.f-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    applyFilters();
+  });
+});
+
+function clearFilters() {
+  const si = document.getElementById('search-input');
+  const ss = document.getElementById('sort-sel');
+  const se = document.getElementById('sector-sel');
+  if (si) si.value = '';
+  if (ss) ss.value = 'score-desc';
+  if (se) se.value = 'all';
+  activeBand = 'all';
+  document.querySelectorAll('.f-btn').forEach(x => x.classList.remove('active'));
+  const allBtn = document.querySelector('.f-btn[data-band="all"]');
+  if (allBtn) allBtn.classList.add('active');
+  applyFilters();
+}
+
+function animateBars(root) {
+  requestAnimationFrame(() => setTimeout(() => {
+    const r = root || document;
+    r.querySelectorAll('.bar-fill,.score-bar-fill').forEach(el => {
+      el.style.width = el.dataset.target + '%';
+    });
+    r.querySelectorAll('.ring-fill').forEach(el => {
+      el.style.strokeDashoffset = el.dataset.filled;
+    });
+  }, 80));
+}
+
+// ─── ANCHOR LINKS ─────────────────────────────────────────
+function copyAnchor(e, id) {
+  e.preventDefault();
+  const url = window.location.href.split('#')[0] + '#co-' + id;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      const lnk = e.target;
+      const orig = lnk.textContent;
+      lnk.textContent = '✓';
+      lnk.style.color = 'var(--glow)';
+      setTimeout(() => { lnk.textContent = orig; lnk.style.color = ''; }, 1400);
+    }).catch(() => { window.location.hash = 'co-' + id; });
+  } else {
+    window.location.hash = 'co-' + id;
+  }
+}
+
+function checkHash() {
+  const h = window.location.hash;
+  if (h && h.startsWith('#co-')) {
+    const card = document.querySelector(h);
+    if (card) {
+      card.classList.add('highlighted');
+      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+      setTimeout(() => card.classList.remove('highlighted'), 3500);
+    }
+  }
+}
+
+// ─── CSV EXPORT ────────────────────────────────────────────
+function exportCSV() {
+  const headers = ['Name','Ticker','Sector','Score','Band','CDP Grade','InfluenceMap','SBTi Status','Active Lawsuits','TPI Level','CIK','EDGAR Date'];
+  const rows = COMPANIES.map(co => {
+    const edEl = document.getElementById('ev-' + co.id);
+    const edDate = edEl && !edEl.classList.contains('loading-pulse') ? edEl.textContent : '—';
+    return [co.name, co.ticker, co.sector, co.score, co.bandLabel, co.cdpGrade, co.im, co.sbti, co.sabin, co.tpi, co.cik.replace(/^0+/, ''), edDate];
+  });
+  const csv = [headers, ...rows].map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\r\n');
+  const d = new Date().toISOString().slice(0, 10);
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `VYRION-CONSCIENCE-${d}.csv`;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+// Store EDGAR results for re-use after re-render
+const edgarCache = {};
+function reattachEdgar() {
+  COMPANIES.forEach(co => {
+    if (edgarCache[co.id] !== undefined) {
+      updateEdgar(co, edgarCache[co.id]);
+    }
+  });
+}
+
+window.addEventListener('hashchange', checkHash);
+
 </script>
 </body>
 </html>
