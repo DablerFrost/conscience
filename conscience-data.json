@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated": "2026-03-31T03:40:58.276Z",
-    "generated_date": "2026-03-31",
+    "generated": "2026-04-01T03:38:11.947Z",
+    "generated_date": "2026-04-01",
     "script_version": "1.0",
-    "runtime_ms": 859,
+    "runtime_ms": 1288,
     "sources": [
       "NOAA Global Monitoring Laboratory (CO₂)",
       "SEC EDGAR Public API (corporate filings)",
@@ -14,28 +14,28 @@
   },
   "atmosphere": {
     "co2": {
-      "ppm": 431.46,
-      "date": "2026-03-29",
+      "ppm": 431.59,
+      "date": "2026-03-30",
       "source": "NOAA Global Monitoring Laboratory — Mauna Loa Observatory",
       "url": "https://gml.noaa.gov/ccgg/trends/",
-      "retrieved": "2026-03-31T03:40:57.947Z"
+      "retrieved": "2026-04-01T03:38:11.151Z"
     },
     "global_temp_anomaly": null,
     "global_temp_era5": {
-      "sample_avg_celsius": 16.6,
-      "anomaly_vs_proxy": 8.1,
+      "sample_avg_celsius": 16.7,
+      "anomaly_vs_proxy": 8.2,
       "sample_coords": [
         "N.Europe",
         "N.America",
         "S.America",
         "SE.Asia"
       ],
-      "period": "2026-03-22 to 2026-03-29",
+      "period": "2026-03-23 to 2026-03-30",
       "baseline_note": "Proxy baseline from ERA5 sample mean — not IPCC global mean. Supplementary signal only.",
       "source": "Open-Meteo ERA5 Reanalysis (ECMWF)",
       "url": "https://open-meteo.com/",
       "license": "CC BY 4.0",
-      "retrieved": "2026-03-31T03:40:58.276Z"
+      "retrieved": "2026-04-01T03:38:11.947Z"
     }
   },
   "global_emissions": null,
@@ -60,11 +60,15 @@
           "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=34088&type=10-K&dateb=&owner=include&count=5"
         },
         "latest_8k": {
-          "date": "2026-02-20",
-          "items": "5.02"
+          "date": "2026-03-31",
+          "items": "8.01,9.01"
         },
-        "count_8k_90d": 3,
+        "count_8k_90d": 4,
         "recent_8k_items": [
+          {
+            "date": "2026-03-31",
+            "items": "8.01,9.01"
+          },
           {
             "date": "2026-02-20",
             "items": "5.02"
@@ -78,7 +82,7 @@
             "items": "7.01"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.612Z"
+        "retrieved": "2026-04-01T03:38:10.867Z"
       }
     },
     "bp": {
@@ -96,7 +100,7 @@
         "latest_8k": null,
         "count_8k_90d": 0,
         "recent_8k_items": [],
-        "retrieved": "2026-03-31T03:40:57.622Z"
+        "retrieved": "2026-04-01T03:38:10.897Z"
       }
     },
     "shell": {
@@ -117,7 +121,7 @@
         },
         "count_8k_90d": 0,
         "recent_8k_items": [],
-        "retrieved": "2026-03-31T03:40:57.609Z"
+        "retrieved": "2026-04-01T03:38:10.881Z"
       }
     },
     "delta": {
@@ -159,7 +163,7 @@
             "items": "1.01,2.02,9.01"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.650Z"
+        "retrieved": "2026-04-01T03:38:10.875Z"
       }
     },
     "starbucks": {
@@ -189,7 +193,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.614Z"
+        "retrieved": "2026-04-01T03:38:10.872Z"
       }
     },
     "walmart": {
@@ -231,7 +235,7 @@
             "items": "5.02,9.01"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.619Z"
+        "retrieved": "2026-04-01T03:38:10.869Z"
       }
     },
     "meta": {
@@ -261,7 +265,7 @@
             "items": "5.02"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.685Z"
+        "retrieved": "2026-04-01T03:38:10.879Z"
       }
     },
     "amazon": {
@@ -299,7 +303,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.617Z"
+        "retrieved": "2026-04-01T03:38:10.946Z"
       }
     },
     "microsoft": {
@@ -325,7 +329,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.616Z"
+        "retrieved": "2026-04-01T03:38:10.953Z"
       }
     },
     "unilever": {
@@ -365,7 +369,7 @@
             "items": "5.02"
           }
         ],
-        "retrieved": "2026-03-31T03:40:57.722Z"
+        "retrieved": "2026-04-01T03:38:10.951Z"
       }
     }
   }
