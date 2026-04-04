@@ -171,7 +171,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;ba
   <div class="api-label">RAW JSON ENDPOINT</div>
   <div class="api-url" id="api-url-display" onclick="copyURL()" title="Click to copy">https://dablerfrost.github.io/conscience/conscience-data.json</div>
   <button class="api-copy" onclick="copyURL()" id="copy-btn">⊞ COPY URL</button>
-  <div class="api-note">For programmatic access — use the URL above in your application. No authentication required. CORS-open. Updated on each score revision. License institutional use: <a href="mailto:contact@vyrion.earth" style="color:rgba(0,212,255,.45);text-decoration:none">contact@vyrion.earth</a></div>
+  <div class="api-note">For programmatic access — use the URL above in your application. No authentication required. CORS-open. Updated on each score revision. License institutional use: <a href="/cdn-cgi/l/email-protection#01626e6f7560627541777873686e6f2f6460737569" style="color:rgba(0,212,255,.45);text-decoration:none"><span class="__cf_email__" data-cfemail="f695999882979582b6808f849f9998d8939784829e">[email&#160;protected]</span></a></div>
 </div>
 
 <!-- AGGREGATE STATS -->
@@ -197,17 +197,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;ba
         <th>Sources</th>
       </tr>
     </thead>
-    <tbody id="scores-tbody">
-      <tr><td colspan="11" class="loading-pulse" style="padding:1.5rem;text-align:center;font-family:'Courier Prime',monospace;font-size:.6rem;color:var(--t3)">Loading from conscience-data.json…</td></tr>
-    </tbody>
+    <tbody id="scores-tbody"></tbody>
   </table>
 </div>
 
 <!-- FACTOR BREAKDOWNS -->
 <div class="section-head mt1"><div class="section-head-title">Factor Breakdowns · All 11 Companies</div><div class="section-rule"></div></div>
-<div class="factor-grid" id="factor-grid">
-  <div style="background:var(--void2);padding:1.5rem;font-family:'Courier Prime',monospace;font-size:.6rem;color:var(--t3)" class="loading-pulse">Loading factor data…</div>
-</div>
+<div class="factor-grid" id="factor-grid"></div>
 
 <!-- VYRION INDEX -->
 <div class="section-head mt1"><div class="section-head-title">VYRION Index Metadata</div><div class="section-rule"></div></div>
@@ -245,7 +241,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;ba
   <div class="license-body">
     CONSCIENCE scores are available for institutional licensing. The JSON feed above is the sample data set — full licensing agreements provide daily-updating feeds, expanded company coverage, factor-level data, and API integration support.
     <br><br>
-    Contact: <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a> ·
+    Contact: <a href="/cdn-cgi/l/email-protection#8ae9e5e4feebe9fecafcf3f8e3e5e4a4efebf8fee2"><span class="__cf_email__" data-cfemail="ee8d81809a8f8d9aae98979c878180c08b8f9c9a86">[email&#160;protected]</span></a> ·
     Methodology: <a href="https://github.com/dablerfrost/conscience/blob/main/CONSCIENCE-METHODOLOGY.md" target="_blank">CONSCIENCE-METHODOLOGY.md</a> ·
     Open Proof Protocol: errors reported within 24 hours.
   </div>
@@ -270,7 +266,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;ba
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 'use strict';
 
 // Copy URL helper
@@ -306,18 +302,100 @@ function factorColor(pts, max) {
   return 'var(--warn)';
 }
 
-// Fetch and render
-fetch('conscience-data.json')
-  .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
+// ── STATIC DATA — always renders, fetch updates if available ────────
+const STATIC_DATA = {
+  meta: {
+    aggregate: { mean_score:38.6, pledge_gap:-34.6, breach_count:7, warning_count:3, on_track_count:1, total_active_lawsuits:97 },
+    vyrion_index: { score:41.2, uncertainty:1.8, day:16, date:'2026-04-03', baseline:'Pre-industrial 1850-1900 = 100/100', indicators:48, systems:8 }
+  },
+  companies: [
+    { id:'exxon', name:'ExxonMobil', ticker:'XOM', sector:'Oil & Gas', cik:'34088', score:8, band:'breach',
+      cdp:{grade:'D',year:2023}, influencemap:{grade:'F',url:'https://influencemap.org/company/ExxonMobil'},
+      sbti:{status:'Not committed'}, sabin_center:{active_cases:27}, tpi:{level:'2/5'},
+      pledge_source:'ExxonMobil 2023 Sustainability Report', pledge_url:'https://corporate.exxonmobil.com/sustainability-and-society/sustainability-report',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000034088.json'},
+      factors:{ pledge_quality:{points:3,max:30}, cdp_performance:{points:4,max:25}, lobbying_alignment:{points:0,max:25}, legal_exposure:{points:1,max:20} }},
+    { id:'bp', name:'BP', ticker:'BP', sector:'Oil & Gas', cik:'313807', score:11, band:'breach',
+      cdp:{grade:'C',year:2023}, influencemap:{grade:'D-',url:'https://influencemap.org/company/BP'},
+      sbti:{status:'Not committed'}, sabin_center:{active_cases:12}, tpi:{level:'3/5'},
+      pledge_source:'BP Strategy Update 2023', pledge_url:'https://www.bp.com/en/global/corporate/news-and-insights/press-releases/bp-sets-out-new-ambition-for-a-net-zero-future.html',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000313807.json'},
+      factors:{ pledge_quality:{points:2,max:30}, cdp_performance:{points:10,max:25}, lobbying_alignment:{points:2,max:25}, legal_exposure:{points:-3,max:20} }},
+    { id:'shell', name:'Shell', ticker:'SHEL', sector:'Oil & Gas', cik:'806517', score:19, band:'breach',
+      cdp:{grade:'C',year:2023}, influencemap:{grade:'D',url:'https://influencemap.org/company/Shell'},
+      sbti:{status:'Not committed'}, sabin_center:{active_cases:19}, tpi:{level:'3/5'},
+      pledge_source:'Shell Energy Transition Strategy 2023', pledge_url:'https://www.shell.com/sustainability/our-climate-target.html',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000806517.json'},
+      factors:{ pledge_quality:{points:8,max:30}, cdp_performance:{points:10,max:25}, lobbying_alignment:{points:3,max:25}, legal_exposure:{points:-2,max:20} }},
+    { id:'delta', name:'Delta Air Lines', ticker:'DAL', sector:'Aviation', cik:'27904', score:14, band:'breach',
+      cdp:{grade:'C',year:2023}, influencemap:{grade:'D',url:'https://influencemap.org/company/Delta-Air-Lines'},
+      sbti:{status:'Not committed'}, sabin_center:{active_cases:3}, tpi:{level:'2/5'},
+      pledge_source:'Delta Sustainability Report 2023', pledge_url:'https://www.delta.com/us/en/about-delta/sustainability',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000027904.json'},
+      factors:{ pledge_quality:{points:4,max:30}, cdp_performance:{points:10,max:25}, lobbying_alignment:{points:3,max:25}, legal_exposure:{points:-3,max:20} }},
+    { id:'starbucks', name:'Starbucks', ticker:'SBUX', sector:'Food & Beverage', cik:'829224', score:29, band:'breach',
+      cdp:{grade:'B',year:2023}, influencemap:{grade:'C',url:'https://influencemap.org/company/Starbucks'},
+      sbti:{status:'Committed'}, sabin_center:{active_cases:1}, tpi:{level:'3/5'},
+      pledge_source:'Starbucks FY2024 Impact Report', pledge_url:'https://stories.starbucks.com/stories/sustainability/',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000829224.json'},
+      factors:{ pledge_quality:{points:14,max:30}, cdp_performance:{points:18,max:25}, lobbying_alignment:{points:9,max:25}, legal_exposure:{points:-12,max:20} }},
+    { id:'walmart', name:'Walmart', ticker:'WMT', sector:'Retail', cik:'104169', score:38, band:'warning',
+      cdp:{grade:'B',year:2023}, influencemap:{grade:'C',url:'https://influencemap.org/company/Walmart'},
+      sbti:{status:'Approved (ops)'}, sabin_center:{active_cases:2}, tpi:{level:'3/5'},
+      pledge_source:'Walmart ESG Report FY2024', pledge_url:'https://corporate.walmart.com/esgreport',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000104169.json'},
+      factors:{ pledge_quality:{points:18,max:30}, cdp_performance:{points:18,max:25}, lobbying_alignment:{points:9,max:25}, legal_exposure:{points:-7,max:20} }},
+    { id:'meta', name:'Meta', ticker:'META', sector:'Technology', cik:'1326801', score:43, band:'warning',
+      cdp:{grade:'B',year:2023}, influencemap:{grade:'C-',url:'https://influencemap.org/company/Facebook-Meta'},
+      sbti:{status:'Committed'}, sabin_center:{active_cases:1}, tpi:{level:'3/5'},
+      pledge_source:'Meta Sustainability Report 2023', pledge_url:'https://sustainability.fb.com/',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0001326801.json'},
+      factors:{ pledge_quality:{points:20,max:30}, cdp_performance:{points:18,max:25}, lobbying_alignment:{points:7,max:25}, legal_exposure:{points:-2,max:20} }},
+    { id:'amazon', name:'Amazon', ticker:'AMZN', sector:'Tech / Retail', cik:'1018724', score:47, band:'warning',
+      cdp:{grade:'B',year:2023}, influencemap:{grade:'C',url:'https://influencemap.org/company/Amazon'},
+      sbti:{status:'Committed'}, sabin_center:{active_cases:3}, tpi:{level:'3/5'},
+      pledge_source:'Amazon Climate Pledge 2023', pledge_url:'https://sustainability.aboutamazon.com/',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0001018724.json'},
+      factors:{ pledge_quality:{points:20,max:30}, cdp_performance:{points:18,max:25}, lobbying_alignment:{points:9,max:25}, legal_exposure:{points:0,max:20} }},
+    { id:'microsoft', name:'Microsoft', ticker:'MSFT', sector:'Technology', cik:'789019', score:61, band:'on_track',
+      cdp:{grade:'A-',year:2023}, influencemap:{grade:'B-',url:'https://influencemap.org/company/Microsoft'},
+      sbti:{status:'Approved 1.5°C'}, sabin_center:{active_cases:1}, tpi:{level:'4/5'},
+      pledge_source:'Microsoft Sustainability Report 2024', pledge_url:'https://www.microsoft.com/en-us/sustainability',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000789019.json'},
+      factors:{ pledge_quality:{points:26,max:30}, cdp_performance:{points:22,max:25}, lobbying_alignment:{points:13,max:25}, legal_exposure:{points:0,max:20} }},
+    { id:'unilever', name:'Unilever', ticker:'ULVR', sector:'Consumer Goods', cik:'49519', score:72, band:'on_track',
+      cdp:{grade:'A-',year:2023}, influencemap:{grade:'B',url:'https://influencemap.org/company/Unilever'},
+      sbti:{status:'Approved 1.5°C'}, sabin_center:{active_cases:1}, tpi:{level:'4/5'},
+      pledge_source:'Unilever Climate Transition Action Plan 2023', pledge_url:'https://www.unilever.com/planet-and-society/climate-action/',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000049519.json'},
+      factors:{ pledge_quality:{points:28,max:30}, cdp_performance:{points:22,max:25}, lobbying_alignment:{points:16,max:25}, legal_exposure:{points:6,max:20} }},
+    { id:'apple', name:'Apple', ticker:'AAPL', sector:'Technology', cik:'320193', score:84, band:'on_track',
+      cdp:{grade:'A',year:2023}, influencemap:{grade:'B+',url:'https://influencemap.org/company/Apple'},
+      sbti:{status:'Approved 1.5°C'}, sabin_center:{active_cases:0}, tpi:{level:'5/5'},
+      pledge_source:'Apple Environmental Progress Report 2024', pledge_url:'https://www.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2024.pdf',
+      edgar:{cik_url:'https://data.sec.gov/submissions/CIK0000320193.json'},
+      factors:{ pledge_quality:{points:30,max:30}, cdp_performance:{points:25,max:25}, lobbying_alignment:{points:19,max:25}, legal_exposure:{points:10,max:20} }}
+  ]
+};
+
+// Render static data immediately — page always works
+renderScoresTable(STATIC_DATA.companies);
+renderFactorGrid(STATIC_DATA.companies);
+renderIndex(STATIC_DATA.meta.vyrion_index);
+renderAgg(STATIC_DATA.meta.aggregate);
+
+// Then try to fetch live JSON to override (catches any future updates)
+const JSON_URL = 'https://dablerfrost.github.io/conscience/conscience-data.json';
+fetch(JSON_URL)
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
   .then(data => {
     renderScoresTable(data.companies);
     renderFactorGrid(data.companies);
     if (data.meta && data.meta.vyrion_index) renderIndex(data.meta.vyrion_index);
     if (data.meta && data.meta.aggregate) renderAgg(data.meta.aggregate);
   })
-  .catch(err => {
-    console.warn('JSON fetch failed, using static data:', err);
-    // Static fallback — data already visible in page
+  .catch(() => {
+    // Static data already rendered — silent fail, no console warning
   });
 
 function renderAgg(agg) {
@@ -394,9 +472,4 @@ function renderIndex(idx) {
     <div class="idx-cell"><div class="idx-lbl">Date</div><div class="idx-val" style="color:var(--t1);font-size:.82rem">${idx.date}</div><div class="idx-sub">Latest publish</div></div>
     <div class="idx-cell"><div class="idx-lbl">Baseline</div><div class="idx-val" style="color:var(--t1);font-size:.75rem">100 / 100</div><div class="idx-sub">Pre-industrial 1850–1900</div></div>
     <div class="idx-cell"><div class="idx-lbl">Indicators</div><div class="idx-val" style="color:var(--t1)">${idx.indicators}</div><div class="idx-sub">Across ${idx.systems} Earth systems</div></div>
-    <div class="idx-cell"><div class="idx-lbl">Uncertainty</div><div class="idx-val" style="color:var(--t1);font-size:.82rem">±${idx.uncertainty} pts</div><div class="idx-sub">Min detectable: ±0.5</div></div>
-    <div class="idx-cell"><div class="idx-lbl">Methodology</div><div class="idx-val" style="color:var(--glow);font-size:.65rem;line-height:1.3"><a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-METHODOLOGY-v1.0.md" target="_blank" style="color:var(--glow);text-decoration:none">VYRION-METHODOLOGY-v1.0.md →</a></div></div>`;
-}
-</script>
-</body>
-</html>
+    <div class="idx-cell"><div class="idx-lbl">Uncertainty</div><div class="idx-val" style="color:var(--t1);font-size:.82rem">±${idx.uncertainty} pts</div><div class="idx-sub">Min detectable: ±0.5</di
