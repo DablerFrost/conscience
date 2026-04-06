@@ -1,436 +1,836 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Nexan Institute - Aligning Intelligence with Planetary Health</title>
-    <style>
-        :root {
-            --primary: #00ffc8;
-            --secondary: #00d9ff;
-            --bg-dark: #050a14;
-            --glass-bg: rgba(13, 42, 61, 0.4);
-            --glass-border: rgba(0, 255, 200, 0.2);
-            --text-main: #e0e0e0;
-            --text-dim: #b0b0b0;
-            --nav-height: 80px; /* Defined nav height for consistent spacing */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Nexan Institute — Aligning Intelligence with Planetary Health. Parent entity of VYRION PBC and Synthekai Collective.">
+<meta property="og:title" content="The Nexan Institute">
+<meta property="og:description" content="Aligning intelligence with planetary health. Parent of VYRION PBC and Synthekai Collective LLC.">
+<title>The Nexan Institute — Aligning Intelligence with Planetary Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700;800&family=Archivo:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --void:    #030a05;
+  --void2:   #071210;
+  --void3:   #0a1a14;
+  --glow:    #00FF9D;
+  --amber:   #FFB84D;
+  --breach:  #F03030;
+  --warn:    #F09000;
+  --cyan:    #00D4FF;
+  --t1:      #050a14;
+  --t2:      #8aab92;
+  --t3:      #4a7a58;
+  --border:  rgba(0,255,157,0.10);
+  --border2: rgba(0,255,157,0.06);
+  /* Entity accent colors */
+  --nexan:   #00FF9D;
+  --vyrion:  #FFB84D;
+  --synth:   #e0e0e0;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* ── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--void);
+  color: var(--t1);
+  font-family: 'Archivo', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+/* Scanline */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 1000;
+  background: repeating-linear-gradient(0deg,
+    transparent, transparent 3px,
+    rgba(0,255,157,0.005) 3px, rgba(0,255,157,0.005) 4px);
+}
 
-        /* Immersive Background */
-        .bg-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
+/* ── NAV ─────────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 52px;
+  background: rgba(3,10,5,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+}
+.nav-logo {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 0.85rem;
+  color: var(--glow); letter-spacing: 0.18em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 700; font-size: 0.65rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--t2); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--t1); }
+.nav-links a.active { color: var(--glow); border-bottom: 1px solid rgba(0,255,157,0.4); }
+.nav-dot {
+  width: 6px; height: 6px;
+  background: var(--glow); border-radius: 50%;
+  animation: pdot 2.2s infinite;
+}
+@keyframes pdot {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(0,255,157,0.5); }
+  50%      { opacity:0.4; box-shadow: 0 0 0 7px rgba(0,255,157,0); }
+}
 
-        .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
-            background-size: cover;
-            filter: brightness(0.4) contrast(1.1);
-            transform: scale(1.1);
-            transition: transform 0.5s ease-out;
-        }
+/* ── HERO ────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  padding: 5rem 2rem 4rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  min-height: 420px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hero-bg-word {
+  position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+  font-family: 'Archivo Narrow', sans-serif; font-weight: 800;
+  font-size: clamp(5rem, 16vw, 13rem);
+  color: rgba(0,255,157,0.03);
+  pointer-events: none; user-select: none; letter-spacing: 0.04em; line-height: 1;
+}
+/* Animated grid lines */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(0,255,157,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,157,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-shift 20s linear infinite;
+}
+@keyframes grid-shift {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 60px 60px, 60px 60px; }
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 20% 60%, rgba(0,255,157,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-eyebrow {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem; color: var(--glow);
+  letter-spacing: 0.24em; text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.55rem;
+}
+.hero-eyebrow::before {
+  content: ''; width: 18px; height: 1px; background: var(--glow); opacity: 0.5;
+}
+.hero-title {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  color: var(--t1); line-height: 0.95;
+  letter-spacing: -0.02em; margin-bottom: 0.8rem;
+}
+.hero-title span { color: var(--glow); }
+.hero-sub {
+  font-size: 0.9rem; color: var(--t2);
+  max-width: 58ch; line-height: 1.75;
+  margin-bottom: 2rem;
+}
+.hero-cta-row { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
+.btn-primary {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.48rem 1.1rem; border-radius: 2px;
+  border: 1px solid var(--glow);
+  background: rgba(0,255,157,0.08);
+  color: var(--glow); text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background: rgba(0,255,157,0.18);
+  box-shadow: 0 0 18px rgba(0,255,157,0.15);
+}
+.btn-secondary {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.46rem 0.95rem; border-radius: 2px;
+  border: 1px solid rgba(0,255,157,0.2);
+  background: transparent;
+  color: var(--t2); text-decoration: none;
+  transition: all 0.18s;
+}
+.btn-secondary:hover { border-color: rgba(0,255,157,0.4); color: var(--t1); }
 
-        .bg-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, rgba(5, 10, 20, 0.8) 100%);
-        }
+/* ── MISSION STRIP ───────────────────────────────────────── */
+.mission-strip {
+  display: flex; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  background: var(--void2);
+}
+.mission-cell {
+  flex: 1; min-width: 200px;
+  padding: 1.4rem 2rem;
+  border-right: 1px solid var(--border);
+}
+.mission-cell:last-child { border-right: none; }
+.mc-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem; color: var(--t3);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.mc-val {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 0.95rem;
+  color: var(--t1); letter-spacing: 0.02em; line-height: 1.2;
+}
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: var(--nav-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 4rem;
-            background: rgba(5, 10, 20, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            z-index: 1000;
-        }
+/* ── SECTION SCAFFOLDING ─────────────────────────────────── */
+.section {
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 2rem;
+}
+.section.alt { background: var(--void2); }
 
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: #fff;
-            text-transform: uppercase;
-        }
+.section-eyebrow {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem; color: var(--glow);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-eyebrow::before { content: ''; width: 14px; height: 1px; background: var(--glow); opacity: 0.5; }
+.section-title {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  color: var(--t1); line-height: 1;
+  letter-spacing: -0.02em; margin-bottom: 0.6rem;
+}
+.section-sub {
+  font-size: 0.82rem; color: var(--t2);
+  max-width: 66ch; line-height: 1.75;
+  margin-bottom: 2rem;
+}
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 3rem;
-            align-items: center;
-        }
+/* ── ENTITY CARDS ────────────────────────────────────────── */
+.entity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1px; background: var(--border);
+}
+.entity-card {
+  background: var(--void2);
+  padding: 1.8rem 1.8rem 1.6rem;
+  position: relative; overflow: hidden;
+  transition: background 0.2s;
+}
+.entity-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--ec-accent, var(--glow));
+}
+.entity-card::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--ec-glow, rgba(0,255,157,0.03)) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.entity-card:hover { background: var(--void3); }
+.entity-card:hover::after { opacity: 1; }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            transition: color 0.3s ease;
-        }
+.ec-num {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.55rem; color: var(--t3);
+  letter-spacing: 0.14em; margin-bottom: 0.6rem;
+}
+.ec-tag {
+  display: inline-block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.1rem 0.4rem; border-radius: 2px;
+  margin-bottom: 0.8rem;
+}
+.ec-name {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 1.4rem;
+  line-height: 1; letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.ec-full {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.58rem; color: var(--t3);
+  letter-spacing: 0.08em; margin-bottom: 0.9rem;
+}
+.ec-body {
+  font-size: 0.78rem; color: var(--t2);
+  line-height: 1.7; margin-bottom: 1.1rem;
+}
+.ec-pillars {
+  display: flex; flex-direction: column; gap: 0.28rem;
+  margin-bottom: 1.1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border2);
+}
+.ec-pillar {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem; color: var(--t2);
+}
+.ec-pillar::before {
+  content: '→'; flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+.ec-status {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.35rem;
+  padding-top: 0.8rem; border-top: 1px solid var(--border2);
+}
+.ec-dot {
+  width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+}
+.ec-link {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.58rem; text-decoration: none;
+  transition: color 0.18s; letter-spacing: 0.06em;
+  margin-top: 0.4rem; display: inline-block;
+}
 
-        nav a:hover {
-            color: var(--primary);
-        }
+/* Nexan — green */
+.entity-nexan { --ec-accent: var(--nexan); --ec-glow: rgba(0,255,157,0.04); }
+.entity-nexan .ec-name { color: var(--nexan); }
+.entity-nexan .ec-tag { background: rgba(0,255,157,0.08); color: var(--nexan); border: 1px solid rgba(0,255,157,0.25); }
+.entity-nexan .ec-dot { background: var(--nexan); animation: pdot 2s infinite; }
+.entity-nexan .ec-status { color: var(--nexan); }
+.entity-nexan .ec-link { color: rgba(0,255,157,0.45); }
+.entity-nexan .ec-link:hover { color: var(--nexan); }
+.entity-nexan .ec-pillar::before { color: var(--nexan); }
 
-        .nav-cta {
-            padding: 0.6rem 1.2rem;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            border-radius: 2px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
+/* VYRION — amber */
+.entity-vyrion { --ec-accent: var(--vyrion); --ec-glow: rgba(255,184,77,0.04); }
+.entity-vyrion .ec-name { color: var(--vyrion); }
+.entity-vyrion .ec-tag { background: rgba(255,184,77,0.08); color: var(--vyrion); border: 1px solid rgba(255,184,77,0.25); }
+.entity-vyrion .ec-dot { background: var(--vyrion); animation: pdot 2s infinite; }
+.entity-vyrion .ec-status { color: var(--vyrion); }
+.entity-vyrion .ec-link { color: rgba(255,184,77,0.45); }
+.entity-vyrion .ec-link:hover { color: var(--vyrion); }
+.entity-vyrion .ec-pillar::before { color: var(--vyrion); }
 
-        .nav-cta:hover {
-            background: rgba(0, 255, 200, 0.1);
-            box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
-        }
+/* Synthekai — purple */
+.entity-synth { --ec-accent: var(--synth); --ec-glow: rgba(184,126,255,0.04); }
+.entity-synth .ec-name { color: var(--synth); }
+.entity-synth .ec-tag { background: rgba(184,126,255,0.08); color: var(--synth); border: 1px solid rgba(184,126,255,0.25); }
+.entity-synth .ec-dot { background: var(--synth); }
+.entity-synth .ec-status { color: var(--synth); }
+.entity-synth .ec-link { color: rgba(184,126,255,0.45); }
+.entity-synth .ec-link:hover { color: var(--synth); }
+.entity-synth .ec-pillar::before { color: var(--synth); }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* Increased top padding to account for fixed nav and provide visual breathing room */
-            padding: calc(var(--nav-height) + 4rem) 2rem 4rem 2rem;
-        }
+/* ── RESEARCH PILLARS ────────────────────────────────────── */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 1px; background: var(--border);
+}
+.pillar-card {
+  background: var(--void);
+  padding: 1.4rem 1.5rem 1.3rem;
+  position: relative; overflow: hidden;
+  transition: background 0.2s;
+}
+.pillar-card:hover { background: var(--void2); }
+.pillar-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,157,0.3), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.pillar-card:hover::before { opacity: 1; }
+.pc-num {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.52rem; color: var(--t3);
+  letter-spacing: 0.14em; margin-bottom: 0.5rem;
+}
+.pc-title {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 0.95rem;
+  color: var(--t1); letter-spacing: 0.04em;
+  margin-bottom: 0.5rem; line-height: 1.2;
+}
+.pc-body {
+  font-size: 0.72rem; color: var(--t2); line-height: 1.68;
+}
 
-        .hero-glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 5rem 4rem;
-            max-width: 1100px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            animation: cardEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+/* ── PROOF OF CONCEPT STRIP ──────────────────────────────── */
+.poc-strip {
+  display: flex; flex-wrap: wrap;
+  background: var(--void2);
+  border-bottom: 1px solid var(--border);
+}
+.poc-cell {
+  flex: 1; min-width: 180px;
+  padding: 1.3rem 2rem;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 0.15rem;
+}
+.poc-cell:last-child { border-right: none; }
+.poc-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.55rem; color: var(--t3);
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+.poc-val {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700; font-size: 1.2rem;
+  color: var(--amber); line-height: 1;
+}
+.poc-sub {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.54rem; color: var(--t3); line-height: 1.4;
+}
 
-        @keyframes cardEntrance {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+/* ── HIERARCHY DIAGRAM ───────────────────────────────────── */
+.hierarchy {
+  padding: 2.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--void);
+}
+.hierarchy-title {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 0.82rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--t1); margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.hierarchy-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
-            color: #fff;
-            text-transform: uppercase;
-        }
+.tree {
+  display: flex; flex-direction: column;
+  gap: 0; max-width: 680px;
+}
+.tree-node {
+  display: flex; align-items: stretch;
+  position: relative;
+}
+.tree-line {
+  width: 2px; background: var(--border);
+  flex-shrink: 0; margin-left: 1.5rem;
+}
+.tree-branch {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.6rem 0 0.6rem 1.5rem;
+  position: relative; flex: 1;
+}
+.tree-branch::before {
+  content: '';
+  position: absolute; left: 0; top: 50%;
+  width: 1.5rem; height: 1px;
+  background: var(--border);
+}
+.tree-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.8rem; border-radius: 2px;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 0.8rem;
+  letter-spacing: 0.06em; white-space: nowrap;
+}
+.tree-desc {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.58rem; color: var(--t3); line-height: 1.4;
+}
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-dim);
-            margin-bottom: 3.5rem;
-            font-weight: 300;
-        }
+.tp-nexan { background: rgba(0,255,157,0.08); color: var(--nexan); border: 1px solid rgba(0,255,157,0.2); }
+.tp-vyrion { background: rgba(255,184,77,0.08); color: var(--vyrion); border: 1px solid rgba(255,184,77,0.2); }
+.tp-synth  { background: rgba(184,126,255,0.08); color: var(--synth);  border: 1px solid rgba(184,126,255,0.2); }
 
-        /* Pillar Icons */
-        .pillars {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            margin-bottom: 2rem;
-        }
+.tree-root {
+  padding: 0.8rem 0 1rem;
+}
+.tree-root .tree-pill {
+  font-size: 0.95rem; padding: 0.45rem 1rem;
+}
+.tree-children {
+  display: flex; flex-direction: column;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+  margin-left: 1.5rem;
+  gap: 0.2rem;
+}
+.tree-child {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.5rem 0;
+  position: relative;
+}
+.tree-child::before {
+  content: '';
+  position: absolute; left: -1.5rem; top: 50%;
+  width: 1.5rem; height: 1px;
+  background: var(--border);
+}
 
-        .pillar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
+/* ── CONTACT / FOUNDER ───────────────────────────────────── */
+.founder-section {
+  padding: 2.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start;
+  gap: 3rem; flex-wrap: wrap;
+  background: var(--void2);
+}
+.founder-left { flex: 1; min-width: 260px; }
+.founder-eyebrow {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem; color: var(--t3);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.4rem;
+}
+.founder-name {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 800; font-size: 1.6rem;
+  color: var(--t1); letter-spacing: -0.01em; line-height: 1;
+  margin-bottom: 0.18rem;
+}
+.founder-handle {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem; color: var(--glow);
+  letter-spacing: 0.08em; margin-bottom: 0.8rem;
+}
+.founder-bio {
+  font-size: 0.76rem; color: var(--t2); line-height: 1.72; max-width: 52ch;
+}
+.founder-right {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  min-width: 220px;
+}
+.contact-row {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem; color: var(--t2);
+}
+.contact-label {
+  font-size: 0.54rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--t3); min-width: 70px;
+}
+.contact-val { color: var(--t1); }
+.contact-val a { color: var(--glow); text-decoration: none; transition: color 0.18s; }
+.contact-val a:hover { color: var(--t1); }
 
-        .pillar-icon-box {
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--primary);
-            position: relative;
-            background: rgba(0, 255, 200, 0.03);
-            transition: all 0.4s ease;
-        }
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer {
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap;
+  gap: 1rem; padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+}
+.footer-l {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem; color: var(--t3); line-height: 1.75;
+}
+.footer-l a { color: rgba(0,255,157,0.4); text-decoration: none; transition: color 0.18s; }
+.footer-l a:hover { color: var(--glow); }
+.footer-r { display: flex; gap: 1.4rem; }
+.footer-r a {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem; color: rgba(0,255,157,0.3);
+  text-decoration: none; transition: color 0.18s; letter-spacing: 0.06em;
+}
+.footer-r a:hover { color: var(--glow); }
 
-        .pillar-icon-box::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 1px solid var(--primary);
-            top: 5px;
-            left: 5px;
-            opacity: 0.3;
-            transition: all 0.4s ease;
-        }
-
-        .pillar:hover .pillar-icon-box {
-            background: rgba(0, 255, 200, 0.1);
-            transform: translate(-3px, -3px);
-            box-shadow: 5px 5px 0px var(--primary);
-        }
-
-        .pillar:hover .pillar-icon-box::before {
-            transform: translate(3px, 3px);
-            opacity: 0;
-        }
-
-        .pillar-icon-box svg {
-            width: 45px;
-            height: 45px;
-            stroke: var(--primary);
-            fill: none;
-            stroke-width: 1.5;
-        }
-
-        .pillar h3 {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        /* Content Sections */
-        section.content {
-            padding: 8rem 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-        }
-
-        .section-header .line {
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            margin: 0 auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 4px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--primary);
-            transform: translateY(-10px);
-        }
-
-        .card h3 {
-            color: var(--primary);
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .card p {
-            color: var(--text-dim);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        /* Footer */
-        footer {
-            padding: 4rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(5, 10, 20, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        footer p {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            nav { padding: 0 2rem; }
-            nav ul { display: none; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero-glass-card { padding: 3rem 2rem; }
-            .pillars { grid-template-columns: 1fr; gap: 2rem; }
-            .hero { padding-top: calc(var(--nav-height) + 2rem); }
-        }
-    </style>
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .hero { padding: 3rem 1rem 2.5rem; min-height: 320px; }
+  .hero-bg-word { display: none; }
+  .section { padding: 2.2rem 1rem; }
+  .entity-grid { grid-template-columns: 1fr; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .founder-section { gap: 1.5rem; padding: 2rem 1rem; }
+  .hierarchy { padding: 2rem 1rem; }
+  .mission-strip { flex-direction: column; }
+  .mission-cell { border-right: none; border-bottom: 1px solid var(--border); }
+  .mission-cell:last-child { border-bottom: none; }
+  .footer { padding: 1.2rem 1rem; }
+  .footer-r { display: none; }
+}
+@media (hover: none) { body::after { display: none; } }
+</style>
 </head>
 <body>
 
-    <div class="bg-container">
-        <div class="bg-image" id="bgImage"></div>
-        <div class="bg-overlay"></div>
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="nexan.html">THE NEXAN INSTITUTE</a>
+  <ul class="nav-links">
+    <li><a href="#entities">Entities</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#vyrion-poc">VYRION</a></li>
+    <li><a href="https://dablerfrost.github.io/conscience" class="active">CONSCIENCE →</a></li>
+    <li><a href="shield.html">SHIELD →</a></li>
+  </ul>
+  <div class="nav-dot"></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg-word">NEXAN</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Research Institute · Hilo, Hawaii · Est. 2026</div>
+    <h1 class="hero-title">THE NEXAN<br><span>INSTITUTE</span></h1>
+    <p class="hero-sub">Aligning intelligence with planetary health. We research the structural intersection of AI systems, human values, and accountability infrastructure — and we publish proof of work, not just papers.</p>
+    <div class="hero-cta-row">
+      <a class="btn-primary" href="https://dablerfrost.github.io/conscience">→ VIEW CONSCIENCE PLATFORM</a>
+      <a class="btn-secondary" href="#entities">OUR ENTITIES →</a>
+      <a class="btn-secondary" href="https://github.com/dablerfrost/conscience" target="_blank">GITHUB →</a>
+    </div>
+  </div>
+</header>
+
+<!-- MISSION STRIP -->
+<div class="mission-strip">
+  <div class="mission-cell">
+    <div class="mc-label">Primary Focus</div>
+    <div class="mc-val">AI-Human Alignment</div>
+  </div>
+  <div class="mission-cell">
+    <div class="mc-label">Method</div>
+    <div class="mc-val">Proof of Concept First</div>
+  </div>
+  <div class="mission-cell">
+    <div class="mc-label">First Output</div>
+    <div class="mc-val">VYRION PBC · Live</div>
+  </div>
+  <div class="mission-cell">
+    <div class="mc-label">Philosophy</div>
+    <div class="mc-val">Nex-Us</div>
+  </div>
+  <div class="mission-cell">
+    <div class="mc-label">Location</div>
+    <div class="mc-val">Hilo, Hawaii</div>
+  </div>
+</div>
+
+<!-- ENTITY STRUCTURE -->
+<section class="section" id="entities">
+  <div class="section-eyebrow">Entity Structure</div>
+  <h2 class="section-title">Three Entities. One Mission.</h2>
+  <p class="section-sub">The Nexan Institute operates as a research parent across two active subsidiaries. Each entity has a distinct domain, a distinct voice, and a direct line to the same underlying purpose: accountability infrastructure for the systems that shape planetary health.</p>
+
+  <div class="entity-grid">
+
+    <!-- NEXAN -->
+    <div class="entity-card entity-nexan">
+      <div class="ec-num">ENTITY 01 · PARENT</div>
+      <div class="ec-tag">Research Institute</div>
+      <div class="ec-name">The Nexan Institute</div>
+      <div class="ec-full">Parent entity · AI-human alignment research · Praxis + Luxem</div>
+      <div class="ec-body">The research and intellectual home. Nexan develops frameworks for ensuring AI systems operate in alignment with human values and long-term planetary health. All outputs from VYRION and Synthekai trace back to Nexan's core research questions: What does it mean for intelligence — artificial or human — to act in genuine alignment with the systems it inhabits?</div>
+      <div class="ec-pillars">
+        <div class="ec-pillar">AI-human alignment frameworks (Praxis)</div>
+        <div class="ec-pillar">Consciousness and values research (Luxem)</div>
+        <div class="ec-pillar">Nex-Us philosophy — interconnected intelligence, humanity, and planetary systems</div>
+        <div class="ec-pillar">Oversight of VYRION and Synthekai outputs</div>
+      </div>
+      <div class="ec-status">
+        <div class="ec-dot"></div>
+        Active · Research ongoing
+      </div>
     </div>
 
-    <nav>
-        <div class="logo">THE NEXAN INSTITUTE</div>
-        <ul>
-            <li><a href="#research">RESEARCH</a></li>
-            <li><a href="#vyrion">VYRION</a></li>
-        </ul>
-        <a href="https://github.com/DablerFrost/conscience" target="_blank" class="nav-cta">VIEW PROOF OF CONCEPT</a>
-    </nav>
+    <!-- VYRION -->
+    <div class="entity-card entity-vyrion">
+      <div class="ec-num">ENTITY 02 · OPERATIONAL SUBSIDIARY</div>
+      <div class="ec-tag">Public Benefit Corporation</div>
+      <div class="ec-name">VYRION PBC</div>
+      <div class="ec-full">Planetary accountability infrastructure · VY-ree-on</div>
+      <div class="ec-body">The first published proof of concept. VYRION builds accountability infrastructure for planetary systems — a daily investable benchmark (the VYRION Index), a corporate pledge verification platform (CONSCIENCE), and an early warning system (SHIELD). Every data point is source-cited. Every error is published as a correction within 24 hours. Not activism. Not a nonprofit. Accountability infrastructure.</div>
+      <div class="ec-pillars">
+        <div class="ec-pillar">CONSCIENCE — corporate climate pledge verification · 11 companies live</div>
+        <div class="ec-pillar">VYRION Index — daily 0–100 planetary health benchmark · 48 indicators</div>
+        <div class="ec-pillar">SHIELD — 14-day global disaster early warning system</div>
+        <div class="ec-pillar">PULSE, ROOT, CANOPY, TIDE, LOOP — modules in development</div>
+      </div>
+      <div class="ec-status">
+        <div class="ec-dot"></div>
+        Live · dablerfrost.github.io/conscience
+      </div>
+      <a class="ec-link" href="https://dablerfrost.github.io/conscience">→ OPEN CONSCIENCE PLATFORM</a>
+    </div>
 
-    <section class="hero">
-        <div class="hero-glass-card">
-            <h1>THE NEXAN INSTITUTE:<br>ALIGNING INTELLIGENCE WITH PLANETARY HEALTH</h1>
-            <p>Researching the structural intersection of AI, human values, and the Nex-Us philosophy.</p>
-            
-            <div class="pillars">
-                <div class="pillar">
-                    <div class="pillar-icon-box">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <h3>AI RESEARCH</h3>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-icon-box">
-                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 14v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </div>
-                    <h3>HUMAN VALUES</h3>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-icon-box">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10zM2 12h20"/></svg>
-                    </div>
-                    <h3>PLANETARY HEALTH</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- SYNTHEKAI -->
+    <div class="entity-card entity-synth">
+      <div class="ec-num">ENTITY 03 · CREATIVE SUBSIDIARY</div>
+      <div class="ec-tag">Creative LLC</div>
+      <div class="ec-name">Synthekai</div>
+      <div class="ec-full">Synthekai Collective LLC · Transmedia · Music · RainbowsGiggle</div>
+      <div class="ec-body">The creative and transmedia arm. Synthekai translates the research and data of Nexan and VYRION into music, narrative, and transmedia work. Home to RainbowsGiggle (with Gin Frost) and The Nihilism Effect — a transmedia universe spanning book, comic, and music. Synthekai believes the ideas that shape the future need more than papers and platforms. They need stories.</div>
+      <div class="ec-pillars">
+        <div class="ec-pillar">Mycelium Bloom — Data Petals #1–12 (Bandcamp)</div>
+        <div class="ec-pillar">RainbowsGiggle — collaborative project with Gin Frost</div>
+        <div class="ec-pillar">The Nihilism Effect — transmedia universe (book · comic · music)</div>
+        <div class="ec-pillar">VYRION Index data sonification — embedded in CONSCIENCE platform</div>
+      </div>
+      <div class="ec-status">
+        <div class="ec-dot"></div>
+        Active · Music live on Bandcamp
+      </div>
+    </div>
 
-    <section class="content" id="research">
-        <div class="section-header">
-            <h2>OUR RESEARCH FOCUS</h2>
-            <div class="line"></div>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <h3>AI-Human Alignment</h3>
-                <p>Developing frameworks that ensure artificial intelligence systems operate in harmony with human values and long-term planetary health.</p>
-            </div>
-            <div class="card">
-                <h3>Accountability Infrastructure</h3>
-                <p>Building transparent, verifiable systems that measure and report on the alignment between promises and reality in complex organizations.</p>
-            </div>
-            <div class="card">
-                <h3>Nex-Us Philosophy</h3>
-                <p>Exploring the interconnected nature of intelligence, consciousness, and planetary systems through transmedia research and creative expression.</p>
-            </div>
-        </div>
-    </section>
+  </div>
+</section>
 
-    <section class="content" id="vyrion">
-        <div class="section-header">
-            <h2>VYRION: PROOF OF CONCEPT</h2>
-            <div class="line"></div>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <h3>Daily Planetary Benchmark</h3>
-                <p>VYRION is our first published proof of concept—a real-time, data-driven system measuring corporate environmental pledges against verified reality.</p>
-            </div>
-            <div class="card">
-                <h3>Open Methodology</h3>
-                <p>Every score, every source, and every correction is publicly auditable. No narrative. No lobbying. Just arithmetic and accountability.</p>
-            </div>
-            <div class="card">
-                <h3>Institutional Access</h3>
-                <p>VYRION provides ESG research firms, reinsurance companies, and institutional investors with the data infrastructure they need.</p>
-            </div>
-        </div>
-    </section>
+<!-- HIERARCHY DIAGRAM -->
+<div class="hierarchy" id="structure">
+  <div class="hierarchy-title">Entity Hierarchy</div>
+  <div class="tree">
+    <div class="tree-root">
+      <span class="tree-pill tp-nexan">THE NEXAN INSTITUTE</span>
+      <span style="font-family:'Courier Prime',monospace;font-size:0.58rem;color:var(--t3);margin-left:0.8rem">Parent · AI-human alignment research</span>
+    </div>
+    <div class="tree-children">
+      <div class="tree-child">
+        <span class="tree-pill tp-vyrion">VYRION PBC</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.58rem;color:var(--t3)">Operational subsidiary · Planetary accountability infrastructure · LIVE</span>
+      </div>
+      <div class="tree-child">
+        <span class="tree-pill tp-synth">SYNTHEKAI COLLECTIVE LLC</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.58rem;color:var(--t3)">Creative subsidiary · Transmedia · Music · RainbowsGiggle</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <footer>
-        <p>&copy; 2026 THE NEXAN INSTITUTE | HILO, HAWAII | ALIGNING INTELLIGENCE WITH PLANETARY HEALTH</p>
-    </footer>
+<!-- RESEARCH PILLARS -->
+<section class="section" id="research">
+  <div class="section-eyebrow">Research Focus</div>
+  <h2 class="section-title">What We're Working On</h2>
+  <p class="section-sub">Nexan's research sits at three intersections. VYRION is the first proof of concept across all three. The Institute publishes corrections, not press releases.</p>
 
-    <script>
-        // Parallax effect for background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const bgImage = document.getElementById('bgImage');
-            bgImage.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
-        });
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="pc-num">PILLAR 01</div>
+      <div class="pc-title">AI-Human Alignment</div>
+      <div class="pc-body">What does it mean for an AI system to genuinely act in alignment with human values — not as a compliance exercise, but as a structural property of how the system is built? Nexan develops frameworks (Praxis) for evaluating alignment at the system architecture level, not just at the output level.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pc-num">PILLAR 02</div>
+      <div class="pc-title">Accountability Infrastructure</div>
+      <div class="pc-body">Transparent, verifiable systems that measure the gap between what is promised and what is done. CONSCIENCE is the first operational proof of this pillar — 11 companies, 4 data sources, publicly auditable methodology, corrections published within 24 hours. The gap between pledge and reality is the signal.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pc-num">PILLAR 03</div>
+      <div class="pc-title">Planetary Systems Thinking</div>
+      <div class="pc-body">The VYRION Index operationalizes planetary boundary science into a daily signal. Steffen et al. (2015), Richardson et al. (2023), and PIK Potsdam's boundary quantification form the scientific substrate. Nexan's contribution is translating Earth system science into infrastructure that institutional capital can act on.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pc-num">PILLAR 04</div>
+      <div class="pc-title">Nex-Us Philosophy</div>
+      <div class="pc-body">The philosophical framework underlying all Nexan work. Nex-Us posits that intelligence — human, artificial, or collective — is not separate from the planetary systems it inhabits. It is embedded in them. The question is not whether AI affects planetary health, but whether it does so with awareness and accountability.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pc-num">PILLAR 05</div>
+      <div class="pc-title">Transmedia Research</div>
+      <div class="pc-body">Ideas that shape the future need more than papers. Synthekai Collective translates Nexan's research questions into music, narrative, and transmedia work. The Nihilism Effect explores what it means to live inside systems that are measurably degrading. VYRION Index data, sonified as Mycelium Bloom.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pc-num">PILLAR 06</div>
+      <div class="pc-title">Open Proof Protocol</div>
+      <div class="pc-body">Nexan publishes corrections, not retractions. Every VYRION score, every Index reading, every methodology assumption is challengeable. Find an error — we publish the correction within 24 hours as a permanent, timestamped changelog entry. No original entry is ever deleted. The protocol is the product.</div>
+    </div>
+  </div>
+</section>
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+<!-- VYRION POC STRIP -->
+<div class="poc-strip" id="vyrion-poc">
+  <div class="poc-cell">
+    <div class="poc-label">VYRION Index · Current</div>
+    <div class="poc-val">41.2 <span style="font-size:0.7rem;color:var(--t3);font-weight:normal">± 1.8</span></div>
+    <div class="poc-sub">/ 100 · Pre-industrial baseline = 100</div>
+  </div>
+  <div class="poc-cell">
+    <div class="poc-label">Companies Tracked</div>
+    <div class="poc-val" style="color:var(--glow)">11</div>
+    <div class="poc-sub">CONSCIENCE · 7 Breach · 3 Warning · 1 On Track</div>
+  </div>
+  <div class="poc-cell">
+    <div class="poc-label">Indicators</div>
+    <div class="poc-val" style="color:var(--glow)">48</div>
+    <div class="poc-sub">Across 8 Earth systems · Daily composite</div>
+  </div>
+  <div class="poc-cell">
+    <div class="poc-label">Active Climate Lawsuits</div>
+    <div class="poc-val" style="color:var(--breach)">97</div>
+    <div class="poc-sub">Sabin Center · Columbia Law · Portfolio total</div>
+  </div>
+  <div class="poc-cell">
+    <div class="poc-label">Prior Art Timestamped</div>
+    <div class="poc-val" style="color:var(--glow);font-size:0.85rem">Mar 20</div>
+    <div class="poc-sub">2026 · VYRION-METHODOLOGY-v1.0.md · GitHub</div>
+  </div>
+</div>
+
+<!-- FOUNDER -->
+<section class="founder-section" id="founder">
+  <div class="founder-left">
+    <div class="founder-eyebrow">Founder</div>
+    <div class="founder-name">Tyler Frost</div>
+    <div class="founder-handle">@DablerFrost</div>
+    <p class="founder-bio">Solo founder of The Nexan Institute, VYRION PBC, and Synthekai Collective LLC. Based in Hilo, Hawaii. Building accountability infrastructure for planetary systems — the VYRION Index, CONSCIENCE, and SHIELD — as the first operational proof of Nexan's alignment research. The work is pre-revenue, open-source, and publicly auditable by design.</p>
+  </div>
+  <div class="founder-right">
+    <div class="contact-row">
+      <span class="contact-label">Email</span>
+      <span class="contact-val"><a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Platform</span>
+      <span class="contact-val"><a href="https://dablerfrost.github.io/conscience" target="_blank">dablerfrost.github.io/conscience</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">GitHub</span>
+      <span class="contact-val"><a href="https://github.com/dablerfrost/conscience" target="_blank">github.com/dablerfrost/conscience</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">X</span>
+      <span class="contact-val"><a href="https://x.com/dablerfrost" target="_blank">@DablerFrost</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">LinkedIn</span>
+      <span class="contact-val"><a href="https://linkedin.com/in/vyrion/" target="_blank">linkedin.com/in/vyrion</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Location</span>
+      <span class="contact-val" style="color:var(--t2)">Hilo, Hawaii</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-l">
+    The Nexan Institute · Hilo, Hawaii · 2026<br>
+    Parent of <a href="https://dablerfrost.github.io/conscience">VYRION PBC</a> and Synthekai Collective LLC ·
+    <a href="https://github.com/dablerfrost/conscience" target="_blank">github.com/dablerfrost/conscience</a> ·
+    <a href="mailto:contact@vyrion.earth">contact@vyrion.earth</a>
+  </div>
+  <div class="footer-r">
+    <a href="https://dablerfrost.github.io/conscience">CONSCIENCE →</a>
+    <a href="shield.html">SHIELD →</a>
+    <a href="https://dablerfrost.github.io/conscience/archive">ARCHIVE →</a>
+    <a href="#entities">ENTITIES →</a>
+  </div>
+</footer>
+
 </body>
 </html>
