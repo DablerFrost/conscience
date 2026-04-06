@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nexan Institute - Aligning Intelligence with Planetary Health</title>
+    <style>
+        :root {
+            --primary: #00ffc8;
+            --secondary: #00d9ff;
+            --bg-dark: #050a14;
+            --glass-bg: rgba(13, 42, 61, 0.4);
+            --glass-border: rgba(0, 255, 200, 0.2);
+            --text-main: #e0e0e0;
+            --text-dim: #b0b0b0;
+            --nav-height: 80px; /* Defined nav height for consistent spacing */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Immersive Background */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.4) contrast(1.1);
+            transform: scale(1.1);
+            transition: transform 0.5s ease-out;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(5, 10, 20, 0.8) 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4rem;
+            background: rgba(5, 10, 20, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: rgba(0, 255, 200, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Increased top padding to account for fixed nav and provide visual breathing room */
+            padding: calc(var(--nav-height) + 4rem) 2rem 4rem 2rem;
+        }
+
+        .hero-glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 5rem 4rem;
+            max-width: 1100px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: cardEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 3.5rem;
+            font-weight: 300;
+        }
+
+        /* Pillar Icons */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .pillar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .pillar-icon-box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--primary);
+            position: relative;
+            background: rgba(0, 255, 200, 0.03);
+            transition: all 0.4s ease;
+        }
+
+        .pillar-icon-box::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--primary);
+            top: 5px;
+            left: 5px;
+            opacity: 0.3;
+            transition: all 0.4s ease;
+        }
+
+        .pillar:hover .pillar-icon-box {
+            background: rgba(0, 255, 200, 0.1);
+            transform: translate(-3px, -3px);
+            box-shadow: 5px 5px 0px var(--primary);
+        }
+
+        .pillar:hover .pillar-icon-box::before {
+            transform: translate(3px, 3px);
+            opacity: 0;
+        }
+
+        .pillar-icon-box svg {
+            width: 45px;
+            height: 45px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .pillar h3 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Content Sections */
+        section.content {
+            padding: 8rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(5, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            nav { padding: 0 2rem; }
+            nav ul { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-glass-card { padding: 3rem 2rem; }
+            .pillars { grid-template-columns: 1fr; gap: 2rem; }
+            .hero { padding-top: calc(var(--nav-height) + 2rem); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container">
+        <div class="bg-image" id="bgImage"></div>
+        <div class="bg-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo">NEXAN</div>
+        <ul>
+            <li><a href="#research">RESEARCH</a></li>
+            <li><a href="#vyrion">VYRION</a></li>
+            <li><a href="#nex-us">NEX-US</a></li>
+            <li><a href="#about">ABOUT</a></li>
+        </ul>
+        <a href="https://github.com/DablerFrost/conscience" target="_blank" class="nav-cta">VIEW PROOF OF CONCEPT</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-glass-card">
+            <h1>THE NEXAN INSTITUTE:<br>ALIGNING INTELLIGENCE WITH PLANETARY HEALTH</h1>
+            <p>Researching the structural intersection of AI, human values, and the Nex-Us philosophy.</p>
+            
+            <div class="pillars">
+                <div class="pillar">
+                    <div class="pillar-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>AI RESEARCH</h3>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 14v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>HUMAN VALUES</h3>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon-box">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10zM2 12h20"/></svg>
+                    </div>
+                    <h3>PLANETARY HEALTH</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content" id="research">
+        <div class="section-header">
+            <h2>OUR RESEARCH FOCUS</h2>
+            <div class="line"></div>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3>AI-Human Alignment</h3>
+                <p>Developing frameworks that ensure artificial intelligence systems operate in harmony with human values and long-term planetary health.</p>
+            </div>
+            <div class="card">
+                <h3>Accountability Infrastructure</h3>
+                <p>Building transparent, verifiable systems that measure and report on the alignment between promises and reality in complex organizations.</p>
+            </div>
+            <div class="card">
+                <h3>Nex-Us Philosophy</h3>
+                <p>Exploring the interconnected nature of intelligence, consciousness, and planetary systems through transmedia research and creative expression.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content" id="vyrion">
+        <div class="section-header">
+            <h2>VYRION: PROOF OF CONCEPT</h2>
+            <div class="line"></div>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3>Daily Planetary Benchmark</h3>
+                <p>VYRION is our first published proof of concept—a real-time, data-driven system measuring corporate environmental pledges against verified reality.</p>
+            </div>
+            <div class="card">
+                <h3>Open Methodology</h3>
+                <p>Every score, every source, and every correction is publicly auditable. No narrative. No lobbying. Just arithmetic and accountability.</p>
+            </div>
+            <div class="card">
+                <h3>Institutional Access</h3>
+                <p>VYRION provides ESG research firms, reinsurance companies, and institutional investors with the data infrastructure they need.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 THE NEXAN INSTITUTE | HILO, HAWAII | ALIGNING INTELLIGENCE WITH PLANETARY HEALTH</p>
+    </footer>
+
+    <script>
+        // Parallax effect for background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const bgImage = document.getElementById('bgImage');
+            bgImage.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
