@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated": "2026-04-08T03:28:22.627Z",
-    "generated_date": "2026-04-08",
+    "generated": "2026-04-09T03:24:07.772Z",
+    "generated_date": "2026-04-09",
     "script_version": "1.0",
-    "runtime_ms": 1720,
+    "runtime_ms": 15084,
     "sources": [
       "NOAA Global Monitoring Laboratory (CO₂)",
       "SEC EDGAR Public API (corporate filings)",
@@ -18,24 +18,24 @@
       "date": "2026-04-05",
       "source": "NOAA Global Monitoring Laboratory — Mauna Loa Observatory",
       "url": "https://gml.noaa.gov/ccgg/trends/",
-      "retrieved": "2026-04-08T03:28:21.248Z"
+      "retrieved": "2026-04-09T03:23:53.018Z"
     },
     "global_temp_anomaly": null,
     "global_temp_era5": {
-      "sample_avg_celsius": 18.35,
-      "anomaly_vs_proxy": 9.85,
+      "sample_avg_celsius": 18.3,
+      "anomaly_vs_proxy": 9.8,
       "sample_coords": [
         "N.Europe",
         "N.America",
         "S.America",
         "SE.Asia"
       ],
-      "period": "2026-03-30 to 2026-04-06",
+      "period": "2026-03-31 to 2026-04-07",
       "baseline_note": "Proxy baseline from ERA5 sample mean — not IPCC global mean. Supplementary signal only.",
       "source": "Open-Meteo ERA5 Reanalysis (ECMWF)",
       "url": "https://open-meteo.com/",
       "license": "CC BY 4.0",
-      "retrieved": "2026-04-08T03:28:22.627Z"
+      "retrieved": "2026-04-09T03:23:53.982Z"
     }
   },
   "global_emissions": null,
@@ -60,11 +60,15 @@
           "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=34088&type=10-K&dateb=&owner=include&count=5"
         },
         "latest_8k": {
-          "date": "2026-03-31",
-          "items": "8.01,9.01"
+          "date": "2026-04-08",
+          "items": "7.01"
         },
-        "count_8k_90d": 3,
+        "count_8k_90d": 4,
         "recent_8k_items": [
+          {
+            "date": "2026-04-08",
+            "items": "7.01"
+          },
           {
             "date": "2026-03-31",
             "items": "8.01,9.01"
@@ -78,7 +82,7 @@
             "items": "2.02,7.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.224Z"
+        "retrieved": "2026-04-09T03:23:52.938Z"
       }
     },
     "bp": {
@@ -96,7 +100,7 @@
         "latest_8k": null,
         "count_8k_90d": 0,
         "recent_8k_items": [],
-        "retrieved": "2026-04-08T03:28:21.203Z"
+        "retrieved": "2026-04-09T03:23:52.950Z"
       }
     },
     "shell": {
@@ -117,7 +121,7 @@
         },
         "count_8k_90d": 0,
         "recent_8k_items": [],
-        "retrieved": "2026-04-08T03:28:21.142Z"
+        "retrieved": "2026-04-09T03:23:52.931Z"
       }
     },
     "delta": {
@@ -133,11 +137,15 @@
           "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=27904&type=10-K&dateb=&owner=include&count=5"
         },
         "latest_8k": {
-          "date": "2026-03-17",
-          "items": "7.01,9.01"
+          "date": "2026-04-08",
+          "items": "2.02,9.01"
         },
-        "count_8k_90d": 5,
+        "count_8k_90d": 6,
         "recent_8k_items": [
+          {
+            "date": "2026-04-08",
+            "items": "2.02,9.01"
+          },
           {
             "date": "2026-03-17",
             "items": "7.01,9.01"
@@ -153,13 +161,9 @@
           {
             "date": "2026-01-27",
             "items": "1.01"
-          },
-          {
-            "date": "2026-01-13",
-            "items": "1.01,2.02,9.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.116Z"
+        "retrieved": "2026-04-09T03:23:52.964Z"
       }
     },
     "starbucks": {
@@ -193,7 +197,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.124Z"
+        "retrieved": "2026-04-09T03:23:52.933Z"
       }
     },
     "walmart": {
@@ -212,7 +216,7 @@
           "date": "2026-03-27",
           "items": "8.01"
         },
-        "count_8k_90d": 5,
+        "count_8k_90d": 4,
         "recent_8k_items": [
           {
             "date": "2026-03-27",
@@ -229,13 +233,9 @@
           {
             "date": "2026-01-16",
             "items": "5.02,9.01"
-          },
-          {
-            "date": "2026-01-08",
-            "items": "5.02,9.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.221Z"
+        "retrieved": "2026-04-09T03:23:53.021Z"
       }
     },
     "meta": {
@@ -265,7 +265,7 @@
             "items": "5.02"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.230Z"
+        "retrieved": "2026-04-09T03:23:52.974Z"
       }
     },
     "amazon": {
@@ -303,7 +303,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.232Z"
+        "retrieved": "2026-04-09T03:23:52.944Z"
       }
     },
     "microsoft": {
@@ -329,7 +329,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.275Z"
+        "retrieved": "2026-04-09T03:23:52.985Z"
       }
     },
     "unilever": {
@@ -365,7 +365,7 @@
             "items": "2.02,9.01"
           }
         ],
-        "retrieved": "2026-04-08T03:28:21.335Z"
+        "retrieved": "2026-04-09T03:23:52.971Z"
       }
     }
   }
