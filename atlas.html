@@ -10,20 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700;800&family=Archivo:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#020816;--void2:#040f24;--void3:#071832;
-  --glow:#00D4FF;--amber:#FFB84D;--breach:#F03030;--warn:#F09000;
-  --t1:#FF5C00;--t2:#6a9ab8;--t3:#a7b005;
-  --border:rgba(0,212,255,.12);--border2:rgba(0,212,255,.06);
-  --nav-bg:rgba(2,9,18,.97);--mag-bg:rgba(2,9,18,.98);
-  --scanline:rgba(0,212,255,.004);
-  --atm:#00D4FF;--ocn:#0088CC;--ice:#88DDFF;--fst:#00CC66;
-  --bio:#44BB88;--fw:#00AAFF;--sol:#CC9944;--corp:#FFB84D;
+  --void:#010d1a;--void2:#041525;--void3:#081e34;
+  --glow:#0099FF;--amber:#FFB84D;--breach:#F03030;--warn:#F09000;
+  --t1:#deeeff;--t2:#5a8aaa;--t3:#1e5070;
+  --border:rgba(0,153,255,.12);--border2:rgba(0,153,255,.06);
+  --nav-bg:rgba(1,13,26,.97);--mag-bg:rgba(1,13,26,.98);
+  --scanline:rgba(0,153,255,.004);
+  /* Earth system colors — distinct from UI chrome */
+  --atm:#00CCFF;--ocn:#0077BB;--ice:#88DDFF;--fst:#00CC66;
+  --bio:#44BB88;--fw:#33AAFF;--sol:#CC9944;--corp:#FFB84D;
 }
 [data-theme="light"]{
-  --void:#eef4f8;--void2:#ddeef6;--void3:#cce4f0;
-  --glow:#0077aa;--t1:#06101a;--t2:#1a4a6a;--t3:#3a7090;
-  --border:rgba(0,119,170,.18);--border2:rgba(0,119,170,.09);
-  --nav-bg:rgba(238,244,248,.97);--mag-bg:rgba(230,244,252,.99);
+  --void:#eff5fc;--void2:#ddeaf8;--void3:#ccdff3;
+  --glow:#0066CC;--t1:#03111f;--t2:#1a4068;--t3:#2a6090;
+  --border:rgba(0,102,204,.18);--border2:rgba(0,102,204,.09);
+  --nav-bg:rgba(239,245,252,.97);--mag-bg:rgba(235,244,255,.99);
   --scanline:transparent;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -49,10 +50,28 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
 @keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,212,255,.5)}50%{opacity:.4;box-shadow:0 0 0 7px rgba(0,212,255,0)}}
 
 /* HEADER */
-.atlas-header{position:relative;padding:3rem 2rem 2.4rem;border-bottom:1px solid var(--border);overflow:hidden;background:linear-gradient(135deg,rgba(0,100,200,.05) 0%,transparent 60%)}
-.atlas-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,212,255,.022) 59px,rgba(0,212,255,.022) 60px),repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,212,255,.014) 59px,rgba(0,212,255,.014) 60px);pointer-events:none}
-.atlas-header{position:relative;overflow:hidden;background-image:url('https://okay-gold-oof5kipmvh.edgeone.app/Testing%20The%20Surface%20-%20Imgur.png');background-size:cover;background-position:center 38%};
-.bg-word{position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:clamp(5rem,14vw,11rem);color:rgba(0,212,255,.03);pointer-events:none;user-select:none;line-height:1}  
+.atlas-header{
+  position:relative;padding:3rem 2rem 2.4rem;
+  border-bottom:1px solid var(--border);overflow:hidden;
+  background-image:url('https://okay-gold-oof5kipmvh.edgeone.app/Testing%20The%20Surface%20-%20Imgur.png');
+  background-size:cover;background-position:center 42%;
+}
+.atlas-header::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(120deg,rgba(1,13,26,.96) 0%,rgba(1,13,26,.80) 45%,rgba(1,13,26,.93) 100%);
+  transition:background .3s;
+}
+[data-theme="light"] .atlas-header::before{
+  background:linear-gradient(120deg,rgba(239,245,252,.97) 0%,rgba(239,245,252,.84) 45%,rgba(239,245,252,.94) 100%);
+}
+.atlas-header::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 55% 65% at 75% 50%,rgba(0,153,255,.07) 0%,transparent 70%);
+  animation:hpulse-at 7s ease-in-out infinite alternate;
+}
+@keyframes hpulse-at{0%{opacity:.4;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+.atlas-header>*{position:relative;z-index:2}
+.bg-word{position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:clamp(5rem,14vw,11rem);color:rgba(0,153,255,.04);pointer-events:none;user-select:none;line-height:1;z-index:2}
 .h-eyebrow{font-family:'Courier Prime',monospace;font-size:.65rem;color:var(--glow);letter-spacing:.24em;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:.55rem}
 .h-eyebrow::before{content:'';width:18px;height:1px;background:var(--glow);opacity:.5}
 .h-title{font-family:'Archivo Narrow',sans-serif;font-weight:800;font-size:clamp(2.4rem,5.5vw,3.8rem);color:var(--t1);line-height:.95;letter-spacing:-.02em;margin-bottom:.65rem}
@@ -63,7 +82,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
 
 /* MASTER PANEL */
 .master{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--border);background:var(--void)}
-@media(max-width:860px){.master{grid-template-columns:1fr}}
 .master-score{padding:2.4rem 2rem;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(135deg,rgba(0,212,255,.04) 0%,transparent 80%);position:relative;overflow:hidden}
 .master-score::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,rgba(0,212,255,.04) 0%,transparent 70%);animation:gp 6s ease-in-out infinite alternate}
 @keyframes gp{0%{opacity:.4}100%{opacity:1}}
@@ -197,19 +215,79 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
 .lp{animation:pulse 1.4s infinite}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.8}}
 
-@media(max-width:860px){.master{grid-template-columns:1fr}.master-score{border-right:none;border-bottom:1px solid var(--border);padding:2rem}}
-@media(max-width:720px){
-  html{font-size:16px!important}
-  .nav{padding:0 .9rem;height:48px}
-  .nav-links{display:none}
-  .atlas-header{padding:2rem 1rem 1.6rem}
+/* ══ RESPONSIVE ════════════════════════════════════ */
+/* 1280px — large desktop: no change, max-width container */
+@media(min-width:1280px){
+  .atlas-header,.master,.ind-section,.pb-section,.method-strip,.footer{max-width:1440px;margin-left:auto;margin-right:auto}
+}
+/* 1024px — tablet landscape / small laptop */
+@media(max-width:1024px){
+  .nav-links{gap:1.1rem}
+  .nav-links a{font-size:.6rem;letter-spacing:.12em}
+  .systems-grid{grid-template-columns:repeat(2,1fr)}
+  .pb-grid{grid-template-columns:repeat(3,1fr)}
+  .master{grid-template-columns:180px 1fr}
+  .ring-wrap{width:120px;height:120px}
+  .ri-score{font-size:1.9rem}
+  .ind-section,.pb-section{padding:2.2rem 1.4rem}
+}
+/* 860px — tablet portrait */
+@media(max-width:860px){
+  .master{grid-template-columns:1fr}
+  .master-score{border-right:none;border-bottom:1px solid var(--border);padding:2rem;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:1.5rem}
   .systems-grid{grid-template-columns:1fr}
   .pb-grid{grid-template-columns:repeat(2,1fr)}
-  .ind-section,.pb-section{padding:2rem 1rem}
-  .footer{padding:1.2rem 1rem}
-  .footer-r{display:none}
-  .ind-table{font-size:.58rem}
+  .sys-badge{display:none}
+  .h-meta{flex-direction:column;gap:.4rem}
+}
+/* 680px — large phone landscape / small tablet */
+@media(max-width:680px){
+  .nav{padding:0 .9rem;height:48px;gap:.6rem}
+  .nav-links{display:none}
+  .nav-controls{gap:.25rem}
+  html{font-size:16px!important}
+  .atlas-header{padding:2rem 1rem 1.6rem}
+  .h-title{font-size:2.2rem}
+  .h-sub{font-size:.78rem}
+  .bg-word{display:none}
+  .systems-grid{grid-template-columns:1fr}
+  .sc{padding:1.2rem 1.1rem 1rem}
+  .sc-val{font-size:1.35rem}
+  .ind-section,.pb-section,.method-strip{padding:1.8rem .9rem}
+  .ind-table{font-size:.57rem}
   .ind-table .ind-source{display:none}
+  .pb-grid{grid-template-columns:repeat(2,1fr)}
+  .footer{padding:1.2rem .9rem;flex-direction:column;gap:.6rem}
+  .footer-r{display:none}
+  .method-grid{grid-template-columns:repeat(2,1fr)}
+}
+/* 480px — standard phone portrait */
+@media(max-width:480px){
+  html{font-size:15px!important}
+  .nav-controls .nc-sz{display:none}
+  .nc-sep{display:none}
+  .atlas-header{padding:1.6rem .8rem 1.2rem}
+  .h-title{font-size:1.9rem}
+  .master-score{padding:1.5rem .8rem;gap:1rem}
+  .ring-wrap{width:100px;height:100px}
+  .ri-score{font-size:1.6rem}
+  .sys-row{gap:.6rem}
+  .sys-name{min-width:110px;font-size:.7rem}
+  .sys-w{display:none}
+  .pb-grid{grid-template-columns:1fr}
+  .ind-table .ind-cadence{display:none}
+  .method-grid{grid-template-columns:1fr}
+  .sc-inds{gap:.18rem}
+  .ind-pill{font-size:.46rem}
+}
+/* 360px — small phone */
+@media(max-width:360px){
+  html{font-size:14px!important}
+  .nc-theme{font-size:.5rem;padding:.16rem .3rem}
+  .nav-logo{font-size:.82rem;letter-spacing:.1em}
+  .h-title{font-size:1.7rem}
+  .sys-bar-bg{display:none}
+  .sys-name{min-width:unset;flex:1}
 }
 @media(hover:none){#mag{display:none!important}}
 </style>
@@ -219,10 +297,11 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
 <nav class="nav">
   <a class="nav-logo" href="https://dablerfrost.github.io/conscience">VYRION</a>
   <ul class="nav-links">
-    <li><a href="https://dablerfrost.github.io/conscience/atlas">ATLAS</a></li>
-    <li><a href="https://dablerfrost.github.io/conscience" class="active">CONSCIENCE</a></li>
+    <li><a href="https://dablerfrost.github.io/conscience">CONSCIENCE</a></li>
+    <li><a href="atlas.html" class="active">ATLAS</a></li>
     <li><a href="shield.html">SHIELD</a></li>
-    <li><a href="https://dablerfrost.github.io/conscience/nexan.html">THE NEXAN INSTITUTE</a></li>
+    <li><a href="nexan.html">NEXAN</a></li>
+    <li><a href="https://dablerfrost.github.io/conscience/archive">ARCHIVE</a></li>
   </ul>
   <div class="nav-controls">
     <button class="nc-theme" id="theme-btn" onclick="toggleTheme()">◐ DARK</button>
@@ -237,7 +316,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
 <!-- HEADER -->
 <header class="atlas-header">
   <div class="bg-word">ATLAS</div>
-  <div class="h-eyebrow">Module 01 · Planetary Intelligence Backbone</div>
+  <div class="h-eyebrow">Module 00 · Planetary Intelligence Backbone</div>
   <h1 class="h-title">ATLAS</h1>
   <p class="h-sub">The VYRION Index backbone. 8 Earth systems, 48 indicators, scored against the pre-industrial 1850–1900 baseline. This is where the number comes from.</p>
   <div class="h-meta">
@@ -625,7 +704,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
 
 <footer class="footer">
   <div class="footer-l">
-    VYRION ATLAS · Module 01 · Planetary Intelligence Backbone · v2.0<br>
+    VYRION ATLAS · Module 00 · Planetary Intelligence Backbone · v2.0<br>
     Data: NOAA GML · NSIDC · NASA FIRMS · GBIF · Open-Meteo · Copernicus · FAO · SEC EDGAR · All public-domain or open-license<br>
     <a href="https://github.com/dablerfrost/conscience/blob/main/VYRION-METHODOLOGY-v1.0.md" target="_blank">VYRION-METHODOLOGY-v1.0.md</a> ·
     <a href="https://github.com/dablerfrost/conscience" target="_blank">github.com/dablerfrost/conscience</a> ·
@@ -634,7 +713,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:990;ba
   <div class="footer-r">
     <a href="https://dablerfrost.github.io/conscience">CONSCIENCE →</a>
     <a href="shield.html">SHIELD →</a>
-    <a href="nexan.html">THE NEXAN INSTITUTE →</a>
+    <a href="nexan.html">NEXAN →</a>
     <a href="https://dablerfrost.github.io/conscience/archive">ARCHIVE →</a>
   </div>
 </footer>
