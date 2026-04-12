@@ -2492,17 +2492,6 @@ function skToggle(){
   }
 }
 </script>
-var _skOpen=false,_skLoaded=false;
-function skToggle(){
-  _skOpen=!_skOpen;
-  document.getElementById('sk-panel').classList.toggle('open',_skOpen);
-  document.getElementById('sk-btn').textContent=_skOpen?'×':'♪';
-  document.getElementById('sk-label').textContent=_skOpen?'close':'Synthekai';
-  if(_skOpen&&!_skLoaded){
-    document.getElementById('sk-frame').src=
-      'https://bandcamp.com/EmbeddedPlayer/album=692362963/size=large/bgcol=020912/linkcol=00D4FF/tracklist=false/artwork=small/transparent=true/';
-    _skLoaded=true;
-  }
 }
 </script>
 </body>
