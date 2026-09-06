@@ -1,18 +1,18 @@
 {
   "meta": {
-    "generated": "2026-09-05T15:09:44.900Z",
-    "generated_date": "2026-09-05",
+    "generated": "2026-09-06T04:27:42.735Z",
+    "generated_date": "2026-09-06",
     "script_version": "1.1",
     "window_days": 14,
-    "window_start": "2026-08-22",
-    "window_end": "2026-09-05",
-    "runtime_ms": 687,
+    "window_start": "2026-08-23",
+    "window_end": "2026-09-06",
+    "runtime_ms": 844,
     "seismic_live": true,
     "eonet_live": true
   },
   "threat": {
     "level": "CRITICAL",
-    "score": 33.9
+    "score": 31.7
   },
   "seismic": {
     "events": [
@@ -73,12 +73,20 @@
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcxn"
       },
       {
-        "id": "us6000tmta",
-        "magnitude": 5.8,
-        "place": "2 km NNW of Toride, Japan",
-        "time": "2026-08-22T17:00:39.299Z",
-        "depth_km": 61,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmta"
+        "id": "us7000temi",
+        "magnitude": 5.6,
+        "place": "93 km SE of Kirakira, Solomon Islands",
+        "time": "2026-09-06T04:05:30.141Z",
+        "depth_km": 38.5,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000temi"
+      },
+      {
+        "id": "us7000tek0",
+        "magnitude": 5.6,
+        "place": "96 km ESE of Isangel, Vanuatu",
+        "time": "2026-09-05T17:02:11.581Z",
+        "depth_km": 10,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tek0"
       },
       {
         "id": "us7000tdmp",
@@ -201,6 +209,14 @@
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdqc"
       },
       {
+        "id": "us7000tem2",
+        "magnitude": 5.3,
+        "place": "108 km SW of Puerto Madero, Mexico",
+        "time": "2026-09-06T02:56:32.601Z",
+        "depth_km": 10,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tem2"
+      },
+      {
         "id": "us7000te2m",
         "magnitude": 5.3,
         "place": "104 km SSW of Nikolski, Alaska",
@@ -247,6 +263,14 @@
         "time": "2026-08-23T11:22:41.913Z",
         "depth_km": 10,
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmyk"
+      },
+      {
+        "id": "us7000tejg",
+        "magnitude": 5.2,
+        "place": "77 km SSW of Sibolga, Indonesia",
+        "time": "2026-09-05T14:06:07.776Z",
+        "depth_km": 91.9,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tejg"
       },
       {
         "id": "us7000te82",
@@ -540,7 +564,7 @@
         "id": "us7000tc9m",
         "magnitude": 5,
         "place": "western Xizang",
-        "time": "2026-08-27T14:45:48.054Z",
+        "time": "2026-08-27T14:45:48.131Z",
         "depth_km": 10,
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tc9m"
       },
@@ -591,6 +615,14 @@
         "time": "2026-08-23T23:20:34.888Z",
         "depth_km": 8.1,
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn19"
+      },
+      {
+        "id": "us7000tek7",
+        "magnitude": 4.9,
+        "place": "80 km SSW of Nikolski, Alaska",
+        "time": "2026-09-05T18:00:09.215Z",
+        "depth_km": 35,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tek7"
       },
       {
         "id": "us7000tea7",
@@ -1009,12 +1041,12 @@
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn25"
       },
       {
-        "id": "us6000tmtu",
-        "magnitude": 4.8,
-        "place": "77 km S of Gorontalo, Indonesia",
-        "time": "2026-08-22T19:54:07.401Z",
-        "depth_km": 110.1,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmtu"
+        "id": "us7000tel1",
+        "magnitude": 4.7,
+        "place": "95 km ESE of Isangel, Vanuatu",
+        "time": "2026-09-05T21:06:01.351Z",
+        "depth_km": 10,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tel1"
       },
       {
         "id": "us7000te95",
@@ -1099,9 +1131,9 @@
       {
         "id": "us7000tc9s",
         "magnitude": 4.7,
-        "place": "16 km SSW of Sipí, Colombia",
-        "time": "2026-08-27T15:25:29.295Z",
-        "depth_km": 65.1,
+        "place": "19 km SW of Sipí, Colombia",
+        "time": "2026-08-27T15:25:29.013Z",
+        "depth_km": 61.4,
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tc9s"
       },
       {
@@ -1193,12 +1225,12 @@
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmzd"
       },
       {
-        "id": "us6000tmt7",
-        "magnitude": 4.7,
-        "place": "170 km SW of Sungai Penuh, Indonesia",
-        "time": "2026-08-22T16:33:04.780Z",
-        "depth_km": 26.3,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmt7"
+        "id": "us7000telf",
+        "magnitude": 4.6,
+        "place": "71 km N of Isangel, Vanuatu",
+        "time": "2026-09-05T23:46:26.056Z",
+        "depth_km": 240.4,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000telf"
       },
       {
         "id": "us7000tede",
@@ -1447,30 +1479,6 @@
         "time": "2026-08-23T10:04:42.433Z",
         "depth_km": 45.5,
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmy3"
-      },
-      {
-        "id": "us6000tmwk",
-        "magnitude": 4.6,
-        "place": "26 km E of Letpandan, Burma (Myanmar)",
-        "time": "2026-08-23T03:44:57.056Z",
-        "depth_km": 10,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmwk"
-      },
-      {
-        "id": "us6000tmtm",
-        "magnitude": 4.6,
-        "place": "29 km NNE of Calama, Chile",
-        "time": "2026-08-22T18:46:27.783Z",
-        "depth_km": 105.5,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmtm"
-      },
-      {
-        "id": "us6000tmt8",
-        "magnitude": 4.6,
-        "place": "80 km N of Ruteng, Indonesia",
-        "time": "2026-08-22T16:42:56.593Z",
-        "depth_km": 10,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmt8"
       },
       {
         "id": "us7000teim",
@@ -1871,34 +1879,10 @@
         "time": "2026-08-23T07:52:53.707Z",
         "depth_km": 10,
         "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcl6"
-      },
-      {
-        "id": "us6000tmut",
-        "magnitude": 4.5,
-        "place": "62 km NNE of Ruteng, Indonesia",
-        "time": "2026-08-22T22:01:02.600Z",
-        "depth_km": 10,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmut"
-      },
-      {
-        "id": "us6000tmuq",
-        "magnitude": 4.5,
-        "place": "117 km SW of Puerto Madero, Mexico",
-        "time": "2026-08-22T21:53:41.193Z",
-        "depth_km": 10,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmuq"
-      },
-      {
-        "id": "us6000tmte",
-        "magnitude": 4.5,
-        "place": "113 km SSW of Sungai Penuh, Indonesia",
-        "time": "2026-08-22T17:40:09.267Z",
-        "depth_km": 37.8,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmte"
       }
     ],
-    "count_total": 235,
-    "count_m55_plus": 19,
+    "count_total": 233,
+    "count_m55_plus": 20,
     "count_m60_plus": 5,
     "count_m70_plus": 0,
     "count_m80_plus": 0,
@@ -1913,7 +1897,7 @@
     "source": "USGS Earthquake Hazards Program",
     "url": "https://earthquake.usgs.gov/",
     "feed_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson",
-    "retrieved": "2026-09-05T15:09:44.316Z"
+    "retrieved": "2026-09-06T04:27:42.191Z"
   },
   "wildfire": {
     "events": [
@@ -2389,86 +2373,9 @@
           48.652
         ],
         "closed": null
-      },
-      {
-        "id": "EONET_23679",
-        "title": "Wildfire GOAT, Kittitas, Washington",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T21:06:00.000Z",
-        "coords": [
-          -121.053,
-          47.459
-        ],
-        "closed": null
-      },
-      {
-        "id": "EONET_23219",
-        "title": "Wildfire Shale Butte, Lincoln, Idaho",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T21:04:00.000Z",
-        "coords": [
-          -113.848,
-          42.962
-        ],
-        "closed": null
-      },
-      {
-        "id": "EONET_23684",
-        "title": "Wildfire Thunder Creek, Skagit, Washington",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T19:27:00.000Z",
-        "coords": [
-          -121.029,
-          48.55
-        ],
-        "closed": null
-      },
-      {
-        "id": "EONET_23211",
-        "title": "Wildfire McCulley, Baker, Oregon",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T18:38:00.000Z",
-        "coords": [
-          -118.281,
-          44.828
-        ],
-        "closed": null
-      },
-      {
-        "id": "EONET_23218",
-        "title": "Wildfire Hawk, Washoe, Nevada",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T14:45:00.000Z",
-        "coords": [
-          -119.952,
-          39.542
-        ],
-        "closed": null
-      },
-      {
-        "id": "EONET_23460",
-        "title": "Wildfire Hawk, Washoe, Nevada",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T14:45:00.000Z",
-        "coords": [
-          -119.952,
-          39.542
-        ],
-        "closed": null
-      },
-      {
-        "id": "EONET_23214",
-        "title": "Wildfire Colwash, Yakima, Washington",
-        "type": "WILDFIRE",
-        "time": "2026-08-22T11:33:00.000Z",
-        "coords": [
-          -120.196,
-          46.175
-        ],
-        "closed": null
       }
     ],
-    "count": 50
+    "count": 43
   },
   "storm": {
     "events": [
